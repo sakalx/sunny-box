@@ -1,27 +1,36 @@
 import React from 'react';
 
-import Paper from '@material-ui/core/Paper';
+import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+
+import {
+  Content,
+  Cover,
+  PauseIcon,
+  PlayIcon,
+  PlayPauseBtn,
+  Spinner,
+  Wrap,
+} from './style';
 
 const StationCard = () => {
 
   return (
-    <Paper elevation={1}>
-      <ButtonBase>
-           <span className={classes.imageButton}>
-            <Typography
-              component="span"
-              variant="subheading"
-              color="inherit"
-              className={classes.imageTitle}
-            >
-              Title
-              <span className={classes.imageMarked}/>
-            </Typography>
-          </span>
-      </ButtonBase>
-    </Paper>
+    <Wrap>
+      <Content>
+        <CardContent>
+          <Typography variant="headline">Live From Space</Typography>
+        </CardContent>
+        <PlayPauseBtn aria-label="Play/pause-cart-station" color="secondary">
+          <PauseIcon/>
+        </PlayPauseBtn>
+        <Spinner color="secondary" thickness={1}/>
+      </Content>
+      <Cover image="https://sakals.000webhostapp.com/share/HelloKitty2.png"
+             title="Live from space album cover"
+      />
+    </Wrap>
   );
 };
 

@@ -15,7 +15,10 @@ import ThumbDown from '@material-ui/icons/ThumbDown';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
 
-import Header from './scenes/header'
+import Header from './scenes/header';
+import Player from './scenes/player';
+import StationCard from './components/station-card';
+
 
 import styled from 'styled-components';
 
@@ -51,13 +54,21 @@ class App extends React.PureComponent {
               <Tab label="Item Seven" icon={<ThumbUp/>}/>
             </Tabs>
           </AppBar>
-          {tabIndex === 0 && <Typography style={{height: '300vh'}}>Item One</Typography >}
+          {tabIndex === 0 &&
+            <div>
+              <StationCard/>
+              <Typography style={{height: '300vh'}}>Item One</Typography >
+            </div>
+
+          }
           {tabIndex === 1 && <Typography >Item Two</Typography >}
           {tabIndex === 2 && <Typography >Item Three</Typography >}
           {tabIndex === 3 && <Typography >Item Four</Typography >}
           {tabIndex === 4 && <Typography >Item Five</Typography >}
           {tabIndex === 5 && <Typography >Item Six</Typography >}
           {tabIndex === 6 && <Typography >Item Seven</Typography >}
+
+          <Player/>
         </div>
         {/*<SnackBarMessage/>*/}
         {/*<AlertMessage/>*/}
