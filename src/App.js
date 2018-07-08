@@ -17,7 +17,11 @@ import Typography from '@material-ui/core/Typography';
 
 import Header from './scenes/header';
 import Player from './scenes/player';
+import WorldMap from './scenes/world-map';
+import CountriesList from './scenes/countries-list';
+
 import StationCard from './components/station-card';
+
 
 
 import styled from 'styled-components';
@@ -38,12 +42,12 @@ class App extends React.PureComponent {
           <Header/>
           <AppBar position="sticky" color="default">
             <Tabs
-              value={tabIndex}
+              indicatorColor="primary"
               onChange={(event, tabIndex) => this.setState({tabIndex})}
               scrollable
               scrollButtons="on"
-              indicatorColor="primary"
               textColor="primary"
+              value={tabIndex}
             >
               <Tab label="Item One" icon={<PhoneIcon/>}/>
               <Tab label="Item Two" icon={<FavoriteIcon/>}/>
@@ -57,7 +61,6 @@ class App extends React.PureComponent {
           {tabIndex === 0 &&
             <div>
               <StationCard/>
-              <Typography style={{height: '300vh'}}>Item One</Typography >
             </div>
 
           }
@@ -67,6 +70,9 @@ class App extends React.PureComponent {
           {tabIndex === 4 && <Typography >Item Five</Typography >}
           {tabIndex === 5 && <Typography >Item Six</Typography >}
           {tabIndex === 6 && <Typography >Item Seven</Typography >}
+
+          <CountriesList/>
+          <WorldMap/>
 
           <Player/>
         </div>

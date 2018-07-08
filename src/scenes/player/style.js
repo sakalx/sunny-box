@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
 import PauseIcn from '@material-ui/icons/PauseCircleFilled';
 import PlayIcn from '@material-ui/icons/PlayCircleOutline';
@@ -46,4 +47,8 @@ export const PlayIcon = styled(PlayIcn)`
 
 export const PauseIcon = styled(PauseIcn)`
   ${playPauseIcon};
+`;
+
+export const ProgressBar = styled(LinearProgress)`
+  height: 7px !important;
 `;

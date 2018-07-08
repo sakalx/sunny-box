@@ -2,14 +2,9 @@ import React from 'react';
 
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Paper from '@material-ui/core/Paper';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-
 
 import {
   Content,
@@ -17,6 +12,7 @@ import {
   Main,
   PauseIcon,
   PlayIcon,
+  ProgressBar,
   Title,
   Wrap,
 } from './style';
@@ -47,7 +43,7 @@ const Player = () => {
           </Controller>
         </Main>
 
-        <LinearProgress color="secondary" variant="query"/>
+        <ProgressBar color="secondary" variant="query"/>
       </Content>
     </Wrap>
   );

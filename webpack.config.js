@@ -26,7 +26,7 @@ const commonsChunk = new webpack.optimize.CommonsChunkPlugin({
 });
 
 const favicon = new FaviconWebpackPlugin({
-  logo: `./${develop}/assets/favicon/logo.png`,
+  logo: `./${develop}/static/favicon/logo.png`,
   prefix: 'favicon/',
   emitStats: false,
   inject: true,
@@ -67,9 +67,9 @@ const pwaManifest = new WebpackPwaManifest({
   start_url: '/',
   icons: [
     {
-      src: path.resolve(`./${develop}/assets/favicon/logo.png`,),
+      src: path.resolve(`./${develop}/static/favicon/logo.png`,),
       sizes: [96, 128, 192, 256, 384, 512],
-      destination: path.join('assets', 'icons')
+      destination: path.join('static', 'icons')
     }
   ]
 });
@@ -91,7 +91,7 @@ const
     loader: 'file-loader',
     options: {
       name: '[name].[ext]',
-      outputPath: 'assets/img/',
+      outputPath: 'static/img/',
     },
   },
   imgProd = [
@@ -106,6 +106,15 @@ const
     },
   ],
   imgConfig = isProd ? imgProd : imgDev;
+
+const
+  jsonConfig = [
+    {
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]',
+      },
+    }];
 //============================================================
 // WebPack
 const config = {
@@ -124,13 +133,13 @@ const config = {
 
   module: {
     rules: [
-      // html-loader
+      // HTML - loader
       {
         include: SRC_DIR,
         test: /\.html$/,
         use: htmlConfig,
       },
-      // babel-loader
+      // JS babel - loader
       {
         include: [
           path.resolve(__dirname, `${develop}`),
@@ -138,12 +147,17 @@ const config = {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
       },
-      // img via file-loader
-      // TODO  include: path.resolve(__dirname, `${develop}/assets/img/`),
+      // IMG - loader
       {
-        include: path.resolve(__dirname, `${develop}`),
+        include: path.resolve(__dirname, `${develop}/static/img/`),
         test: /\.(jpg|png)$/,
         use: imgConfig,
+      },
+      // JSON - используя file-loader
+      {
+        include: path.resolve(__dirname, `${develop}`),
+        test: /\.(json)$/,
+        use: jsonConfig,
       },
     ],
   },

@@ -11,6 +11,7 @@ const DB = {
       coordinates: {
         Y: '55.755826', // широта Latitude
         X: '37.6172999', // долгота Longitude
+        // coordinates: [-58.3816,-34.6037]
       },
     },
     'unique-ID-3' : {
