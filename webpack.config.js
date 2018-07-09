@@ -153,7 +153,7 @@ const config = {
         test: /\.(jpg|png)$/,
         use: imgConfig,
       },
-      // JSON - используя file-loader
+      // JSON - via file-loader
       {
         include: path.resolve(__dirname, `${develop}`),
         test: /\.(json)$/,

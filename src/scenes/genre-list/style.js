@@ -7,20 +7,21 @@ export const Wrap = styled('section')`
 `;
 
 export const List = styled('div')`
-  min-height: 48px;
+  min-height: 72px;
   overflow-x: hidden;
 `;
 
 export const SearchSection = styled('div')`
    left: 0;
    overflow-x: hidden;
-   position: absolute;
-   top: 0;
+   position: fixed;
+   top: 15px;
    width: 100%;
 `;
 
 export const SearchBtn = styled(SearchButton)`
   margin: 15px;
-  position: absolute;
+  position: fixed;
   right: 0;
+  top: 70px;
 `;

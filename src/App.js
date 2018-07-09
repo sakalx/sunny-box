@@ -4,29 +4,30 @@ import AlertMessage from 'root/components/AlertMessage';
 import SnackBarMessage from 'root/components/SnackBarMessage';
 
 import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
+import Button from '@material-ui/core/Button';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
 import HelpIcon from '@material-ui/icons/Help';
+import PersonPinIcon from '@material-ui/icons/PersonPin';
+import PhoneIcon from '@material-ui/icons/Phone';
+import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import ThumbUp from '@material-ui/icons/ThumbUp';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
-import Header from './scenes/header';
+
 import Player from './scenes/player';
 import WorldMap from './scenes/world-map';
 import CountriesList from './scenes/countries-list';
+import GenreList from './scenes/genre-list';
 
 import StationCard from './components/station-card';
 
 
-
 import styled from 'styled-components';
-
-
 
 class App extends React.PureComponent {
   state = {
@@ -38,49 +39,21 @@ class App extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <div>
-          <Header/>
-          <AppBar position="sticky" color="default">
-            <Tabs
-              indicatorColor="primary"
-              onChange={(event, tabIndex) => this.setState({tabIndex})}
-              scrollable
-              scrollButtons="on"
-              textColor="primary"
-              value={tabIndex}
-            >
-              <Tab label="Item One" icon={<PhoneIcon/>}/>
-              <Tab label="Item Two" icon={<FavoriteIcon/>}/>
-              <Tab label="Item Three" icon={<PersonPinIcon/>}/>
-              <Tab label="Item Four" icon={<HelpIcon/>}/>
-              <Tab label="Item Five" icon={<ShoppingBasket/>}/>
-              <Tab label="Item Six" icon={<ThumbDown/>}/>
-              <Tab label="Item Seven" icon={<ThumbUp/>}/>
-            </Tabs>
-          </AppBar>
-          {tabIndex === 0 &&
-            <div>
-              <StationCard/>
-            </div>
 
-          }
-          {tabIndex === 1 && <Typography >Item Two</Typography >}
-          {tabIndex === 2 && <Typography >Item Three</Typography >}
-          {tabIndex === 3 && <Typography >Item Four</Typography >}
-          {tabIndex === 4 && <Typography >Item Five</Typography >}
-          {tabIndex === 5 && <Typography >Item Six</Typography >}
-          {tabIndex === 6 && <Typography >Item Seven</Typography >}
 
-          <CountriesList/>
-          <WorldMap/>
 
-          <Player/>
-        </div>
+        <GenreList/>
+
+
+        <CountriesList/>
+        <WorldMap/>
+
+        <Player/>
         {/*<SnackBarMessage/>*/}
         {/*<AlertMessage/>*/}
       </React.Fragment>
     )
   }
 }
-
+// onClick={() => this.setState({isSearch: !isSearch})}
 export default App
