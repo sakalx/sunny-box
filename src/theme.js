@@ -1,29 +1,35 @@
 import {createMuiTheme} from '@material-ui/core/styles';
 
-const toggleTheme = {
+const currentTheme = {
   type: 'light',
   backgroundColor: '#fafafa',
 
-  dark() {
-    this.type = 'dark';
-    this.backgroundColor = '#303030';
-  },
+  setTheme(type, backgroundColor) {
+    console.log(`current theme ${type}`);
 
-  light() {
-    this.type = 'light';
-    this.backgroundColor = '#fafafa';
-
+    this.type = type;
+    this.backgroundColor = backgroundColor;
   }
 };
 
-document.body.style.backgroundColor = toggleTheme.backgroundColor;
+(() => {
+  const currentHour = new Date('AM').getHours();
+
+  if (currentHour > 7 && currentHour < 19) {
+    currentTheme.setTheme('light', '#fafafa');
+  } else {
+    currentTheme.setTheme('dark', '#303030');
+  }
+
+  document.body.style.backgroundColor = currentTheme.backgroundColor;
+})();
 
 const muiTheme = createMuiTheme({
   palette: {
     primary: {
       main: '#2196f3',
     },
-    type: toggleTheme.type,
+    type: currentTheme.type,
   },
 });
 
