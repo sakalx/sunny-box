@@ -1,36 +1,27 @@
 import React from 'react';
 
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
-
 import {
-  Content,
+  City,
   Cover,
   PauseIcon,
-  PlayIcon,
   Spinner,
+  Title,
   Wrap,
 } from './style';
 
-const StationCard = () => {
+const StationCard = ({active}) => {
 
   return (
-    <Wrap playing={true.toString()}>
-
-
-         <ButtonBase focusRipple>
-        <Content>
-          <CardContent>
-            <Typography variant="headline">Live From Space</Typography>
-          </CardContent>
-          <PauseIcon color="secondary"/>
-          <Spinner color="secondary" thickness={1} size={45}/>
-        </Content>
-        <Cover image="https://sakals.000webhostapp.com/share/HelloKitty2.png"
-               title="Live from space album cover"
-        />
-      </ButtonBase>
+    <Wrap playing={String(true)}>
+      <City component="span" variant="caption">
+        New York
+      </City>
+      <Cover image="https://sakals.000webhostapp.com/share/HelloKitty2.png"
+             title="Live from space album cover"
+      />
+      <Title variant="title" active={String(active)}>Gop Fm</Title>
+      <PauseIcon color="secondary"/>
+      <Spinner color="secondary" thickness={1} size={45}/>
     </Wrap>
   );
 };

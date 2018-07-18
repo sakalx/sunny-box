@@ -1,49 +1,62 @@
 import styled from 'styled-components';
 import muiTheme from 'root/theme';
 
-import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Paper from '@material-ui/core/Paper';
 import PauseIcn from '@material-ui/icons/PauseCircleFilled';
 import PlayIcn from '@material-ui/icons/PlayCircleOutline';
+import Typography from '@material-ui/core/Typography';
 
-export const Wrap = styled(Card)`
-  display: flex;
-  margin: 15px;
-  width: 300px;
-  &:hover {
-    ${props => `
-      box-shadow: 5px 5px 20px ${props.playing === 'true' ? muiTheme.palette.secondary.light: muiTheme.palette.primary.light};
-    `};
-    };
-  transition: all 0.3s linear;
-`;
-
-export const Content = styled('div')`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-`;
-
-const playPauseIcon = `
+const _playPauseIcon = styled('div')`
   height: 44px !important;
   width: 44px !important;
 `;
 
-export const PlayIcon = styled(PlayIcn)`
-  ${playPauseIcon};
-`;
-
-export const PauseIcon = styled(PauseIcn)`
-  ${playPauseIcon};
+export const Wrap = styled(Paper)`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+  min-width: 170px;
+  position: relative;
+  transition: all 0.3s linear;
+  &:hover {
+    ${props => `
+      box-shadow: 5px 5px 20px ${props.playing === 'true' 
+                                  ? muiTheme.palette.secondary.light
+                                  : muiTheme.palette.primary.light
+      };
+    `};
+    };
 `;
 
 export const Cover = styled(CardMedia)`
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
 `;
 
+export const City = styled(Typography)`
+  background: ${muiTheme.palette.error.light};
+  color: ${muiTheme.palette.common.white} !important;
+  padding: 0 5px;
+  position: absolute;
+  right: 0;
+  top: 10px;
+`;
+
+export const Title = styled(Typography)`
+  padding: 10px;
+  ${({active}) => active === 'true' && `
+    color: ${muiTheme.palette.primary.dark} !important;  
+  `};
+`;
+
+export const PlayIcon = _playPauseIcon.withComponent(PlayIcn);
+
+export const PauseIcon = _playPauseIcon.withComponent(PauseIcn);
+
 export const Spinner = styled(CircularProgress)`
-  bottom: 4px;
+  bottom: 0;
   position: absolute;
 `;

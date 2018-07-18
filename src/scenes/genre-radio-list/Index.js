@@ -49,7 +49,6 @@ class GenreList extends React.PureComponent {
               indicatorColor="primary"
               onChange={handleChangeGenre}
               scrollable
-              scrollButtons="on"
               textColor="primary"
               value={genreIndex}
             >

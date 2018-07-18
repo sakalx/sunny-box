@@ -16,4 +16,5 @@ export const SearchBtn = styled(SearchButton)`
   position: absolute;
   right: 15px;
   top: 85px;
+  z-index: 2;
 `;

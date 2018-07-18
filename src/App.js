@@ -7,15 +7,20 @@ import Typography from '@material-ui/core/Typography';
 import Player from './scenes/player';
 import WorldMap from './scenes/world-map';
 import CountriesList from './scenes/countries-list';
-import GenreList from './scenes/radio-list';
+import GenreList from './scenes/genre-radio-list';
 
-import StationCard from './scenes/card';
+import StationList from './scenes/station-list';
 
 
 import styled from 'styled-components';
 
 const Wrap = styled('section')`
   overflow: hidden;
+  //overflow-x: auto;
+`;
+
+const WrapCard = styled('div')`
+  display: flex;
 `;
 
 class App extends React.PureComponent {
@@ -36,11 +41,8 @@ class App extends React.PureComponent {
 
         {genreIndex === 0 &&
 
-        <div>
-          <StationCard/>
-          <StationCard/>
-          <StationCard/>
-        </div>
+        <StationList/>
+
         }
         {genreIndex === 1 && <Typography>Item Two</Typography>}
         {genreIndex === 2 && <Typography>Item Three</Typography>}

@@ -49,7 +49,6 @@ class CountriesList extends React.PureComponent {
               indicatorColor="primary"
               onChange={this.handleChange}
               scrollable
-              scrollButtons="on"
               textColor="primary"
               value={tabIndex}
             >

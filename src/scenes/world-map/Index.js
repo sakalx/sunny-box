@@ -13,7 +13,6 @@ import geographyMap from 'root/static/world-map.json';
 
 const wrapperStyles = {
   width: "100%",
-  maxWidth: 980,
   margin: "0 auto",
 };
 
