@@ -4,7 +4,15 @@ const radioList = [
   }, {
     "label": "Brooklyn FM"
   }, {
-    "label": "Radio FM"
+    "label": "Radio FM2"
+  },{
+    "label": "Radio FM3"
+  },{
+    "label": "Radio FM4"
+  },{
+    "label": "Radio FM5"
+  },{
+    "label": "Radio FM6"
   },
 ];
 

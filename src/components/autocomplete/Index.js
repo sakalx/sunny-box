@@ -2,27 +2,24 @@ import React from 'react';
 
 import Autosuggest from 'react-autosuggest';
 
-import RenderInput from 'root/components/render-input';
+import RenderInput from 'root/components/input';
 import {
   getSuggestions,
   getSuggestionValue,
   RenderSuggestion,
   RenderSuggestionsContainer,
-} from 'root/components/render-suggestion';
+} from './suggestions';
 
 import {style} from './style';
 
-class Search extends React.PureComponent {
+class Autocomplete extends React.PureComponent {
   state = {
-    value: '',
     suggestions: [],
   };
 
   handleSuggestionsFetchRequested = ({value}) => {
-    const {suggestionsValue} = this.props;
-
     this.setState({
-      suggestions: getSuggestions(suggestionsValue, value),
+      suggestions: getSuggestions(this.props.suggestions, value),
     });
   };
 
@@ -32,15 +29,8 @@ class Search extends React.PureComponent {
     });
   };
 
-  handleChange = (event, {newValue}) => {
-    this.setState({
-      value: newValue,
-    });
-  };
-
   render() {
-    const {title} = this.props;
-    const {value, suggestions} = this.state;
+    const {suggestions} = this.state;
 
     return (
       <Autosuggest theme={{
@@ -57,13 +47,11 @@ class Search extends React.PureComponent {
                    getSuggestionValue={getSuggestionValue}
                    renderSuggestion={RenderSuggestion}
                    inputProps={{
-                     onChange: this.handleChange,
-                     placeholder: `Search a ${title}`,
-                     value,
+                     ...this.props,
                    }}
       />
     );
   }
 }
 
-export default Search;
+export default Autocomplete;

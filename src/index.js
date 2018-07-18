@@ -8,7 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import {MuiThemeProvider} from '@material-ui/core/styles';
 import muiTheme from './theme';
 
-import ErrorBoundary from './components/ErrorBoundary';
+import ErrorBoundary from './components/error-boundary';
 import App from './App';
 
 ReactDOM.render(

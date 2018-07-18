@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import muiTheme from 'root/theme';
 
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import IconButton from '@material-ui/core/IconButton';
 import PauseIcn from '@material-ui/icons/PauseCircleFilled';
 import PlayIcn from '@material-ui/icons/PlayCircleOutline';
 
@@ -11,17 +11,18 @@ export const Wrap = styled(Card)`
   display: flex;
   margin: 15px;
   width: 300px;
+  &:hover {
+    ${props => `
+      box-shadow: 5px 5px 20px ${props.playing === 'true' ? muiTheme.palette.secondary.light: muiTheme.palette.primary.light};
+    `};
+    };
+  transition: all 0.3s linear;
 `;
 
 export const Content = styled('div')`
   align-items: center;
   display: flex;
   flex-direction: column;
-  position: relative;
-`;
-
-export const PlayPauseBtn = styled(IconButton)`
-  z-index: 1;
 `;
 
 const playPauseIcon = `
@@ -43,6 +44,6 @@ export const Cover = styled(CardMedia)`
 `;
 
 export const Spinner = styled(CircularProgress)`
- bottom: 10px;
- position: absolute;
+  bottom: 4px;
+  position: absolute;
 `;

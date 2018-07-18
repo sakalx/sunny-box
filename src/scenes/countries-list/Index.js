@@ -1,20 +1,15 @@
 import React from 'react';
-import {getSuggestionValue} from "root/components/render-suggestion";
 
 import countriesList from 'root/static/countries-list';
 
-import AppBar from '@material-ui/core/AppBar';
 import Slide from '@material-ui/core/Slide';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 
-import Search from 'root/scenes/search';
-import SearchButton from 'root/components/search-button';
-
 import {
-  List,
   SearchBtn,
-  SearchSection,
+  SearchCountry,
+  TabBar,
   Wrap,
 } from './style';
 
@@ -22,44 +17,68 @@ class CountriesList extends React.PureComponent {
   state = {
     tabIndex: 0,
     isSearch: false,
+    searchCountry: {value: ''},
   };
 
   handleChange = (event, tabIndex) => {
     this.setState({tabIndex});
   };
 
+  handleSearchCountry = (event, {newValue}) => {
+    this.setState({searchCountry: {value: newValue.trimStart()}});
+  };
+
   render() {
-    const {tabIndex, isSearch} = this.state;
+    const {
+      isSearch,
+      searchCountry,
+      tabIndex,
+    } = this.state;
 
     return (
       <Wrap>
-        <List>
-          <Slide timeout={{enter: 1000, exit: 200}} direction="left" in={!isSearch}
-                 mountOnEnter unmountOnExit>
-            <AppBar position="static" color="default">
-              <Tabs indicatorColor="primary"
-                    onChange={this.handleChange}
-                    scrollable
-                    scrollButtons="on"
-                    textColor="primary"
-                    value={tabIndex}
-              >
-                {countriesList.map(({label}, index) => (
-                  <Tab key={String(index)} label={label}/>
-                ))}
-              </Tabs>
-            </AppBar>
-          </Slide>
-        </List>
+        <Slide
+          direction="left"
+          in={!isSearch}
+          mountOnEnter
+          timeout={{enter: 800, exit: 500}}
+          unmountOnExit
+        >
+          <TabBar color="default" position="absolute">
+            <Tabs
+              indicatorColor="primary"
+              onChange={this.handleChange}
+              scrollable
+              scrollButtons="on"
+              textColor="primary"
+              value={tabIndex}
+            >
+              {countriesList.map(({label}, index) => (
+                <Tab key={String(index)} label={label}/>
+              ))}
+            </Tabs>
+          </TabBar>
+        </Slide>
 
-        <SearchSection>
-          <Slide timeout={{enter: 1000, exit: 200}} direction="left" in={isSearch}
-                 mountOnEnter unmountOnExit>
-            <Search suggestionsValue={countriesList} title="country"/>
-          </Slide>
-        </SearchSection>
+        <Slide
+          direction="left"
+          in={isSearch}
+          mountOnEnter
+          timeout={{enter: 800, exit: 500}}
+          unmountOnExit
+        >
+          <SearchCountry
+            label="searchCountry"
+            onChange={this.handleSearchCountry}
+            suggestions={countriesList}
+            value={searchCountry.value}
+          />
+        </Slide>
 
-        <SearchBtn label="country" handleClick={() => this.setState({isSearch: !isSearch})}/>
+        <SearchBtn
+          handleClick={() => this.setState({isSearch: !isSearch})}
+          label="country"
+        />
       </Wrap>
     );
   }

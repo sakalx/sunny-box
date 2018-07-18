@@ -1,15 +1,16 @@
+import styled from 'styled-components';
+
+export const Name = styled('strong')`
+  font-weight: 300;
+`;
+
 export const style = {
   container: {
-    flexGrow: 1,
-    position: 'relative',
-    height: 250,
   },
   suggestionsContainerOpen: {
-    position: 'absolute',
-    zIndex: 1,
     marginTop: '5px',
-    left: 0,
-    right: 0,
+    position: 'absolute',
+    zIndex: 3000,
   },
   suggestion: {
     display: 'block',

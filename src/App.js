@@ -1,59 +1,63 @@
 import React from 'react';
 
-import AlertMessage from 'root/components/AlertMessage';
-import SnackBarMessage from 'root/components/SnackBarMessage';
 
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import HelpIcon from '@material-ui/icons/Help';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
-import PhoneIcon from '@material-ui/icons/Phone';
-import SearchIcon from '@material-ui/icons/Search';
-import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import ThumbDown from '@material-ui/icons/ThumbDown';
-import ThumbUp from '@material-ui/icons/ThumbUp';
-import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 
 import Player from './scenes/player';
 import WorldMap from './scenes/world-map';
 import CountriesList from './scenes/countries-list';
-import GenreList from './scenes/genre-list';
+import GenreList from './scenes/radio-list';
 
-import StationCard from './components/station-card';
+import StationCard from './scenes/card';
 
 
 import styled from 'styled-components';
 
+const Wrap = styled('section')`
+  overflow: hidden;
+`;
+
 class App extends React.PureComponent {
   state = {
-    tabIndex: 0,
+    genreIndex: 0,
+  };
+
+  handleChangeGenre = (event, genreIndex) => {
+    this.setState({genreIndex});
   };
 
   render() {
-    const {tabIndex} = this.state;
+    const {genreIndex} = this.state;
 
     return (
-      <React.Fragment>
+      <Wrap>
+        <GenreList genreIndex={genreIndex} handleChangeGenre={this.handleChangeGenre}/>
 
+        {genreIndex === 0 &&
 
-
-        <GenreList/>
-
+        <div>
+          <StationCard/>
+          <StationCard/>
+          <StationCard/>
+        </div>
+        }
+        {genreIndex === 1 && <Typography>Item Two</Typography>}
+        {genreIndex === 2 && <Typography>Item Three</Typography>}
+        {genreIndex === 3 && <Typography>Item Four</Typography>}
+        {genreIndex === 4 && <Typography>Item Five</Typography>}
+        {genreIndex === 5 && <Typography>Item Six</Typography>}
+        {genreIndex === 6 && <Typography>Item Seven</Typography>}
 
         <CountriesList/>
         <WorldMap/>
-
-        <Player/>
+        {/*<Player/>*/}
         {/*<SnackBarMessage/>*/}
         {/*<AlertMessage/>*/}
-      </React.Fragment>
+      </Wrap>
     )
   }
 }
+
 // onClick={() => this.setState({isSearch: !isSearch})}
 export default App

@@ -8,16 +8,16 @@ import parse from 'autosuggest-highlight/parse';
 
 import {Name} from './style';
 
-export const getSuggestions = (suggestionsValue, value) => {
+export const getSuggestions = (suggestions, value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
   let count = 0;
 
   return inputLength === 0
     ? []
-    : suggestionsValue.filter(suggestion => {
+    : suggestions.filter(({label}) => {
       const keep =
-        count < 5 && suggestion.label.toLowerCase().slice(0, inputLength) === inputValue;
+        count < 5 && label.toLowerCase().slice(0, inputLength) === inputValue;
 
       if (keep) {
         count += 1;

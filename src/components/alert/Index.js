@@ -16,17 +16,17 @@ import Slide from '@material-ui/core/Slide';
 const Transition = props => <Slide direction='up' {...props}/>;
 
 const AlertMessage = ({descriptionAlert, openAlert, titleAlert, toggleAlert}) =>
-  <Dialog aria-labelledby='alert-message-title'
+  <Dialog aria-labelledby='alert-title'
           keepMounted
           onClose={() => toggleAlert()}
           open={openAlert}
           TransitionComponent={Transition}
-          aria-describedby='alert-message-description'>
-    <DialogTitle id='alert-message-title'>
+          aria-describedby='alert-description'>
+    <DialogTitle id='alert-title'>
       {titleAlert}
     </DialogTitle>
     <DialogContent>
-      <DialogContentText id='alert-message-description'>
+      <DialogContentText id='alert-description'>
         {descriptionAlert}
       </DialogContentText>
     </DialogContent>
