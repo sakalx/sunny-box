@@ -7,5 +7,3 @@ export const WrapTabs = styled(Tabs)`
   margin: 25px 0;
   color: ${muiTheme.palette.primary.main};
 `;
-
-console.log(muiTheme.palette);

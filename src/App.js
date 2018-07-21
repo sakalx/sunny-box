@@ -3,11 +3,10 @@ import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
 
-
 import Player from './scenes/player';
 import WorldMap from './scenes/world-map';
 import CountriesList from './scenes/countries-list';
-import GenreList from './scenes/genre-radio-list';
+import RadioList from './scenes/genre-radio-list';
 
 import StationList from './scenes/station-list';
 
@@ -32,19 +31,24 @@ class App extends React.PureComponent {
     this.setState({genreIndex});
   };
 
+
   render() {
     const {genreIndex} = this.state;
 
     return (
       <Wrap>
-        <GenreList genreIndex={genreIndex} handleChangeGenre={this.handleChangeGenre}/>
+        <RadioList
+          genreIndex={genreIndex}
+          handleChangeGenre={this.handleChangeGenre}
+
+        />
 
         {genreIndex === 0 &&
 
         <StationList/>
 
         }
-        {genreIndex === 1 && <Typography>Item Two</Typography>}
+        {genreIndex === 1 && <Typography style={{minHeight: '305px'}}>Item Two</Typography>}
         {genreIndex === 2 && <Typography>Item Three</Typography>}
         {genreIndex === 3 && <Typography>Item Four</Typography>}
         {genreIndex === 4 && <Typography>Item Five</Typography>}
@@ -53,7 +57,7 @@ class App extends React.PureComponent {
 
         <CountriesList/>
         <WorldMap/>
-        {/*<Player/>*/}
+        <Player/>
         {/*<SnackBarMessage/>*/}
         {/*<AlertMessage/>*/}
       </Wrap>

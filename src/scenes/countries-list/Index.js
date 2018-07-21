@@ -15,7 +15,7 @@ import {
 
 class CountriesList extends React.PureComponent {
   state = {
-    tabIndex: 0,
+    tabIndex: false,
     isSearch: false,
     searchCountry: {value: ''},
   };

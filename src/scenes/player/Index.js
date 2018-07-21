@@ -1,5 +1,8 @@
 import React from 'react';
 
+import coverImg from 'root/static/Sketch.png';
+
+
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
@@ -32,7 +35,7 @@ const Player = () => {
       <Content elevation={24}>
 
         <Main>
-          <Avatar alt="Name Radio" src="https://sakals.000webhostapp.com/share/HelloKitty2.png"/>
+          <Avatar alt="Name Radio" src={coverImg}/>
           <Controller>
             <Title variant="headline" component="h3"> Radio Name Gop FM</Title>
             {renderNavigationBtn('Previous')}

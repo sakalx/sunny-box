@@ -149,7 +149,7 @@ const config = {
       },
       // IMG - loader
       {
-        include: path.resolve(__dirname, `${develop}/static/img/`),
+        include: path.resolve(__dirname, `${develop}/static`),
         test: /\.(jpg|png)$/,
         use: imgConfig,
       },

@@ -10,13 +10,16 @@ import {
 
 class StationList extends React.PureComponent {
   state = {
-    tabIndex: 0,
-    isSearch: false,
-    searchCountry: {value: ''},
+    tabIndex: false,
+
   };
 
   handleChange = (event, tabIndex) => {
-    this.setState({tabIndex});
+    this.setState(state =>
+      ({tabIndex: tabIndex === state.tabIndex
+          ? false
+          : tabIndex
+      }));
   };
 
 
@@ -33,7 +36,7 @@ class StationList extends React.PureComponent {
       >
         {[1, 2, 3, 4, 5, 6].map((c, index) => (
           <Tab
-            icon={<StationCard active={tabIndex === index}/>}
+            icon={<StationCard playing={tabIndex === index}/>}
             key={String(index)}
             label="Brooklyn"
           />

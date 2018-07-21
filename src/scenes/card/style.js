@@ -18,7 +18,7 @@ export const Wrap = styled(Paper)`
   display: flex;
   flex-direction: column;
   margin: 15px;
-  min-width: 170px;
+  min-width: 150px;
   position: relative;
   transition: all 0.3s linear;
   &:hover {
@@ -32,8 +32,8 @@ export const Wrap = styled(Paper)`
 `;
 
 export const Cover = styled(CardMedia)`
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: 100%;
 `;
 
 export const City = styled(Typography)`
@@ -46,7 +46,7 @@ export const City = styled(Typography)`
 `;
 
 export const Title = styled(Typography)`
-  padding: 10px;
+  padding: 5px;
   ${({active}) => active === 'true' && `
     color: ${muiTheme.palette.primary.dark} !important;  
   `};

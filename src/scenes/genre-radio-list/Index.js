@@ -1,6 +1,7 @@
 import React from 'react';
 
 import radioList from 'root/static/radio-list';
+import genreList from 'root/static/genre-list';
 
 import AppBar from '@material-ui/core/AppBar';
 import Fade from '@material-ui/core/Fade';
@@ -18,7 +19,7 @@ import {
   Wrap,
 } from './style';
 
-class GenreList extends React.PureComponent {
+class RadioList extends React.PureComponent {
   state = {
     isSearch: false,
     searchRadio: {value: ''},
@@ -52,13 +53,15 @@ class GenreList extends React.PureComponent {
               textColor="primary"
               value={genreIndex}
             >
-              <Tab label="Item One" icon={<PhoneIcon/>}/>
-              <Tab label="Item Two" icon={<FavoriteIcon/>}/>
-              <Tab label="Item Three" icon={<PersonPinIcon/>}/>
-              <Tab label="Item Four" icon={<HelpIcon/>}/>
-              <Tab label="Item Five" icon={<PhoneIcon/>}/>
-              <Tab label="Item Six" icon={<PersonPinIcon/>}/>
-              <Tab label="Item Seven" icon={<HelpIcon/>}/>
+              {
+                genreList.map(({label}) => (
+                  <Tab
+                    icon={<PhoneIcon/>}
+                    key={label}
+                    label={label}
+                  />
+                ))
+              }
             </Tabs>
           </AppBar>
         </Slide>
@@ -81,4 +84,4 @@ class GenreList extends React.PureComponent {
   }
 }
 
-export default GenreList;
+export default RadioList;
