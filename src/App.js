@@ -57,7 +57,7 @@ class App extends React.PureComponent {
 
         <CountriesList/>
         <WorldMap/>
-        <Player/>
+        {/*<Player/>*/}
         {/*<SnackBarMessage/>*/}
         {/*<AlertMessage/>*/}
       </Wrap>

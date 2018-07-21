@@ -78,6 +78,8 @@ class RadioList extends React.PureComponent {
         <SearchBtn
           handleClick={() => this.setState({isSearch: !isSearch})}
           label="radio"
+          placement="left"
+          title="Search radio"
         />
       </Wrap>
     );

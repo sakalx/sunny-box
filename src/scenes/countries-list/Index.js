@@ -1,10 +1,11 @@
 import React from 'react';
 
-import countriesList from 'root/static/countries-list';
+import countriesList from 'root/static/countries';
 
 import Slide from '@material-ui/core/Slide';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
+
 
 import {
   SearchBtn,
@@ -77,6 +78,8 @@ class CountriesList extends React.PureComponent {
         <SearchBtn
           handleClick={() => this.setState({isSearch: !isSearch})}
           label="country"
+          placement="left-start"
+          title="Search country"
         />
       </Wrap>
     );
