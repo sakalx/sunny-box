@@ -10,13 +10,19 @@ import ZoomOutMap from '@material-ui/icons/ZoomOutMap';
 
 const {palette} = muiTheme;
 
-export const Wrap = styled('div')`
-  margin: 0 auto;
-  max-width: 100%;
+const _flex = styled('div')`
+  display: flex;
 `;
 
-export const Head = styled('section')`
-  display: flex;
+export const Wrap = _flex.extend`
+  flex-wrap: wrap;
+`;
+
+export const WrapMap = styled('div')`
+  flex: 1 1 750px;
+`;
+
+export const Head = _flex.extend`
   justify-content: center;
   position: relative;
 `;
@@ -56,36 +62,30 @@ export const motionStyle = {
   }
 };
 
-export const geographyStyle = isSelected => {
-  const hoverColor = isSelected
-    ? palette.primary.light
-    : palette.error.light;
-
-  return ({
-    default: {
-      fill: isSelected ? palette.primary.light : '#ECEFF1',
-      stroke: '#607D8B',
-      strokeWidth: .75,
-      outline: 'none',
-    },
-    hover: {
-      fill: hoverColor,
-      stroke: hoverColor,
-      strokeWidth: .75,
-      outline: 'none',
-      cursor: 'pointer',
-    },
-    pressed: {
-      fill: palette.primary.main,
-      stroke: '#607D8B',
-      strokeWidth: .75,
-      outline: 'none',
-    },
-  })
-};
+export const geographyStyle = isSelected => ({
+  default: {
+    fill: isSelected ? palette.primary.light : palette.grey['100'],
+    stroke: palette.grey['700'],
+    strokeWidth: .75,
+    outline: 'none',
+  },
+  hover: {
+    fill: palette.grey['A100'],
+    stroke: palette.grey['500'],
+    strokeWidth: .75,
+    outline: 'none',
+    cursor: 'pointer',
+  },
+  pressed: {
+    fill: palette.primary.main,
+    stroke: palette.grey['700'],
+    strokeWidth: .75,
+    outline: 'none',
+  },
+});
 
 export const tooltipStyle = position => ({
-  color: palette.error.dark,
+  color: palette.grey['A700'],
   fontSize: '14px',
   left: position[0],
   position: 'absolute',

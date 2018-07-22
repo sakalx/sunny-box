@@ -6,7 +6,7 @@ import countriesList from 'root/static/countries';
 import {ZoomableGroup, Geographies, Geography} from 'react-simple-maps';
 import {Motion} from 'react-motion';
 
-import Typography from '@material-ui/core/Typography';
+import CountryInfo from './country-info';
 
 import {
   ComponentMap,
@@ -14,10 +14,11 @@ import {
   geographyStyle,
   Head,
   motionStyle,
+  tooltipStyle,
   Wrap,
+  WrapMap,
   ZoomOutButton,
   ZoomOutIcon,
-  tooltipStyle,
 } from './style';
 
 class WorldMap extends React.PureComponent {
@@ -58,7 +59,7 @@ class WorldMap extends React.PureComponent {
 
   handleMove = ({properties}, event) => {
     const x = event.clientX;
-    const y = event.clientY + window.pageYOffset - 20;
+    const y = event.clientY + window.pageYOffset;
 
     this.setState({
       tooltipPosition: [x, y],
@@ -78,64 +79,66 @@ class WorldMap extends React.PureComponent {
 
     return (
       <Wrap>
-        <Head>
-          <CountryName variant="display1">
-            {selectedCountry}
-          </CountryName>
-          {zoom > 1 &&
-          <ZoomOutButton
-            aria-label="Zoom-out-map"
-            onClick={this.handleZoomOut}
-          >
-            <ZoomOutIcon/>
-          </ZoomOutButton>
-          }
-        </Head>
-
-        <Motion
-          defaultStyle={motionStyle.default}
-          style={motionStyle.motion(zoom, center)}
-        >
-          {({zoom, x, y}) => (
-            <ComponentMap
-              projectionConfig={{scale: 205}}
-              width={980}
-              height={551}
+        <WrapMap>
+          <Head>
+            <CountryName variant="display1">
+              {selectedCountry}
+            </CountryName>
+            {zoom > 1 &&
+            <ZoomOutButton
+              aria-label="Zoom-out-map"
+              onClick={this.handleZoomOut}
             >
-              <ZoomableGroup center={[x, y]} zoom={zoom}>
-                <Geographies
-                  disableOptimization={disableOptimization}
-                  geography={geographyMap}>
-                  {(geographies, projection) =>
-                    geographies.map((geography) => {
-                      const isSelected = selectedCountry === geography.properties.name;
+              <ZoomOutIcon/>
+            </ZoomOutButton>
+            }
+          </Head>
 
-                      return (
-                        geography.id !== "010" && (
-                          <Geography
-                            key={geography.properties.name}
-                            geography={geography}
-                            projection={projection}
-                            onMouseMove={this.handleMove}
-                            onMouseLeave={() => this.setState({tooltip: ''})}
-                            style={geographyStyle(isSelected)}
-                            onClick={this.handleCountryClick}
-                          />
+          <Motion
+            defaultStyle={motionStyle.default}
+            style={motionStyle.motion(zoom, center)}
+          >
+            {({zoom, x, y}) => (
+              <ComponentMap
+                projectionConfig={{scale: 205}}
+                width={980}
+                height={551}
+              >
+                <ZoomableGroup center={[x, y]} zoom={zoom}>
+                  <Geographies
+                    disableOptimization={disableOptimization}
+                    geography={geographyMap}>
+                    {(geographies, projection) =>
+                      geographies.map((geography) => {
+                        const isSelected = selectedCountry === geography.properties.name;
+
+                        return (
+                          geography.id !== "010" && (
+                            <Geography
+                              key={geography.properties.name}
+                              geography={geography}
+                              projection={projection}
+                              onMouseMove={this.handleMove}
+                              onMouseLeave={() => this.setState({tooltip: ''})}
+                              style={geographyStyle(isSelected)}
+                              onClick={this.handleCountryClick}
+                            />
+                          )
                         )
-                      )
-                    })
-                  }
-                </Geographies>
-              </ZoomableGroup>
-            </ComponentMap>
-          )}
-        </Motion>
+                      })
+                    }
+                  </Geographies>
+                </ZoomableGroup>
+              </ComponentMap>
+            )}
+          </Motion>
 
-        <span
-          style={tooltipStyle(tooltipPosition)}
-        >
-          {tooltip}
-        </span>
+          <h6 style={tooltipStyle(tooltipPosition)}>
+            {tooltip}
+          </h6>
+        </WrapMap>
+
+        <CountryInfo/>
       </Wrap>
     )
   }
