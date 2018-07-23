@@ -111,7 +111,7 @@ class WorldMap extends React.PureComponent {
                     {(geographies, projection) =>
                       geographies.map((geography) => {
                         const isSelected = selectedCountry === geography.properties.name;
-
+                        console.log(geography);
                         return (
                           geography.id !== "010" && (
                             <Geography
@@ -133,9 +133,9 @@ class WorldMap extends React.PureComponent {
             )}
           </Motion>
 
-          <h6 style={tooltipStyle(tooltipPosition)}>
+          <h5 style={tooltipStyle(tooltipPosition)}>
             {tooltip}
-          </h6>
+          </h5>
         </WrapMap>
 
         <CountryInfo/>

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// import {Provider} from 'react-redux';
-// import store from './redux-core/store';
+import {Provider} from 'react-redux';
+import store from './redux-core/store';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import {MuiThemeProvider} from '@material-ui/core/styles';
@@ -16,11 +16,11 @@ ReactDOM.render(
     <CssBaseline/>
 
     <MuiThemeProvider theme={muiTheme}>
-      {/*<Provider store={store}>*/}
+      <Provider store={store}>
         <ErrorBoundary>
           <App/>
         </ErrorBoundary>
-      {/*</Provider>*/}
+      </Provider>
     </MuiThemeProvider>
 
   </React.Fragment>

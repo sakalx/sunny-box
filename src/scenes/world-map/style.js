@@ -70,8 +70,8 @@ export const geographyStyle = isSelected => ({
     outline: 'none',
   },
   hover: {
-    fill: palette.grey['A100'],
-    stroke: palette.grey['500'],
+    fill: isSelected ? palette.primary.light : palette.grey['A100'],
+    stroke: palette.grey['700'],
     strokeWidth: .75,
     outline: 'none',
     cursor: 'pointer',
@@ -86,7 +86,6 @@ export const geographyStyle = isSelected => ({
 
 export const tooltipStyle = position => ({
   color: palette.grey['A700'],
-  fontSize: '14px',
   left: position[0],
   position: 'absolute',
   top: position[1],

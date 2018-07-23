@@ -8,8 +8,7 @@ const countriesList = [
       -69.96666666
     ],
     "label": "Aruba",
-    "country_code": "AW",
-    "capital": "Oranjestad"
+    "country_code": "AW"
   },
   {
     "timezones": [
@@ -20,8 +19,7 @@ const countriesList = [
       65
     ],
     "label": "Afghanistan",
-    "country_code": "AF",
-    "capital": "Kabul"
+    "country_code": "AF"
   },
   {
     "timezones": [
@@ -32,8 +30,7 @@ const countriesList = [
       18.5
     ],
     "label": "Angola",
-    "country_code": "AO",
-    "capital": "Luanda"
+    "country_code": "AO"
   },
   {
     "timezones": [
@@ -44,8 +41,7 @@ const countriesList = [
       -63.16666666
     ],
     "label": "Anguilla",
-    "country_code": "AI",
-    "capital": "The Valley"
+    "country_code": "AI"
   },
   {
     "timezones": [
@@ -55,9 +51,8 @@ const countriesList = [
       60.116667,
       19.9
     ],
-    "label": "\u00c5land Islands",
-    "country_code": "AX",
-    "capital": "Mariehamn"
+    "label": "Åland Islands",
+    "country_code": "AX"
   },
   {
     "timezones": [
@@ -68,8 +63,7 @@ const countriesList = [
       20
     ],
     "label": "Albania",
-    "country_code": "AL",
-    "capital": "Tirana"
+    "country_code": "AL"
   },
   {
     "timezones": [
@@ -80,8 +74,7 @@ const countriesList = [
       1.5
     ],
     "label": "Andorra",
-    "country_code": "AD",
-    "capital": "Andorra la Vella"
+    "country_code": "AD"
   },
   {
     "timezones": [
@@ -92,8 +85,7 @@ const countriesList = [
       54
     ],
     "label": "United Arab Emirates",
-    "country_code": "AE",
-    "capital": "Abu Dhabi"
+    "country_code": "AE"
   },
   {
     "timezones": [
@@ -115,8 +107,7 @@ const countriesList = [
       -64
     ],
     "label": "Argentina",
-    "country_code": "AR",
-    "capital": "Buenos Aires"
+    "country_code": "AR"
   },
   {
     "timezones": [
@@ -127,8 +118,7 @@ const countriesList = [
       45
     ],
     "label": "Armenia",
-    "country_code": "AM",
-    "capital": "Yerevan"
+    "country_code": "AM"
   },
   {
     "timezones": [
@@ -139,8 +129,7 @@ const countriesList = [
       -170
     ],
     "label": "American Samoa",
-    "country_code": "AS",
-    "capital": "Pago Pago"
+    "country_code": "AS"
   },
   {
     "timezones": [
@@ -160,8 +149,7 @@ const countriesList = [
       0
     ],
     "label": "Antarctica",
-    "country_code": "AQ",
-    "capital": null
+    "country_code": "AQ"
   },
   {
     "timezones": [
@@ -172,8 +160,7 @@ const countriesList = [
       69.167
     ],
     "label": "French Southern and Antarctic Lands",
-    "country_code": "TF",
-    "capital": "Port-aux-Fran\u00e7ais"
+    "country_code": "TF"
   },
   {
     "timezones": [
@@ -184,8 +171,7 @@ const countriesList = [
       -61.8
     ],
     "label": "Antigua and Barbuda",
-    "country_code": "AG",
-    "capital": "Saint John's"
+    "country_code": "AG"
   },
   {
     "timezones": [
@@ -208,8 +194,7 @@ const countriesList = [
       133
     ],
     "label": "Australia",
-    "country_code": "AU",
-    "capital": "Canberra"
+    "country_code": "AU"
   },
   {
     "timezones": [
@@ -220,8 +205,7 @@ const countriesList = [
       13.33333333
     ],
     "label": "Austria",
-    "country_code": "AT",
-    "capital": "Vienna"
+    "country_code": "AT"
   },
   {
     "timezones": [
@@ -232,8 +216,7 @@ const countriesList = [
       47.5
     ],
     "label": "Azerbaijan",
-    "country_code": "AZ",
-    "capital": "Baku"
+    "country_code": "AZ"
   },
   {
     "timezones": [
@@ -244,8 +227,7 @@ const countriesList = [
       30
     ],
     "label": "Burundi",
-    "country_code": "BI",
-    "capital": "Bujumbura"
+    "country_code": "BI"
   },
   {
     "timezones": [
@@ -256,8 +238,7 @@ const countriesList = [
       4
     ],
     "label": "Belgium",
-    "country_code": "BE",
-    "capital": "Brussels"
+    "country_code": "BE"
   },
   {
     "timezones": [
@@ -268,8 +249,7 @@ const countriesList = [
       2.25
     ],
     "label": "Benin",
-    "country_code": "BJ",
-    "capital": "Porto-Novo"
+    "country_code": "BJ"
   },
   {
     "timezones": [
@@ -280,8 +260,7 @@ const countriesList = [
       -2
     ],
     "label": "Burkina Faso",
-    "country_code": "BF",
-    "capital": "Ouagadougou"
+    "country_code": "BF"
   },
   {
     "timezones": [
@@ -292,8 +271,7 @@ const countriesList = [
       90
     ],
     "label": "Bangladesh",
-    "country_code": "BD",
-    "capital": "Dhaka"
+    "country_code": "BD"
   },
   {
     "timezones": [
@@ -304,8 +282,7 @@ const countriesList = [
       25
     ],
     "label": "Bulgaria",
-    "country_code": "BG",
-    "capital": "Sofia"
+    "country_code": "BG"
   },
   {
     "timezones": [
@@ -316,8 +293,7 @@ const countriesList = [
       50.55
     ],
     "label": "Bahrain",
-    "country_code": "BH",
-    "capital": "Manama"
+    "country_code": "BH"
   },
   {
     "timezones": [
@@ -328,8 +304,7 @@ const countriesList = [
       -76
     ],
     "label": "Bahamas",
-    "country_code": "BS",
-    "capital": "Nassau"
+    "country_code": "BS"
   },
   {
     "timezones": [
@@ -340,8 +315,7 @@ const countriesList = [
       18
     ],
     "label": "Bosnia and Herzegovina",
-    "country_code": "BA",
-    "capital": "Sarajevo"
+    "country_code": "BA"
   },
   {
     "timezones": [
@@ -351,9 +325,8 @@ const countriesList = [
       18.5,
       -63.41666666
     ],
-    "label": "Saint Barth\u00e9lemy",
-    "country_code": "BL",
-    "capital": "Gustavia"
+    "label": "Saint Barthélemy",
+    "country_code": "BL"
   },
   {
     "timezones": [
@@ -364,8 +337,7 @@ const countriesList = [
       28
     ],
     "label": "Belarus",
-    "country_code": "BY",
-    "capital": "Minsk"
+    "country_code": "BY"
   },
   {
     "timezones": [
@@ -376,8 +348,7 @@ const countriesList = [
       -88.75
     ],
     "label": "Belize",
-    "country_code": "BZ",
-    "capital": "Belmopan"
+    "country_code": "BZ"
   },
   {
     "timezones": [
@@ -388,8 +359,7 @@ const countriesList = [
       -64.75
     ],
     "label": "Bermuda",
-    "country_code": "BM",
-    "capital": "Hamilton"
+    "country_code": "BM"
   },
   {
     "timezones": [
@@ -400,8 +370,7 @@ const countriesList = [
       -65
     ],
     "label": "Bolivia",
-    "country_code": "BO",
-    "capital": "Sucre"
+    "country_code": "BO"
   },
   {
     "timezones": [
@@ -427,8 +396,7 @@ const countriesList = [
       -55
     ],
     "label": "Brazil",
-    "country_code": "BR",
-    "capital": "Bras\u00edlia"
+    "country_code": "BR"
   },
   {
     "timezones": [
@@ -439,8 +407,7 @@ const countriesList = [
       -59.53333333
     ],
     "label": "Barbados",
-    "country_code": "BB",
-    "capital": "Bridgetown"
+    "country_code": "BB"
   },
   {
     "timezones": [
@@ -451,8 +418,7 @@ const countriesList = [
       114.66666666
     ],
     "label": "Brunei",
-    "country_code": "BN",
-    "capital": "Bandar Seri Begawan"
+    "country_code": "BN"
   },
   {
     "timezones": [
@@ -463,8 +429,7 @@ const countriesList = [
       90.5
     ],
     "label": "Bhutan",
-    "country_code": "BT",
-    "capital": "Thimphu"
+    "country_code": "BT"
   },
   {
     "timezones": [
@@ -475,8 +440,7 @@ const countriesList = [
       3.4
     ],
     "label": "Bouvet Island",
-    "country_code": "BV",
-    "capital": null
+    "country_code": "BV"
   },
   {
     "timezones": [
@@ -487,8 +451,7 @@ const countriesList = [
       24
     ],
     "label": "Botswana",
-    "country_code": "BW",
-    "capital": "Gaborone"
+    "country_code": "BW"
   },
   {
     "timezones": [
@@ -499,8 +462,7 @@ const countriesList = [
       21
     ],
     "label": "Central African Republic",
-    "country_code": "CF",
-    "capital": "Bangui"
+    "country_code": "CF"
   },
   {
     "timezones": [
@@ -538,8 +500,7 @@ const countriesList = [
       -95
     ],
     "label": "Canada",
-    "country_code": "CA",
-    "capital": "Ottawa"
+    "country_code": "CA"
   },
   {
     "timezones": [
@@ -550,8 +511,7 @@ const countriesList = [
       96.83333333
     ],
     "label": "Cocos (Keeling) Islands",
-    "country_code": "CC",
-    "capital": "West Island"
+    "country_code": "CC"
   },
   {
     "timezones": [
@@ -562,8 +522,7 @@ const countriesList = [
       8
     ],
     "label": "Switzerland",
-    "country_code": "CH",
-    "capital": "Bern"
+    "country_code": "CH"
   },
   {
     "timezones": [
@@ -575,8 +534,7 @@ const countriesList = [
       -71
     ],
     "label": "Chile",
-    "country_code": "CL",
-    "capital": "Santiago"
+    "country_code": "CL"
   },
   {
     "timezones": [
@@ -588,8 +546,7 @@ const countriesList = [
       105
     ],
     "label": "China",
-    "country_code": "CN",
-    "capital": "Beijing"
+    "country_code": "CN"
   },
   {
     "timezones": [
@@ -600,8 +557,7 @@ const countriesList = [
       -5
     ],
     "label": "Ivory Coast",
-    "country_code": "CI",
-    "capital": "Yamoussoukro"
+    "country_code": "CI"
   },
   {
     "timezones": [
@@ -612,8 +568,7 @@ const countriesList = [
       12
     ],
     "label": "Cameroon",
-    "country_code": "CM",
-    "capital": "Yaound\u00e9"
+    "country_code": "CM"
   },
   {
     "timezones": [
@@ -625,8 +580,7 @@ const countriesList = [
       25
     ],
     "label": "DR Congo",
-    "country_code": "CD",
-    "capital": "Kinshasa"
+    "country_code": "CD"
   },
   {
     "timezones": [
@@ -637,8 +591,7 @@ const countriesList = [
       15
     ],
     "label": "Republic of the Congo",
-    "country_code": "CG",
-    "capital": "Brazzaville"
+    "country_code": "CG"
   },
   {
     "timezones": [
@@ -649,8 +602,7 @@ const countriesList = [
       -159.76666666
     ],
     "label": "Cook Islands",
-    "country_code": "CK",
-    "capital": "Avarua"
+    "country_code": "CK"
   },
   {
     "timezones": [
@@ -661,8 +613,7 @@ const countriesList = [
       -72
     ],
     "label": "Colombia",
-    "country_code": "CO",
-    "capital": "Bogot\u00e1"
+    "country_code": "CO"
   },
   {
     "timezones": [
@@ -673,8 +624,7 @@ const countriesList = [
       44.25
     ],
     "label": "Comoros",
-    "country_code": "KM",
-    "capital": "Moroni"
+    "country_code": "KM"
   },
   {
     "timezones": [
@@ -685,8 +635,7 @@ const countriesList = [
       -24
     ],
     "label": "Cape Verde",
-    "country_code": "CV",
-    "capital": "Praia"
+    "country_code": "CV"
   },
   {
     "timezones": [
@@ -697,8 +646,7 @@ const countriesList = [
       -84
     ],
     "label": "Costa Rica",
-    "country_code": "CR",
-    "capital": "San Jos\u00e9"
+    "country_code": "CR"
   },
   {
     "timezones": [
@@ -709,8 +657,7 @@ const countriesList = [
       -80
     ],
     "label": "Cuba",
-    "country_code": "CU",
-    "capital": "Havana"
+    "country_code": "CU"
   },
   {
     "timezones": [
@@ -720,9 +667,8 @@ const countriesList = [
       12.116667,
       -68.933333
     ],
-    "label": "Cura\u00e7ao",
-    "country_code": "CW",
-    "capital": "Willemstad"
+    "label": "Curaçao",
+    "country_code": "CW"
   },
   {
     "timezones": [
@@ -733,8 +679,7 @@ const countriesList = [
       105.66666666
     ],
     "label": "Christmas Island",
-    "country_code": "CX",
-    "capital": "Flying Fish Cove"
+    "country_code": "CX"
   },
   {
     "timezones": [
@@ -745,8 +690,7 @@ const countriesList = [
       -80.5
     ],
     "label": "Cayman Islands",
-    "country_code": "KY",
-    "capital": "George Town"
+    "country_code": "KY"
   },
   {
     "timezones": [
@@ -757,8 +701,7 @@ const countriesList = [
       33
     ],
     "label": "Cyprus",
-    "country_code": "CY",
-    "capital": "Nicosia"
+    "country_code": "CY"
   },
   {
     "timezones": [
@@ -769,8 +712,7 @@ const countriesList = [
       15.5
     ],
     "label": "Czech Republic",
-    "country_code": "CZ",
-    "capital": "Prague"
+    "country_code": "CZ"
   },
   {
     "timezones": [
@@ -782,8 +724,7 @@ const countriesList = [
       9
     ],
     "label": "Germany",
-    "country_code": "DE",
-    "capital": "Berlin"
+    "country_code": "DE"
   },
   {
     "timezones": [
@@ -794,8 +735,7 @@ const countriesList = [
       43
     ],
     "label": "Djibouti",
-    "country_code": "DJ",
-    "capital": "Djibouti"
+    "country_code": "DJ"
   },
   {
     "timezones": [
@@ -806,8 +746,7 @@ const countriesList = [
       -61.33333333
     ],
     "label": "Dominica",
-    "country_code": "DM",
-    "capital": "Roseau"
+    "country_code": "DM"
   },
   {
     "timezones": [
@@ -818,8 +757,7 @@ const countriesList = [
       10
     ],
     "label": "Denmark",
-    "country_code": "DK",
-    "capital": "Copenhagen"
+    "country_code": "DK"
   },
   {
     "timezones": [
@@ -830,8 +768,7 @@ const countriesList = [
       -70.66666666
     ],
     "label": "Dominican Republic",
-    "country_code": "DO",
-    "capital": "Santo Domingo"
+    "country_code": "DO"
   },
   {
     "timezones": [
@@ -842,8 +779,7 @@ const countriesList = [
       3
     ],
     "label": "Algeria",
-    "country_code": "DZ",
-    "capital": "Algiers"
+    "country_code": "DZ"
   },
   {
     "timezones": [
@@ -855,8 +791,7 @@ const countriesList = [
       -77.5
     ],
     "label": "Ecuador",
-    "country_code": "EC",
-    "capital": "Quito"
+    "country_code": "EC"
   },
   {
     "timezones": [
@@ -867,8 +802,7 @@ const countriesList = [
       30
     ],
     "label": "Egypt",
-    "country_code": "EG",
-    "capital": "Cairo"
+    "country_code": "EG"
   },
   {
     "timezones": [
@@ -879,8 +813,7 @@ const countriesList = [
       39
     ],
     "label": "Eritrea",
-    "country_code": "ER",
-    "capital": "Asmara"
+    "country_code": "ER"
   },
   {
     "timezones": [
@@ -891,8 +824,7 @@ const countriesList = [
       -13
     ],
     "label": "Western Sahara",
-    "country_code": "EH",
-    "capital": "El Aai\u00fan"
+    "country_code": "EH"
   },
   {
     "timezones": [
@@ -905,8 +837,7 @@ const countriesList = [
       -4
     ],
     "label": "Spain",
-    "country_code": "ES",
-    "capital": "Madrid"
+    "country_code": "ES"
   },
   {
     "timezones": [
@@ -917,8 +848,7 @@ const countriesList = [
       26
     ],
     "label": "Estonia",
-    "country_code": "EE",
-    "capital": "Tallinn"
+    "country_code": "EE"
   },
   {
     "timezones": [
@@ -929,8 +859,7 @@ const countriesList = [
       38
     ],
     "label": "Ethiopia",
-    "country_code": "ET",
-    "capital": "Addis Ababa"
+    "country_code": "ET"
   },
   {
     "timezones": [
@@ -941,8 +870,7 @@ const countriesList = [
       26
     ],
     "label": "Finland",
-    "country_code": "FI",
-    "capital": "Helsinki"
+    "country_code": "FI"
   },
   {
     "timezones": [
@@ -953,8 +881,7 @@ const countriesList = [
       175
     ],
     "label": "Fiji",
-    "country_code": "FJ",
-    "capital": "Suva"
+    "country_code": "FJ"
   },
   {
     "timezones": [
@@ -965,8 +892,7 @@ const countriesList = [
       -59
     ],
     "label": "Falkland Islands",
-    "country_code": "FK",
-    "capital": "Stanley"
+    "country_code": "FK"
   },
   {
     "timezones": [
@@ -977,8 +903,7 @@ const countriesList = [
       2
     ],
     "label": "France",
-    "country_code": "FR",
-    "capital": "Paris"
+    "country_code": "FR"
   },
   {
     "timezones": [
@@ -989,8 +914,7 @@ const countriesList = [
       -7
     ],
     "label": "Faroe Islands",
-    "country_code": "FO",
-    "capital": "T\u00f3rshavn"
+    "country_code": "FO"
   },
   {
     "timezones": [
@@ -1003,8 +927,7 @@ const countriesList = [
       158.25
     ],
     "label": "Micronesia",
-    "country_code": "FM",
-    "capital": "Palikir"
+    "country_code": "FM"
   },
   {
     "timezones": [
@@ -1015,8 +938,7 @@ const countriesList = [
       11.75
     ],
     "label": "Gabon",
-    "country_code": "GA",
-    "capital": "Libreville"
+    "country_code": "GA"
   },
   {
     "timezones": [
@@ -1027,8 +949,7 @@ const countriesList = [
       -2
     ],
     "label": "United Kingdom",
-    "country_code": "GB",
-    "capital": "London"
+    "country_code": "GB"
   },
   {
     "timezones": [
@@ -1039,8 +960,7 @@ const countriesList = [
       43.5
     ],
     "label": "Georgia",
-    "country_code": "GE",
-    "capital": "Tbilisi"
+    "country_code": "GE"
   },
   {
     "timezones": [
@@ -1051,8 +971,7 @@ const countriesList = [
       -2.58333333
     ],
     "label": "Guernsey",
-    "country_code": "GG",
-    "capital": "St. Peter Port"
+    "country_code": "GG"
   },
   {
     "timezones": [
@@ -1063,8 +982,7 @@ const countriesList = [
       -2
     ],
     "label": "Ghana",
-    "country_code": "GH",
-    "capital": "Accra"
+    "country_code": "GH"
   },
   {
     "timezones": [
@@ -1075,8 +993,7 @@ const countriesList = [
       -5.35
     ],
     "label": "Gibraltar",
-    "country_code": "GI",
-    "capital": "Gibraltar"
+    "country_code": "GI"
   },
   {
     "timezones": [
@@ -1087,8 +1004,7 @@ const countriesList = [
       -10
     ],
     "label": "Guinea",
-    "country_code": "GN",
-    "capital": "Conakry"
+    "country_code": "GN"
   },
   {
     "timezones": [
@@ -1099,8 +1015,7 @@ const countriesList = [
       -61.583333
     ],
     "label": "Guadeloupe",
-    "country_code": "GP",
-    "capital": "Basse-Terre"
+    "country_code": "GP"
   },
   {
     "timezones": [
@@ -1111,8 +1026,7 @@ const countriesList = [
       -16.56666666
     ],
     "label": "Gambia",
-    "country_code": "GM",
-    "capital": "Banjul"
+    "country_code": "GM"
   },
   {
     "timezones": [
@@ -1123,8 +1037,7 @@ const countriesList = [
       -15
     ],
     "label": "Guinea-Bissau",
-    "country_code": "GW",
-    "capital": "Bissau"
+    "country_code": "GW"
   },
   {
     "timezones": [
@@ -1135,8 +1048,7 @@ const countriesList = [
       10
     ],
     "label": "Equatorial Guinea",
-    "country_code": "GQ",
-    "capital": "Malabo"
+    "country_code": "GQ"
   },
   {
     "timezones": [
@@ -1147,8 +1059,7 @@ const countriesList = [
       22
     ],
     "label": "Greece",
-    "country_code": "GR",
-    "capital": "Athens"
+    "country_code": "GR"
   },
   {
     "timezones": [
@@ -1159,8 +1070,7 @@ const countriesList = [
       -61.66666666
     ],
     "label": "Grenada",
-    "country_code": "GD",
-    "capital": "St. George's"
+    "country_code": "GD"
   },
   {
     "timezones": [
@@ -1174,8 +1084,7 @@ const countriesList = [
       -40
     ],
     "label": "Greenland",
-    "country_code": "GL",
-    "capital": "Nuuk"
+    "country_code": "GL"
   },
   {
     "timezones": [
@@ -1186,8 +1095,7 @@ const countriesList = [
       -90.25
     ],
     "label": "Guatemala",
-    "country_code": "GT",
-    "capital": "Guatemala City"
+    "country_code": "GT"
   },
   {
     "timezones": [
@@ -1198,8 +1106,7 @@ const countriesList = [
       -53
     ],
     "label": "French Guiana",
-    "country_code": "GF",
-    "capital": "Cayenne"
+    "country_code": "GF"
   },
   {
     "timezones": [
@@ -1210,8 +1117,7 @@ const countriesList = [
       144.78333333
     ],
     "label": "Guam",
-    "country_code": "GU",
-    "capital": "Hag\u00e5t\u00f1a"
+    "country_code": "GU"
   },
   {
     "timezones": [
@@ -1222,8 +1128,7 @@ const countriesList = [
       -59
     ],
     "label": "Guyana",
-    "country_code": "GY",
-    "capital": "Georgetown"
+    "country_code": "GY"
   },
   {
     "timezones": [
@@ -1234,8 +1139,7 @@ const countriesList = [
       114.188
     ],
     "label": "Hong Kong",
-    "country_code": "HK",
-    "capital": "City of Victoria"
+    "country_code": "HK"
   },
   {
     "timezones": [
@@ -1246,8 +1150,7 @@ const countriesList = [
       -86.5
     ],
     "label": "Honduras",
-    "country_code": "HN",
-    "capital": "Tegucigalpa"
+    "country_code": "HN"
   },
   {
     "timezones": [
@@ -1258,8 +1161,7 @@ const countriesList = [
       15.5
     ],
     "label": "Croatia",
-    "country_code": "HR",
-    "capital": "Zagreb"
+    "country_code": "HR"
   },
   {
     "timezones": [
@@ -1270,8 +1172,7 @@ const countriesList = [
       -72.41666666
     ],
     "label": "Haiti",
-    "country_code": "HT",
-    "capital": "Port-au-Prince"
+    "country_code": "HT"
   },
   {
     "timezones": [
@@ -1282,8 +1183,7 @@ const countriesList = [
       20
     ],
     "label": "Hungary",
-    "country_code": "HU",
-    "capital": "Budapest"
+    "country_code": "HU"
   },
   {
     "timezones": [
@@ -1297,8 +1197,7 @@ const countriesList = [
       120
     ],
     "label": "Indonesia",
-    "country_code": "ID",
-    "capital": "Jakarta"
+    "country_code": "ID"
   },
   {
     "timezones": [
@@ -1309,8 +1208,7 @@ const countriesList = [
       -4.5
     ],
     "label": "Isle of Man",
-    "country_code": "IM",
-    "capital": "Douglas"
+    "country_code": "IM"
   },
   {
     "timezones": [
@@ -1321,8 +1219,7 @@ const countriesList = [
       77
     ],
     "label": "India",
-    "country_code": "IN",
-    "capital": "New Delhi"
+    "country_code": "IN"
   },
   {
     "timezones": [
@@ -1333,8 +1230,7 @@ const countriesList = [
       71.5
     ],
     "label": "British Indian Ocean Territory",
-    "country_code": "IO",
-    "capital": "Diego Garcia"
+    "country_code": "IO"
   },
   {
     "timezones": [
@@ -1345,8 +1241,7 @@ const countriesList = [
       -8
     ],
     "label": "Ireland",
-    "country_code": "IE",
-    "capital": "Dublin"
+    "country_code": "IE"
   },
   {
     "timezones": [
@@ -1357,8 +1252,7 @@ const countriesList = [
       53
     ],
     "label": "Iran",
-    "country_code": "IR",
-    "capital": "Tehran"
+    "country_code": "IR"
   },
   {
     "timezones": [
@@ -1369,8 +1263,7 @@ const countriesList = [
       44
     ],
     "label": "Iraq",
-    "country_code": "IQ",
-    "capital": "Baghdad"
+    "country_code": "IQ"
   },
   {
     "timezones": [
@@ -1381,8 +1274,7 @@ const countriesList = [
       -18
     ],
     "label": "Iceland",
-    "country_code": "IS",
-    "capital": "Reykjavik"
+    "country_code": "IS"
   },
   {
     "timezones": [
@@ -1393,8 +1285,7 @@ const countriesList = [
       35.13
     ],
     "label": "Israel",
-    "country_code": "IL",
-    "capital": "Jerusalem"
+    "country_code": "IL"
   },
   {
     "timezones": [
@@ -1405,8 +1296,7 @@ const countriesList = [
       12.83333333
     ],
     "label": "Italy",
-    "country_code": "IT",
-    "capital": "Rome"
+    "country_code": "IT"
   },
   {
     "timezones": [
@@ -1417,8 +1307,7 @@ const countriesList = [
       -77.5
     ],
     "label": "Jamaica",
-    "country_code": "JM",
-    "capital": "Kingston"
+    "country_code": "JM"
   },
   {
     "timezones": [
@@ -1429,8 +1318,7 @@ const countriesList = [
       -2.16666666
     ],
     "label": "Jersey",
-    "country_code": "JE",
-    "capital": "Saint Helier"
+    "country_code": "JE"
   },
   {
     "timezones": [
@@ -1441,8 +1329,7 @@ const countriesList = [
       36
     ],
     "label": "Jordan",
-    "country_code": "JO",
-    "capital": "Amman"
+    "country_code": "JO"
   },
   {
     "timezones": [
@@ -1453,8 +1340,7 @@ const countriesList = [
       138
     ],
     "label": "Japan",
-    "country_code": "JP",
-    "capital": "Tokyo"
+    "country_code": "JP"
   },
   {
     "timezones": [
@@ -1469,8 +1355,7 @@ const countriesList = [
       68
     ],
     "label": "Kazakhstan",
-    "country_code": "KZ",
-    "capital": "Astana"
+    "country_code": "KZ"
   },
   {
     "timezones": [
@@ -1481,8 +1366,7 @@ const countriesList = [
       38
     ],
     "label": "Kenya",
-    "country_code": "KE",
-    "capital": "Nairobi"
+    "country_code": "KE"
   },
   {
     "timezones": [
@@ -1493,8 +1377,7 @@ const countriesList = [
       75
     ],
     "label": "Kyrgyzstan",
-    "country_code": "KG",
-    "capital": "Bishkek"
+    "country_code": "KG"
   },
   {
     "timezones": [
@@ -1505,8 +1388,7 @@ const countriesList = [
       105
     ],
     "label": "Cambodia",
-    "country_code": "KH",
-    "capital": "Phnom Penh"
+    "country_code": "KH"
   },
   {
     "timezones": [
@@ -1519,8 +1401,7 @@ const countriesList = [
       173
     ],
     "label": "Kiribati",
-    "country_code": "KI",
-    "capital": "South Tarawa"
+    "country_code": "KI"
   },
   {
     "timezones": [
@@ -1531,8 +1412,7 @@ const countriesList = [
       -62.75
     ],
     "label": "Saint Kitts and Nevis",
-    "country_code": "KN",
-    "capital": "Basseterre"
+    "country_code": "KN"
   },
   {
     "timezones": [
@@ -1543,18 +1423,18 @@ const countriesList = [
       127.5
     ],
     "label": "South Korea",
-    "country_code": "KR",
-    "capital": "Seoul"
+    "country_code": "KR"
   },
   {
-    "timezones": ["Europe/Belgrade"],
+    "timezones": [
+      "Europe/Belgrade"
+    ],
     "latlng": [
       42.666667,
       21.166667
     ],
     "label": "Kosovo",
-    "country_code": "XK",
-    "capital": "Pristina"
+    "country_code": "XK"
   },
   {
     "timezones": [
@@ -1565,8 +1445,7 @@ const countriesList = [
       45.75
     ],
     "label": "Kuwait",
-    "country_code": "KW",
-    "capital": "Kuwait City"
+    "country_code": "KW"
   },
   {
     "timezones": [
@@ -1577,8 +1456,7 @@ const countriesList = [
       105
     ],
     "label": "Laos",
-    "country_code": "LA",
-    "capital": "Vientiane"
+    "country_code": "LA"
   },
   {
     "timezones": [
@@ -1589,8 +1467,7 @@ const countriesList = [
       35.83333333
     ],
     "label": "Lebanon",
-    "country_code": "LB",
-    "capital": "Beirut"
+    "country_code": "LB"
   },
   {
     "timezones": [
@@ -1601,8 +1478,7 @@ const countriesList = [
       -9.5
     ],
     "label": "Liberia",
-    "country_code": "LR",
-    "capital": "Monrovia"
+    "country_code": "LR"
   },
   {
     "timezones": [
@@ -1613,8 +1489,7 @@ const countriesList = [
       17
     ],
     "label": "Libya",
-    "country_code": "LY",
-    "capital": "Tripoli"
+    "country_code": "LY"
   },
   {
     "timezones": [
@@ -1625,8 +1500,7 @@ const countriesList = [
       -60.96666666
     ],
     "label": "Saint Lucia",
-    "country_code": "LC",
-    "capital": "Castries"
+    "country_code": "LC"
   },
   {
     "timezones": [
@@ -1637,8 +1511,7 @@ const countriesList = [
       9.53333333
     ],
     "label": "Liechtenstein",
-    "country_code": "LI",
-    "capital": "Vaduz"
+    "country_code": "LI"
   },
   {
     "timezones": [
@@ -1649,8 +1522,7 @@ const countriesList = [
       81
     ],
     "label": "Sri Lanka",
-    "country_code": "LK",
-    "capital": "Colombo"
+    "country_code": "LK"
   },
   {
     "timezones": [
@@ -1661,8 +1533,7 @@ const countriesList = [
       28.5
     ],
     "label": "Lesotho",
-    "country_code": "LS",
-    "capital": "Maseru"
+    "country_code": "LS"
   },
   {
     "timezones": [
@@ -1673,8 +1544,7 @@ const countriesList = [
       24
     ],
     "label": "Lithuania",
-    "country_code": "LT",
-    "capital": "Vilnius"
+    "country_code": "LT"
   },
   {
     "timezones": [
@@ -1685,8 +1555,7 @@ const countriesList = [
       6.16666666
     ],
     "label": "Luxembourg",
-    "country_code": "LU",
-    "capital": "Luxembourg"
+    "country_code": "LU"
   },
   {
     "timezones": [
@@ -1697,8 +1566,7 @@ const countriesList = [
       25
     ],
     "label": "Latvia",
-    "country_code": "LV",
-    "capital": "Riga"
+    "country_code": "LV"
   },
   {
     "timezones": [
@@ -1709,8 +1577,7 @@ const countriesList = [
       113.55
     ],
     "label": "Macau",
-    "country_code": "MO",
-    "capital": null
+    "country_code": "MO"
   },
   {
     "timezones": [
@@ -1721,8 +1588,7 @@ const countriesList = [
       -63.95
     ],
     "label": "Saint Martin",
-    "country_code": "MF",
-    "capital": "Marigot"
+    "country_code": "MF"
   },
   {
     "timezones": [
@@ -1733,8 +1599,7 @@ const countriesList = [
       -5
     ],
     "label": "Morocco",
-    "country_code": "MA",
-    "capital": "Rabat"
+    "country_code": "MA"
   },
   {
     "timezones": [
@@ -1745,8 +1610,7 @@ const countriesList = [
       7.4
     ],
     "label": "Monaco",
-    "country_code": "MC",
-    "capital": "Monaco"
+    "country_code": "MC"
   },
   {
     "timezones": [
@@ -1757,8 +1621,7 @@ const countriesList = [
       29
     ],
     "label": "Moldova",
-    "country_code": "MD",
-    "capital": "Chi\u0219in\u0103u"
+    "country_code": "MD"
   },
   {
     "timezones": [
@@ -1769,8 +1632,7 @@ const countriesList = [
       47
     ],
     "label": "Madagascar",
-    "country_code": "MG",
-    "capital": "Antananarivo"
+    "country_code": "MG"
   },
   {
     "timezones": [
@@ -1781,8 +1643,7 @@ const countriesList = [
       73
     ],
     "label": "Maldives",
-    "country_code": "MV",
-    "capital": "Mal\u00e9"
+    "country_code": "MV"
   },
   {
     "timezones": [
@@ -1803,8 +1664,7 @@ const countriesList = [
       -102
     ],
     "label": "Mexico",
-    "country_code": "MX",
-    "capital": "Mexico City"
+    "country_code": "MX"
   },
   {
     "timezones": [
@@ -1816,8 +1676,7 @@ const countriesList = [
       168
     ],
     "label": "Marshall Islands",
-    "country_code": "MH",
-    "capital": "Majuro"
+    "country_code": "MH"
   },
   {
     "timezones": [
@@ -1828,8 +1687,7 @@ const countriesList = [
       22
     ],
     "label": "Macedonia",
-    "country_code": "MK",
-    "capital": "Skopje"
+    "country_code": "MK"
   },
   {
     "timezones": [
@@ -1840,8 +1698,7 @@ const countriesList = [
       -4
     ],
     "label": "Mali",
-    "country_code": "ML",
-    "capital": "Bamako"
+    "country_code": "ML"
   },
   {
     "timezones": [
@@ -1852,8 +1709,7 @@ const countriesList = [
       14.58333333
     ],
     "label": "Malta",
-    "country_code": "MT",
-    "capital": "Valletta"
+    "country_code": "MT"
   },
   {
     "timezones": [
@@ -1864,8 +1720,7 @@ const countriesList = [
       98
     ],
     "label": "Myanmar",
-    "country_code": "MM",
-    "capital": "Naypyidaw"
+    "country_code": "MM"
   },
   {
     "timezones": [
@@ -1876,8 +1731,7 @@ const countriesList = [
       19.3
     ],
     "label": "Montenegro",
-    "country_code": "ME",
-    "capital": "Podgorica"
+    "country_code": "ME"
   },
   {
     "timezones": [
@@ -1890,8 +1744,7 @@ const countriesList = [
       105
     ],
     "label": "Mongolia",
-    "country_code": "MN",
-    "capital": "Ulan Bator"
+    "country_code": "MN"
   },
   {
     "timezones": [
@@ -1902,8 +1755,7 @@ const countriesList = [
       145.75
     ],
     "label": "Northern Mariana Islands",
-    "country_code": "MP",
-    "capital": "Saipan"
+    "country_code": "MP"
   },
   {
     "timezones": [
@@ -1914,8 +1766,7 @@ const countriesList = [
       35
     ],
     "label": "Mozambique",
-    "country_code": "MZ",
-    "capital": "Maputo"
+    "country_code": "MZ"
   },
   {
     "timezones": [
@@ -1926,8 +1777,7 @@ const countriesList = [
       -12
     ],
     "label": "Mauritania",
-    "country_code": "MR",
-    "capital": "Nouakchott"
+    "country_code": "MR"
   },
   {
     "timezones": [
@@ -1938,8 +1788,7 @@ const countriesList = [
       -62.2
     ],
     "label": "Montserrat",
-    "country_code": "MS",
-    "capital": "Plymouth"
+    "country_code": "MS"
   },
   {
     "timezones": [
@@ -1950,8 +1799,7 @@ const countriesList = [
       -61
     ],
     "label": "Martinique",
-    "country_code": "MQ",
-    "capital": "Fort-de-France"
+    "country_code": "MQ"
   },
   {
     "timezones": [
@@ -1962,8 +1810,7 @@ const countriesList = [
       57.55
     ],
     "label": "Mauritius",
-    "country_code": "MU",
-    "capital": "Port Louis"
+    "country_code": "MU"
   },
   {
     "timezones": [
@@ -1974,8 +1821,7 @@ const countriesList = [
       34
     ],
     "label": "Malawi",
-    "country_code": "MW",
-    "capital": "Lilongwe"
+    "country_code": "MW"
   },
   {
     "timezones": [
@@ -1987,8 +1833,7 @@ const countriesList = [
       112.5
     ],
     "label": "Malaysia",
-    "country_code": "MY",
-    "capital": "Kuala Lumpur"
+    "country_code": "MY"
   },
   {
     "timezones": [
@@ -1999,8 +1844,7 @@ const countriesList = [
       45.16666666
     ],
     "label": "Mayotte",
-    "country_code": "YT",
-    "capital": "Mamoudzou"
+    "country_code": "YT"
   },
   {
     "timezones": [
@@ -2011,8 +1855,7 @@ const countriesList = [
       17
     ],
     "label": "Namibia",
-    "country_code": "NA",
-    "capital": "Windhoek"
+    "country_code": "NA"
   },
   {
     "timezones": [
@@ -2023,8 +1866,7 @@ const countriesList = [
       165.5
     ],
     "label": "New Caledonia",
-    "country_code": "NC",
-    "capital": "Noum\u00e9a"
+    "country_code": "NC"
   },
   {
     "timezones": [
@@ -2035,8 +1877,7 @@ const countriesList = [
       8
     ],
     "label": "Niger",
-    "country_code": "NE",
-    "capital": "Niamey"
+    "country_code": "NE"
   },
   {
     "timezones": [
@@ -2047,8 +1888,7 @@ const countriesList = [
       167.95
     ],
     "label": "Norfolk Island",
-    "country_code": "NF",
-    "capital": "Kingston"
+    "country_code": "NF"
   },
   {
     "timezones": [
@@ -2059,8 +1899,7 @@ const countriesList = [
       8
     ],
     "label": "Nigeria",
-    "country_code": "NG",
-    "capital": "Abuja"
+    "country_code": "NG"
   },
   {
     "timezones": [
@@ -2071,8 +1910,7 @@ const countriesList = [
       -85
     ],
     "label": "Nicaragua",
-    "country_code": "NI",
-    "capital": "Managua"
+    "country_code": "NI"
   },
   {
     "timezones": [
@@ -2083,8 +1921,7 @@ const countriesList = [
       -169.86666666
     ],
     "label": "Niue",
-    "country_code": "NU",
-    "capital": "Alofi"
+    "country_code": "NU"
   },
   {
     "timezones": [
@@ -2095,8 +1932,7 @@ const countriesList = [
       5.75
     ],
     "label": "Netherlands",
-    "country_code": "NL",
-    "capital": "Amsterdam"
+    "country_code": "NL"
   },
   {
     "timezones": [
@@ -2107,8 +1943,7 @@ const countriesList = [
       10
     ],
     "label": "Norway",
-    "country_code": "NO",
-    "capital": "Oslo"
+    "country_code": "NO"
   },
   {
     "timezones": [
@@ -2119,8 +1954,7 @@ const countriesList = [
       84
     ],
     "label": "Nepal",
-    "country_code": "NP",
-    "capital": "Kathmandu"
+    "country_code": "NP"
   },
   {
     "timezones": [
@@ -2131,8 +1965,7 @@ const countriesList = [
       166.91666666
     ],
     "label": "Nauru",
-    "country_code": "NR",
-    "capital": "Yaren"
+    "country_code": "NR"
   },
   {
     "timezones": [
@@ -2144,8 +1977,7 @@ const countriesList = [
       174
     ],
     "label": "New Zealand",
-    "country_code": "NZ",
-    "capital": "Wellington"
+    "country_code": "NZ"
   },
   {
     "timezones": [
@@ -2156,8 +1988,7 @@ const countriesList = [
       57
     ],
     "label": "Oman",
-    "country_code": "OM",
-    "capital": "Muscat"
+    "country_code": "OM"
   },
   {
     "timezones": [
@@ -2168,8 +1999,7 @@ const countriesList = [
       70
     ],
     "label": "Pakistan",
-    "country_code": "PK",
-    "capital": "Islamabad"
+    "country_code": "PK"
   },
   {
     "timezones": [
@@ -2180,8 +2010,7 @@ const countriesList = [
       -80
     ],
     "label": "Panama",
-    "country_code": "PA",
-    "capital": "Panama City"
+    "country_code": "PA"
   },
   {
     "timezones": [
@@ -2192,8 +2021,7 @@ const countriesList = [
       -130.1
     ],
     "label": "Pitcairn Islands",
-    "country_code": "PN",
-    "capital": "Adamstown"
+    "country_code": "PN"
   },
   {
     "timezones": [
@@ -2204,8 +2032,7 @@ const countriesList = [
       -76
     ],
     "label": "Peru",
-    "country_code": "PE",
-    "capital": "Lima"
+    "country_code": "PE"
   },
   {
     "timezones": [
@@ -2216,8 +2043,7 @@ const countriesList = [
       122
     ],
     "label": "Philippines",
-    "country_code": "PH",
-    "capital": "Manila"
+    "country_code": "PH"
   },
   {
     "timezones": [
@@ -2228,8 +2054,7 @@ const countriesList = [
       134.5
     ],
     "label": "Palau",
-    "country_code": "PW",
-    "capital": "Ngerulmud"
+    "country_code": "PW"
   },
   {
     "timezones": [
@@ -2241,8 +2066,7 @@ const countriesList = [
       147
     ],
     "label": "Papua New Guinea",
-    "country_code": "PG",
-    "capital": "Port Moresby"
+    "country_code": "PG"
   },
   {
     "timezones": [
@@ -2253,8 +2077,7 @@ const countriesList = [
       20
     ],
     "label": "Poland",
-    "country_code": "PL",
-    "capital": "Warsaw"
+    "country_code": "PL"
   },
   {
     "timezones": [
@@ -2265,8 +2088,7 @@ const countriesList = [
       -66.5
     ],
     "label": "Puerto Rico",
-    "country_code": "PR",
-    "capital": "San Juan"
+    "country_code": "PR"
   },
   {
     "timezones": [
@@ -2277,8 +2099,7 @@ const countriesList = [
       127
     ],
     "label": "North Korea",
-    "country_code": "KP",
-    "capital": "Pyongyang"
+    "country_code": "KP"
   },
   {
     "timezones": [
@@ -2291,8 +2112,7 @@ const countriesList = [
       -8
     ],
     "label": "Portugal",
-    "country_code": "PT",
-    "capital": "Lisbon"
+    "country_code": "PT"
   },
   {
     "timezones": [
@@ -2303,8 +2123,7 @@ const countriesList = [
       -58
     ],
     "label": "Paraguay",
-    "country_code": "PY",
-    "capital": "Asunci\u00f3n"
+    "country_code": "PY"
   },
   {
     "timezones": [
@@ -2316,8 +2135,7 @@ const countriesList = [
       35.2
     ],
     "label": "Palestine",
-    "country_code": "PS",
-    "capital": "Ramallah"
+    "country_code": "PS"
   },
   {
     "timezones": [
@@ -2330,8 +2148,7 @@ const countriesList = [
       -140
     ],
     "label": "French Polynesia",
-    "country_code": "PF",
-    "capital": "Papeet\u0113"
+    "country_code": "PF"
   },
   {
     "timezones": [
@@ -2342,8 +2159,7 @@ const countriesList = [
       51.25
     ],
     "label": "Qatar",
-    "country_code": "QA",
-    "capital": "Doha"
+    "country_code": "QA"
   },
   {
     "timezones": [
@@ -2353,9 +2169,8 @@ const countriesList = [
       -21.15,
       55.5
     ],
-    "label": "R\u00e9union",
-    "country_code": "RE",
-    "capital": "Saint-Denis"
+    "label": "Réunion",
+    "country_code": "RE"
   },
   {
     "timezones": [
@@ -2366,8 +2181,7 @@ const countriesList = [
       25
     ],
     "label": "Romania",
-    "country_code": "RO",
-    "capital": "Bucharest"
+    "country_code": "RO"
   },
   {
     "timezones": [
@@ -2403,8 +2217,7 @@ const countriesList = [
       100
     ],
     "label": "Russia",
-    "country_code": "RU",
-    "capital": "Moscow"
+    "country_code": "RU"
   },
   {
     "timezones": [
@@ -2415,8 +2228,7 @@ const countriesList = [
       30
     ],
     "label": "Rwanda",
-    "country_code": "RW",
-    "capital": "Kigali"
+    "country_code": "RW"
   },
   {
     "timezones": [
@@ -2427,8 +2239,7 @@ const countriesList = [
       45
     ],
     "label": "Saudi Arabia",
-    "country_code": "SA",
-    "capital": "Riyadh"
+    "country_code": "SA"
   },
   {
     "timezones": [
@@ -2439,8 +2250,7 @@ const countriesList = [
       30
     ],
     "label": "Sudan",
-    "country_code": "SD",
-    "capital": "Khartoum"
+    "country_code": "SD"
   },
   {
     "timezones": [
@@ -2451,8 +2261,7 @@ const countriesList = [
       -14
     ],
     "label": "Senegal",
-    "country_code": "SN",
-    "capital": "Dakar"
+    "country_code": "SN"
   },
   {
     "timezones": [
@@ -2463,8 +2272,7 @@ const countriesList = [
       103.8
     ],
     "label": "Singapore",
-    "country_code": "SG",
-    "capital": "Singapore"
+    "country_code": "SG"
   },
   {
     "timezones": [
@@ -2475,8 +2283,7 @@ const countriesList = [
       -37
     ],
     "label": "South Georgia",
-    "country_code": "GS",
-    "capital": "King Edward Point"
+    "country_code": "GS"
   },
   {
     "timezones": [
@@ -2487,8 +2294,7 @@ const countriesList = [
       20
     ],
     "label": "Svalbard and Jan Mayen",
-    "country_code": "SJ",
-    "capital": "Longyearbyen"
+    "country_code": "SJ"
   },
   {
     "timezones": [
@@ -2499,8 +2305,7 @@ const countriesList = [
       159
     ],
     "label": "Solomon Islands",
-    "country_code": "SB",
-    "capital": "Honiara"
+    "country_code": "SB"
   },
   {
     "timezones": [
@@ -2511,8 +2316,7 @@ const countriesList = [
       -11.5
     ],
     "label": "Sierra Leone",
-    "country_code": "SL",
-    "capital": "Freetown"
+    "country_code": "SL"
   },
   {
     "timezones": [
@@ -2523,8 +2327,7 @@ const countriesList = [
       -88.91666666
     ],
     "label": "El Salvador",
-    "country_code": "SV",
-    "capital": "San Salvador"
+    "country_code": "SV"
   },
   {
     "timezones": [
@@ -2535,8 +2338,7 @@ const countriesList = [
       12.41666666
     ],
     "label": "San Marino",
-    "country_code": "SM",
-    "capital": "City of San Marino"
+    "country_code": "SM"
   },
   {
     "timezones": [
@@ -2547,8 +2349,7 @@ const countriesList = [
       49
     ],
     "label": "Somalia",
-    "country_code": "SO",
-    "capital": "Mogadishu"
+    "country_code": "SO"
   },
   {
     "timezones": [
@@ -2559,8 +2360,7 @@ const countriesList = [
       -56.33333333
     ],
     "label": "Saint Pierre and Miquelon",
-    "country_code": "PM",
-    "capital": "Saint-Pierre"
+    "country_code": "PM"
   },
   {
     "timezones": [
@@ -2571,8 +2371,7 @@ const countriesList = [
       21
     ],
     "label": "Serbia",
-    "country_code": "RS",
-    "capital": "Belgrade"
+    "country_code": "RS"
   },
   {
     "timezones": [
@@ -2583,8 +2382,7 @@ const countriesList = [
       30
     ],
     "label": "South Sudan",
-    "country_code": "SS",
-    "capital": "Juba"
+    "country_code": "SS"
   },
   {
     "timezones": [
@@ -2594,9 +2392,8 @@ const countriesList = [
       1,
       7
     ],
-    "label": "S\u00e3o Tom\u00e9 and Pr\u00edncipe",
-    "country_code": "ST",
-    "capital": "S\u00e3o Tom\u00e9"
+    "label": "São Tomé and Príncipe",
+    "country_code": "ST"
   },
   {
     "timezones": [
@@ -2607,8 +2404,7 @@ const countriesList = [
       -56
     ],
     "label": "Suriname",
-    "country_code": "SR",
-    "capital": "Paramaribo"
+    "country_code": "SR"
   },
   {
     "timezones": [
@@ -2619,8 +2415,7 @@ const countriesList = [
       19.5
     ],
     "label": "Slovakia",
-    "country_code": "SK",
-    "capital": "Bratislava"
+    "country_code": "SK"
   },
   {
     "timezones": [
@@ -2631,8 +2426,7 @@ const countriesList = [
       14.81666666
     ],
     "label": "Slovenia",
-    "country_code": "SI",
-    "capital": "Ljubljana"
+    "country_code": "SI"
   },
   {
     "timezones": [
@@ -2643,8 +2437,7 @@ const countriesList = [
       15
     ],
     "label": "Sweden",
-    "country_code": "SE",
-    "capital": "Stockholm"
+    "country_code": "SE"
   },
   {
     "timezones": [
@@ -2655,8 +2448,7 @@ const countriesList = [
       31.5
     ],
     "label": "Swaziland",
-    "country_code": "SZ",
-    "capital": "Lobamba"
+    "country_code": "SZ"
   },
   {
     "timezones": [
@@ -2667,8 +2459,7 @@ const countriesList = [
       -63.05
     ],
     "label": "Sint Maarten",
-    "country_code": "SX",
-    "capital": "Philipsburg"
+    "country_code": "SX"
   },
   {
     "timezones": [
@@ -2679,8 +2470,7 @@ const countriesList = [
       55.66666666
     ],
     "label": "Seychelles",
-    "country_code": "SC",
-    "capital": "Victoria"
+    "country_code": "SC"
   },
   {
     "timezones": [
@@ -2691,8 +2481,7 @@ const countriesList = [
       38
     ],
     "label": "Syria",
-    "country_code": "SY",
-    "capital": "Damascus"
+    "country_code": "SY"
   },
   {
     "timezones": [
@@ -2703,8 +2492,7 @@ const countriesList = [
       -71.58333333
     ],
     "label": "Turks and Caicos Islands",
-    "country_code": "TC",
-    "capital": "Cockburn Town"
+    "country_code": "TC"
   },
   {
     "timezones": [
@@ -2715,8 +2503,7 @@ const countriesList = [
       19
     ],
     "label": "Chad",
-    "country_code": "TD",
-    "capital": "N'Djamena"
+    "country_code": "TD"
   },
   {
     "timezones": [
@@ -2727,8 +2514,7 @@ const countriesList = [
       1.16666666
     ],
     "label": "Togo",
-    "country_code": "TG",
-    "capital": "Lom\u00e9"
+    "country_code": "TG"
   },
   {
     "timezones": [
@@ -2739,8 +2525,7 @@ const countriesList = [
       100
     ],
     "label": "Thailand",
-    "country_code": "TH",
-    "capital": "Bangkok"
+    "country_code": "TH"
   },
   {
     "timezones": [
@@ -2751,8 +2536,7 @@ const countriesList = [
       71
     ],
     "label": "Tajikistan",
-    "country_code": "TJ",
-    "capital": "Dushanbe"
+    "country_code": "TJ"
   },
   {
     "timezones": [
@@ -2763,8 +2547,7 @@ const countriesList = [
       -172
     ],
     "label": "Tokelau",
-    "country_code": "TK",
-    "capital": "Fakaofo"
+    "country_code": "TK"
   },
   {
     "timezones": [
@@ -2775,8 +2558,7 @@ const countriesList = [
       60
     ],
     "label": "Turkmenistan",
-    "country_code": "TM",
-    "capital": "Ashgabat"
+    "country_code": "TM"
   },
   {
     "timezones": [
@@ -2787,8 +2569,7 @@ const countriesList = [
       125.91666666
     ],
     "label": "Timor-Leste",
-    "country_code": "TL",
-    "capital": "Dili"
+    "country_code": "TL"
   },
   {
     "timezones": [
@@ -2799,8 +2580,7 @@ const countriesList = [
       -175
     ],
     "label": "Tonga",
-    "country_code": "TO",
-    "capital": "Nuku'alofa"
+    "country_code": "TO"
   },
   {
     "timezones": [
@@ -2811,8 +2591,7 @@ const countriesList = [
       -61
     ],
     "label": "Trinidad and Tobago",
-    "country_code": "TT",
-    "capital": "Port of Spain"
+    "country_code": "TT"
   },
   {
     "timezones": [
@@ -2823,8 +2602,7 @@ const countriesList = [
       9
     ],
     "label": "Tunisia",
-    "country_code": "TN",
-    "capital": "Tunis"
+    "country_code": "TN"
   },
   {
     "timezones": [
@@ -2835,8 +2613,7 @@ const countriesList = [
       35
     ],
     "label": "Turkey",
-    "country_code": "TR",
-    "capital": "Ankara"
+    "country_code": "TR"
   },
   {
     "timezones": [
@@ -2847,8 +2624,7 @@ const countriesList = [
       178
     ],
     "label": "Tuvalu",
-    "country_code": "TV",
-    "capital": "Funafuti"
+    "country_code": "TV"
   },
   {
     "timezones": [
@@ -2859,8 +2635,7 @@ const countriesList = [
       121
     ],
     "label": "Taiwan",
-    "country_code": "TW",
-    "capital": "Taipei"
+    "country_code": "TW"
   },
   {
     "timezones": [
@@ -2871,8 +2646,7 @@ const countriesList = [
       35
     ],
     "label": "Tanzania",
-    "country_code": "TZ",
-    "capital": "Dodoma"
+    "country_code": "TZ"
   },
   {
     "timezones": [
@@ -2883,8 +2657,7 @@ const countriesList = [
       32
     ],
     "label": "Uganda",
-    "country_code": "UG",
-    "capital": "Kampala"
+    "country_code": "UG"
   },
   {
     "timezones": [
@@ -2897,8 +2670,7 @@ const countriesList = [
       32
     ],
     "label": "Ukraine",
-    "country_code": "UA",
-    "capital": "Kiev"
+    "country_code": "UA"
   },
   {
     "timezones": [
@@ -2911,8 +2683,7 @@ const countriesList = [
       166.618332
     ],
     "label": "United States Minor Outlying Islands",
-    "country_code": "UM",
-    "capital": null
+    "country_code": "UM"
   },
   {
     "timezones": [
@@ -2923,8 +2694,7 @@ const countriesList = [
       -56
     ],
     "label": "Uruguay",
-    "country_code": "UY",
-    "capital": "Montevideo"
+    "country_code": "UY"
   },
   {
     "timezones": [
@@ -2963,8 +2733,7 @@ const countriesList = [
       -97
     ],
     "label": "United States",
-    "country_code": "US",
-    "capital": "Washington D.C."
+    "country_code": "US"
   },
   {
     "timezones": [
@@ -2976,8 +2745,7 @@ const countriesList = [
       64
     ],
     "label": "Uzbekistan",
-    "country_code": "UZ",
-    "capital": "Tashkent"
+    "country_code": "UZ"
   },
   {
     "timezones": [
@@ -2988,8 +2756,7 @@ const countriesList = [
       12.45
     ],
     "label": "Vatican City",
-    "country_code": "VA",
-    "capital": "Vatican City"
+    "country_code": "VA"
   },
   {
     "timezones": [
@@ -3000,8 +2767,7 @@ const countriesList = [
       -61.2
     ],
     "label": "Saint Vincent and the Grenadines",
-    "country_code": "VC",
-    "capital": "Kingstown"
+    "country_code": "VC"
   },
   {
     "timezones": [
@@ -3012,8 +2778,7 @@ const countriesList = [
       -66
     ],
     "label": "Venezuela",
-    "country_code": "VE",
-    "capital": "Caracas"
+    "country_code": "VE"
   },
   {
     "timezones": [
@@ -3024,8 +2789,7 @@ const countriesList = [
       -64.62305
     ],
     "label": "British Virgin Islands",
-    "country_code": "VG",
-    "capital": "Road Town"
+    "country_code": "VG"
   },
   {
     "timezones": [
@@ -3036,8 +2800,7 @@ const countriesList = [
       -64.933333
     ],
     "label": "United States Virgin Islands",
-    "country_code": "VI",
-    "capital": "Charlotte Amalie"
+    "country_code": "VI"
   },
   {
     "timezones": [
@@ -3048,8 +2811,7 @@ const countriesList = [
       107.83333333
     ],
     "label": "Vietnam",
-    "country_code": "VN",
-    "capital": "Hanoi"
+    "country_code": "VN"
   },
   {
     "timezones": [
@@ -3060,8 +2822,7 @@ const countriesList = [
       167
     ],
     "label": "Vanuatu",
-    "country_code": "VU",
-    "capital": "Port Vila"
+    "country_code": "VU"
   },
   {
     "timezones": [
@@ -3072,8 +2833,7 @@ const countriesList = [
       -176.2
     ],
     "label": "Wallis and Futuna",
-    "country_code": "WF",
-    "capital": "Mata-Utu"
+    "country_code": "WF"
   },
   {
     "timezones": [
@@ -3084,8 +2844,7 @@ const countriesList = [
       -172.33333333
     ],
     "label": "Samoa",
-    "country_code": "WS",
-    "capital": "Apia"
+    "country_code": "WS"
   },
   {
     "timezones": [
@@ -3096,8 +2855,7 @@ const countriesList = [
       48
     ],
     "label": "Yemen",
-    "country_code": "YE",
-    "capital": "Sana'a"
+    "country_code": "YE"
   },
   {
     "timezones": [
@@ -3108,8 +2866,7 @@ const countriesList = [
       24
     ],
     "label": "South Africa",
-    "country_code": "ZA",
-    "capital": "Pretoria"
+    "country_code": "ZA"
   },
   {
     "timezones": [
@@ -3120,8 +2877,7 @@ const countriesList = [
       30
     ],
     "label": "Zambia",
-    "country_code": "ZM",
-    "capital": "Lusaka"
+    "country_code": "ZM"
   },
   {
     "timezones": [
@@ -3132,9 +2888,8 @@ const countriesList = [
       30
     ],
     "label": "Zimbabwe",
-    "country_code": "ZW",
-    "capital": "Harare"
+    "country_code": "ZW"
   }
-]
+];
 
 export default countriesList;
