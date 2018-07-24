@@ -7,23 +7,32 @@ const firestore = firebase.firestore();
 firestore.settings({timestampsInSnapshots: true});
 
 
-export const addRadio = ({country, genre, title, ...other}) => {
-  const newRadio = {[title]: {title, ...other}};
-
-  return firestore.doc(`${country}/${genre}`).set(newRadio, {merge: true});
-};
-
-
-export const getRadioByCountry = country => firestore.collection(country).get()
+const getCounries = () => firestore.collection('countries').get()
   .then(querySnapshot => {
       const data = [];
-
-      querySnapshot.forEach(doc => {
-        data.push({
-          [doc.id]: Object.values(doc.data())
-        })
-      });
+      querySnapshot.forEach(doc => data.push(doc.id));
 
       return data;
     }
   );
+
+
+export const getRadioByCountry = country =>
+  firestore.doc(`countries/${country}`).get().then(doc => doc.data());
+
+
+export const addRadio = ({country, genre, ...other}) => {
+  const newRadio = {...other};
+
+  return getRadioByCountry(country)
+    .then(prevData => {
+
+      const newData = {
+        ...prevData,
+        [genre]: [...prevData[genre], newRadio]
+      };
+
+      return firestore.doc(`countries/${country}`).update(newData);
+    });
+};
+
