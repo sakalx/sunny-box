@@ -3,6 +3,11 @@ import React from 'react';
 import geographyMap from 'root/static/world-map.json';
 import countriesList from 'root/static/countries';
 
+import moment from 'moment-timezone';
+
+console.log(moment.tz.guess());
+console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+
 import {ZoomableGroup, Geographies, Geography} from 'react-simple-maps';
 import {Motion} from 'react-motion';
 
@@ -23,7 +28,10 @@ import {
 
 class WorldMap extends React.PureComponent {
   state = {
-    selectedCountry: '',
+    selectedCountry: {
+      label: '',
+      code: '',
+    },
     center: [0, 20],
     zoom: 1,
     tooltip: '',
@@ -45,16 +53,19 @@ class WorldMap extends React.PureComponent {
     );
 
     this.setState({
-        selectedCountry: country.label,
+        selectedCountry: {
+          label: country.label,
+          code: country.country_code,
+        },
         center: [country.latlng[1], country.latlng[0]],
         zoom: 2,
         disableOptimization: true,
+        tooltip: '',
       },
       () => {
         this.setState({disableOptimization: false})
       }
     );
-
   };
 
   handleMove = ({properties}, event) => {
@@ -64,7 +75,7 @@ class WorldMap extends React.PureComponent {
     this.setState({
       tooltipPosition: [x, y],
       tooltip: properties.name,
-    })
+    });
   };
 
   render() {
@@ -82,7 +93,7 @@ class WorldMap extends React.PureComponent {
         <WrapMap>
           <Head>
             <CountryName variant="display1">
-              {selectedCountry}
+              {selectedCountry.label}
             </CountryName>
             {zoom > 1 &&
             <ZoomOutButton
@@ -110,20 +121,18 @@ class WorldMap extends React.PureComponent {
                     geography={geographyMap}>
                     {(geographies, projection) =>
                       geographies.map((geography) => {
-                        const isSelected = selectedCountry === geography.properties.name;
+                        const isSelected = selectedCountry.code === geography.properties['Alpha-2'];
 
                         return (
-                          geography.id !== "010" && (
-                            <Geography
-                              key={geography.properties.name}
-                              geography={geography}
-                              projection={projection}
-                              onMouseMove={this.handleMove}
-                              onMouseLeave={() => this.setState({tooltip: ''})}
-                              style={geographyStyle(isSelected)}
-                              onClick={this.handleCountryClick}
-                            />
-                          )
+                          <Geography
+                            key={geography.properties.name}
+                            geography={geography}
+                            projection={projection}
+                            onMouseMove={this.handleMove}
+                            onMouseLeave={() => this.setState({tooltip: ''})}
+                            style={geographyStyle(isSelected)}
+                            onClick={this.handleCountryClick}
+                          />
                         )
                       })
                     }

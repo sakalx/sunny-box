@@ -1,0 +1,8 @@
+export const promise = {
+  PENDING: '_PENDING',
+  REJECTED: '_REJECTED',
+  FULFILLED: '_FULFILLED',
+};
+
+export const GET_COUNTRIES_LIST = 'GET_LIST_OF_COUNTRIES';
+export const GET_RADIO_BY_COUNTRY = 'GET_LIST_OF_RADIO_BY_COUNTRY';

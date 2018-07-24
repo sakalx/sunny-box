@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 
-//import user from './user';
+import sterling from './sterling';
 
 const rootReducer = combineReducers({
-  //user,
+  sterling,
 });
 
 export default rootReducer;

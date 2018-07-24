@@ -113,6 +113,7 @@ const
       loader: 'file-loader',
       options: {
         name: '[name].[ext]',
+        outputPath: 'static/',
       },
     }];
 //============================================================
@@ -155,7 +156,7 @@ const config = {
       },
       // JSON - via file-loader
       {
-        include: path.resolve(__dirname, `${develop}`),
+        include: path.resolve(__dirname, `${develop}/static`),
         test: /\.(json)$/,
         use: jsonConfig,
       },
@@ -180,10 +181,10 @@ const config = {
     cleanFolderProd,
     commonsChunk,
     definePlugin,
-    favicon,
+    //favicon,
     htmlIndex,
     uglifyJs,
-    pwaManifest,
+    //pwaManifest,
   ] : [
     commonsChunk,
     htmlIndex,

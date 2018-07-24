@@ -1,8 +1,5 @@
 import React from 'react';
 
-import coverImg from 'root/static/Sketch.png';
-
-
 import {
   City,
   Cover,
@@ -20,7 +17,7 @@ const StationCard = ({playing}) => {
       <City component="span" variant="caption">
         New York
       </City>
-      <Cover image={coverImg}
+      <Cover image={'https://sakals.000webhostapp.com/share/DeadKitty.png'}
              title="Live from space album cover"
       />
       <Title variant="title" playing={String(playing)}>Gop Fm</Title>

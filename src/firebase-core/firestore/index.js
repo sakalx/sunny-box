@@ -7,7 +7,7 @@ const firestore = firebase.firestore();
 firestore.settings({timestampsInSnapshots: true});
 
 
-const getCounries = () => firestore.collection('countries').get()
+export const getCountries = () => firestore.collection('countries').get()
   .then(querySnapshot => {
       const data = [];
       querySnapshot.forEach(doc => data.push(doc.id));

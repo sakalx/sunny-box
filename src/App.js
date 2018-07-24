@@ -3,7 +3,7 @@ import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
 
-import Player from './scenes/player';
+//import Player from './scenes/player';
 import WorldMap from './scenes/world-map';
 import CountriesList from './scenes/countries-list';
 import RadioList from './scenes/genre-radio-list';
@@ -22,6 +22,15 @@ const WrapCard = styled('div')`
   display: flex;
 `;
 
+
+
+
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+import {getCountriesList, getRadioStationsByCountry} from 'root/redux-core/actions/radio';
+
+
 class App extends React.PureComponent {
   state = {
     genreIndex: 0,
@@ -31,6 +40,12 @@ class App extends React.PureComponent {
     this.setState({genreIndex});
   };
 
+  componentDidMount() {
+
+   // this.props.getCountriesList();
+   //  setTimeout(this.props.getRadioStationsByCountry, 2000, 'USA');
+   //  setTimeout(this.props.getRadioStationsByCountry, 4000, 'Russia');
+  }
 
   render() {
     const {genreIndex} = this.state;
@@ -65,5 +80,14 @@ class App extends React.PureComponent {
   }
 }
 
-// onClick={() => this.setState({isSearch: !isSearch})}
-export default App
+const mapStateToProps = ({queries: {queryHistory, selectedQuery}}) => ({
+  queryHistory,
+  selectedQuery,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getCountriesList,
+  getRadioStationsByCountry,
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(App);
