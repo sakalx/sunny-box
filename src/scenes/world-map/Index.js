@@ -111,7 +111,7 @@ class WorldMap extends React.PureComponent {
                     {(geographies, projection) =>
                       geographies.map((geography) => {
                         const isSelected = selectedCountry === geography.properties.name;
-                        console.log(geography);
+
                         return (
                           geography.id !== "010" && (
                             <Geography
