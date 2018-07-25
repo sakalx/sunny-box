@@ -1,13 +1,11 @@
 import React from 'react';
-import cache from "root/redux-core/reducers/cache";
-import styled from 'styled-components';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {getCountriesList, getRadioStationsByCountry} from 'root/redux-core/actions/sterling';
 
-
+import styled from 'styled-components';
 //import Player from './scenes/player';
 import WorldMap from './scenes/world-map';
 import CountriesList from './scenes/countries-list';
@@ -37,11 +35,7 @@ class App extends React.PureComponent {
 
   componentDidMount() {
 
-
-    //const {initLocalStorage} = this.props;
-
-
-    // this.props.getCountriesList();
+   // this.props.getCountriesList();
     //  setTimeout(this.props.getRadioStationsByCountry, 2000, 'USA');
     //  setTimeout(this.props.getRadioStationsByCountry, 4000, 'Russia');
   }
