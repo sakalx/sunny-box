@@ -12,12 +12,16 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import Slide from '@material-ui/core/Slide';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
+import SvgIcon from '@material-ui/core/SvgIcon';
+
 
 import {
   SearchBtn,
   SearchRadio,
   Wrap,
 } from './style';
+
+//const alphabetPath = JSON.parse(localStorage.getItem('alphabet'));
 
 class RadioList extends React.PureComponent {
   state = {
@@ -54,13 +58,21 @@ class RadioList extends React.PureComponent {
               value={genreIndex}
             >
               {
-                genreList.map(({label}) => (
-                  <Tab
-                    icon={<PhoneIcon/>}
-                    key={label}
-                    label={label}
-                  />
-                ))
+                genreList.map(({label}) => {
+                  const chart = label[0];
+
+                  return (
+                    <Tab
+                      key={label}
+                      label={label}
+                      icon={
+                        <SvgIcon viewBox="0 0 32 32">
+                          <path d=""/>
+                        </SvgIcon>
+                      }
+                    />
+                  )
+                })
               }
             </Tabs>
           </AppBar>

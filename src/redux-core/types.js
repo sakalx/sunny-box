@@ -4,5 +4,7 @@ export const promise = {
   FULFILLED: '_FULFILLED',
 };
 
+export const CACHE = 'INIT_LOCAL_STORAGE';
+
 export const GET_COUNTRIES_LIST = 'GET_LIST_OF_COUNTRIES';
 export const GET_RADIO_BY_COUNTRY = 'GET_LIST_OF_RADIO_BY_COUNTRY';

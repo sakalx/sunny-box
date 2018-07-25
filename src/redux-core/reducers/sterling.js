@@ -84,7 +84,6 @@ export default function sterling(state = initState, {type, payload}) {
           ...payload,
         },
       };
-
   }
 
   return state;

@@ -1,7 +1,12 @@
 import React from 'react';
+import cache from "root/redux-core/reducers/cache";
+import styled from 'styled-components';
 
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
-import Typography from '@material-ui/core/Typography';
+import {getCountriesList, getRadioStationsByCountry} from 'root/redux-core/actions/sterling';
+
 
 //import Player from './scenes/player';
 import WorldMap from './scenes/world-map';
@@ -10,26 +15,16 @@ import RadioList from './scenes/genre-radio-list';
 
 import StationList from './scenes/station-list';
 
+import Typography from '@material-ui/core/Typography';
 
-import styled from 'styled-components';
 
 const Wrap = styled('section')`
   overflow: hidden;
   //overflow-x: auto;
 `;
 
-const WrapCard = styled('div')`
-  display: flex;
-`;
 
-
-
-
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-
-import {getCountriesList, getRadioStationsByCountry} from 'root/redux-core/actions/radio';
-
+import SvgIcon from '@material-ui/core/SvgIcon';
 
 class App extends React.PureComponent {
   state = {
@@ -42,13 +37,18 @@ class App extends React.PureComponent {
 
   componentDidMount() {
 
-   // this.props.getCountriesList();
-   //  setTimeout(this.props.getRadioStationsByCountry, 2000, 'USA');
-   //  setTimeout(this.props.getRadioStationsByCountry, 4000, 'Russia');
+
+    //const {initLocalStorage} = this.props;
+
+
+    // this.props.getCountriesList();
+    //  setTimeout(this.props.getRadioStationsByCountry, 2000, 'USA');
+    //  setTimeout(this.props.getRadioStationsByCountry, 4000, 'Russia');
   }
 
   render() {
     const {genreIndex} = this.state;
+
 
     return (
       <Wrap>
@@ -80,9 +80,8 @@ class App extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({queries: {queryHistory, selectedQuery}}) => ({
-  queryHistory,
-  selectedQuery,
+const mapStateToProps = ({cache}) => ({
+  cache,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

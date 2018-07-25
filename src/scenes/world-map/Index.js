@@ -1,10 +1,8 @@
 import React from 'react';
 
-import geographyMap from 'root/static/world-map.json';
 import countriesList from 'root/static/countries';
 
 import moment from 'moment-timezone';
-
 console.log(moment.tz.guess());
 console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
@@ -87,7 +85,7 @@ class WorldMap extends React.PureComponent {
       tooltipPosition,
       zoom,
     } = this.state;
-
+if (true) return null;
     return (
       <Wrap>
         <WrapMap>
@@ -118,7 +116,7 @@ class WorldMap extends React.PureComponent {
                 <ZoomableGroup center={[x, y]} zoom={zoom}>
                   <Geographies
                     disableOptimization={disableOptimization}
-                    geography={geographyMap}>
+                    geography={{}}>
                     {(geographies, projection) =>
                       geographies.map((geography) => {
                         const isSelected = selectedCountry.code === geography.properties['Alpha-2'];

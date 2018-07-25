@@ -113,7 +113,7 @@ const
       loader: 'file-loader',
       options: {
         name: '[name].[ext]',
-        outputPath: 'static/',
+        outputPath: 'static/json',
       },
     }];
 //============================================================
@@ -156,7 +156,7 @@ const config = {
       },
       // JSON - via file-loader
       {
-        include: path.resolve(__dirname, `${develop}/static`),
+        include: path.resolve(__dirname, `${develop}/static/json`),
         test: /\.(json)$/,
         use: jsonConfig,
       },
