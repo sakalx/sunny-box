@@ -3,11 +3,11 @@ import 'root/static/json/geography-map.json';
 
 const LSConfig = {
   "geographyMap": {
-    "key": "geographyMap",
+    "key": "geography-map",
     "src": "static/json/geography-map.json",
   },
   "alphabet": {
-    "key": "alphabet",
+    "key": "alphabet-svg",
     "src": "static/json/svg-alphabet.json",
   },
 };

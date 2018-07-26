@@ -1,28 +1,28 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {getCountriesList, getRadioStationsByCountry} from 'root/redux-core/actions/sterling';
+import {
+  fetchCountriesList,
+  fetchStationsByCountry,
+  getCountriesListCache,
+  getStationsCache,
+} from 'root/redux-core/actions';
 
-import styled from 'styled-components';
 //import Player from './scenes/player';
 import WorldMap from './scenes/world-map';
 import CountriesList from './scenes/countries-list';
 import RadioList from './scenes/genre-radio-list';
-
 import StationList from './scenes/station-list';
 
 import Typography from '@material-ui/core/Typography';
-
 
 const Wrap = styled('section')`
   overflow: hidden;
   //overflow-x: auto;
 `;
-
-
-import SvgIcon from '@material-ui/core/SvgIcon';
 
 class App extends React.PureComponent {
   state = {
@@ -34,8 +34,25 @@ class App extends React.PureComponent {
   };
 
   componentDidMount() {
+    const {
+      fetchCountriesList,
+      fetchStationsByCountry,
+      getCountriesListCache,
+      getStationsCache,
+    } = this.props;
+    const listCache = localStorage.getItem('country-list');
+    const stationsCache = localStorage.getItem('Russia');
 
-   // this.props.getCountriesList();
+    listCache
+      ? getCountriesListCache(listCache)
+      : fetchCountriesList();
+
+    stationsCache
+      ? getStationsCache(stationsCache)
+      : fetchStationsByCountry('Russia');
+
+
+    //fetchStationsByCountry('Russia')
     //  setTimeout(this.props.getRadioStationsByCountry, 2000, 'USA');
     //  setTimeout(this.props.getRadioStationsByCountry, 4000, 'Russia');
   }
@@ -74,13 +91,15 @@ class App extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({cache}) => ({
-  cache,
+const mapStateToProps = ({sunny}) => ({
+  sunny,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getCountriesList,
-  getRadioStationsByCountry,
+  fetchCountriesList,
+  fetchStationsByCountry,
+  getCountriesListCache,
+  getStationsCache,
 }, dispatch);
 
 export default connect(null, mapDispatchToProps)(App);

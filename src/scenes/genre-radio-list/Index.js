@@ -1,19 +1,21 @@
 import React from 'react';
 
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+import LSConfig from 'root/config/local-storage';
+import {waitStorage} from 'root/helpers/caching-local-storage';
+import Base64Decode from 'root/helpers/decoder-base64';
+
 import radioList from 'root/static/radio-list';
 import genreList from 'root/static/genre-list';
 
 import AppBar from '@material-ui/core/AppBar';
 import Fade from '@material-ui/core/Fade';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import HelpIcon from '@material-ui/icons/Help';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
-import PhoneIcon from '@material-ui/icons/Phone';
 import Slide from '@material-ui/core/Slide';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import SvgIcon from '@material-ui/core/SvgIcon';
-
 
 import {
   SearchBtn,
@@ -21,13 +23,23 @@ import {
   Wrap,
 } from './style';
 
-//const alphabetPath = JSON.parse(localStorage.getItem('alphabet'));
+let alphabet = null;
 
 class RadioList extends React.PureComponent {
   state = {
     isSearch: false,
     searchRadio: {value: ''},
+    alphabetReady: false,
   };
+
+  componentDidMount() {
+    if (!alphabet) {
+      waitStorage().then(() => {
+        alphabet = Base64Decode(LSConfig.alphabet.key);
+        this.setState({alphabetReady: true})
+      })
+    }
+  }
 
   handleSearchRadio = (event, {newValue}) => {
     this.setState({searchRadio: {value: newValue.trimStart()}});
@@ -35,10 +47,11 @@ class RadioList extends React.PureComponent {
 
   render() {
     const {genreIndex, handleChangeGenre} = this.props;
-    const {
-      isSearch,
-      searchRadio,
-    } = this.state;
+    const {alphabetReady, isSearch, searchRadio} = this.state;
+
+    if (!alphabetReady) {
+      return <span>Loading ...</span>
+    }
 
     return (
       <Wrap>
@@ -67,7 +80,7 @@ class RadioList extends React.PureComponent {
                       label={label}
                       icon={
                         <SvgIcon viewBox="0 0 32 32">
-                          <path d=""/>
+                          <path d={alphabet[chart]}/>
                         </SvgIcon>
                       }
                     />
@@ -98,4 +111,8 @@ class RadioList extends React.PureComponent {
   }
 }
 
-export default RadioList;
+const mapStateToProps = ({}) => ({});
+
+const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+
+export default connect(null, null)(RadioList);

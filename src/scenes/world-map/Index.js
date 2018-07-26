@@ -1,11 +1,11 @@
 import React from 'react';
 
-import {subscribeStoreCache} from 'root/redux-core/store';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import Base64Decode from 'root/helpers/decoder-base64';
 import LSConfig from 'root/config/local-storage';
+import {waitStorage} from 'root/helpers/caching-local-storage';
+import Base64Decode from 'root/helpers/decoder-base64';
 
 import countriesList from 'root/static/countries';
 
@@ -32,7 +32,7 @@ import {
   ZoomOutIcon,
 } from './style';
 
-let geographyMap;
+let geographyMap = null;
 
 class WorldMap extends React.PureComponent {
   state = {
@@ -45,7 +45,18 @@ class WorldMap extends React.PureComponent {
     tooltip: '',
     tooltipPosition: [0, 0],
     disableOptimization: false,
+    geoMapReady: false,
   };
+
+
+  componentDidMount() {
+    if (!geographyMap) {
+      waitStorage().then(() => {
+        geographyMap = Base64Decode(LSConfig.geographyMap.key);
+        this.setState({geoMapReady: true})
+      })
+    }
+  }
 
   handleZoomOut = () => {
     this.setState({
@@ -87,95 +98,86 @@ class WorldMap extends React.PureComponent {
   };
 
   render() {
-    const {cache} = this.props;
     const {
       center,
       disableOptimization,
+      geoMapReady,
       selectedCountry,
       tooltip,
       tooltipPosition,
       zoom,
     } = this.state;
 
-    if (!cache.ready) {
+    if (!geoMapReady) {
       return <span>Loading ...</span>
-    } else {
-      return (
-        <Wrap>
-          <WrapMap>
-            <Head>
-              <CountryName variant="display1">
-                {selectedCountry.label}
-              </CountryName>
-              {zoom > 1 &&
-              <ZoomOutButton
-                aria-label="Zoom-out-map"
-                onClick={this.handleZoomOut}
-              >
-                <ZoomOutIcon/>
-              </ZoomOutButton>
-              }
-            </Head>
-
-            <Motion
-              defaultStyle={motionStyle.default}
-              style={motionStyle.motion(zoom, center)}
-            >
-              {({zoom, x, y}) => (
-                <ComponentMap
-                  projectionConfig={{scale: 205}}
-                  width={980}
-                  height={551}
-                >
-                  <ZoomableGroup center={[x, y]} zoom={zoom}>
-                    <Geographies
-                      disableOptimization={disableOptimization}
-                      geography={geographyMap}>
-                      {(geographies, projection) =>
-                        geographies.map((geography) => {
-                          const isSelected = selectedCountry.code === geography.properties['Alpha-2'];
-
-                          return (
-                            <Geography
-                              key={geography.properties.name}
-                              geography={geography}
-                              projection={projection}
-                              onMouseMove={this.handleMove}
-                              onMouseLeave={() => this.setState({tooltip: ''})}
-                              style={geographyStyle(isSelected)}
-                              onClick={this.handleCountryClick}
-                            />
-                          )
-                        })
-                      }
-                    </Geographies>
-                  </ZoomableGroup>
-                </ComponentMap>
-              )}
-            </Motion>
-
-            <h5 style={tooltipStyle(tooltipPosition)}>
-              {tooltip}
-            </h5>
-          </WrapMap>
-
-          <CountryInfo/>
-        </Wrap>
-      )
     }
+    return (
+      <Wrap>
+        <WrapMap>
+          <Head>
+            <CountryName variant="display1">
+              {selectedCountry.label}
+            </CountryName>
+            {zoom > 1 &&
+            <ZoomOutButton
+              aria-label="Zoom-out-map"
+              onClick={this.handleZoomOut}
+            >
+              <ZoomOutIcon/>
+            </ZoomOutButton>
+            }
+          </Head>
+
+          <Motion
+            defaultStyle={motionStyle.default}
+            style={motionStyle.motion(zoom, center)}
+          >
+            {({zoom, x, y}) => (
+              <ComponentMap
+                projectionConfig={{scale: 205}}
+                width={980}
+                height={551}
+              >
+                <ZoomableGroup center={[x, y]} zoom={zoom}>
+                  <Geographies
+                    disableOptimization={disableOptimization}
+                    geography={geographyMap}>
+                    {(geographies, projection) =>
+                      geographies.map((geography) => {
+                        const isSelected = selectedCountry.code === geography.properties['Alpha-2'];
+
+                        return (
+                          <Geography
+                            key={geography.properties.name}
+                            geography={geography}
+                            projection={projection}
+                            onMouseMove={this.handleMove}
+                            onMouseLeave={() => this.setState({tooltip: ''})}
+                            style={geographyStyle(isSelected)}
+                            onClick={this.handleCountryClick}
+                          />
+                        )
+                      })
+                    }
+                  </Geographies>
+                </ZoomableGroup>
+              </ComponentMap>
+            )}
+          </Motion>
+
+          <h5 style={tooltipStyle(tooltipPosition)}>
+            {tooltip}
+          </h5>
+        </WrapMap>
+
+        <CountryInfo/>
+      </Wrap>
+    )
   }
 }
 
-const getGeographyMap = () => {
-  geographyMap = Base64Decode(LSConfig.geographyMap.key);
-};
-
-subscribeStoreCache(getGeographyMap);
-
-const mapStateToProps = ({cache}) => ({
-  cache,
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
 
-export default connect(mapStateToProps, null)(WorldMap);
+export default connect(null, null)(WorldMap);

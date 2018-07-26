@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 
 import {Provider} from 'react-redux';
 import store from './redux-core/store';
-import {initLocalStorage} from 'root/redux-core/actions/cache';
 
 import caching from 'root/helpers/caching-local-storage';
 import LSConfig from 'root/config/local-storage';
@@ -17,7 +16,6 @@ import App from './App';
 
 caching(LSConfig.alphabet);
 caching(LSConfig.geographyMap);
-store.dispatch(initLocalStorage());
 
 ReactDOM.render(
   <React.Fragment>

@@ -22,7 +22,7 @@ function caching(config) {
   }
 }
 
-export function initStorage() {
+export function waitStorage() {
   const cacheLength = Object.keys(LSConfig).length;
 
   return new Promise(resolve => {

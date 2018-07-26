@@ -20,14 +20,14 @@ export const getCountries = () => firestore.collection('countries').get()
   );
 
 
-export const getRadioByCountry = country =>
+export const getStationsByCountry = country =>
   firestore.doc(`countries/${country}`).get().then(doc => doc.data());
 
 
 export const addRadio = ({country, genre, ...other}) => {
   const newRadio = {...other};
 
-  return getRadioByCountry(country)
+  return getStationsByCountry(country)
     .then(prevData => {
 
       const newData = {

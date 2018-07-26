@@ -10,19 +10,4 @@ const middleware = applyMiddleware(promise(), thunk, logger);
 
 const store = createStore(rootReducer, middleware);
 
-
-export function subscribeStoreCache(callBack) {
-  let unsubscribe;
-
-  function cacheChange(callBack) {
-    if (store.getState().cache.ready) {
-      unsubscribe();
-      callBack();
-    }
-  }
-
-  unsubscribe = store.subscribe(() => cacheChange(callBack));
-}
-
-
 export default store;

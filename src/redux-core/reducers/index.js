@@ -1,11 +1,9 @@
 import {combineReducers} from 'redux';
 
-import sterling from './sterling';
-import cache from './cache';
+import sunny from './sunny';
 
 const rootReducer = combineReducers({
-  cache,
-  sterling,
+  sunny,
 });
 
 export default rootReducer;
