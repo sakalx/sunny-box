@@ -1,6 +1,6 @@
 import React from 'react';
 
-import countriesList from 'root/static/countries';
+import countriesList from 'root/static/timezones';
 
 import Slide from '@material-ui/core/Slide';
 import Tab from '@material-ui/core/Tab';

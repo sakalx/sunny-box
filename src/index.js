@@ -4,9 +4,8 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import store from './redux-core/store';
 
-import LSConfig from 'root/config/local-storage';
+import cacheConfig from 'root/config/cache';
 import {fetchCacheHost, fetchCacheFireStore} from 'root/helpers/caching';
-
 import {getSvgAlphabet} from 'root/firebase-core/firestore';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,8 +17,9 @@ import App from './App';
 
 // TODO check version LS => Reset LS
 // Caching
-fetchCacheHost(LSConfig.geographyMap);
-fetchCacheFireStore(getSvgAlphabet, LSConfig.alphabet.key);
+fetchCacheHost(cacheConfig.geographyMap);
+fetchCacheHost(cacheConfig.timezones);
+fetchCacheFireStore(getSvgAlphabet, cacheConfig.alphabet.key);
 
 
 ReactDOM.render(

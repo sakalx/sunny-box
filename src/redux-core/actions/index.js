@@ -26,9 +26,11 @@ export function fetchStationsByCountry(country) {
   return {
     type: FETCH_STATIONS_BY_COUNTRY,
     payload: getStationsByCountry(country)
-      .then(stations => ({
-        [country]: stations,
-      }))
+      .then(stations =>
+        stations
+          ? ({[country]: stations})
+          : null
+      )
   }
 }
 

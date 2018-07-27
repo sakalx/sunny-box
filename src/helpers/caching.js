@@ -30,7 +30,7 @@ export function fetchCacheFireStore(callBack, key) {
   }
 }
 
-function waitCaching(key) {
+function waitFetching(key) {
 
   return new Promise(resolve => {
     const stateCheck = setInterval(() => {
@@ -45,4 +45,4 @@ function waitCaching(key) {
   });
 }
 
-export default waitCaching;
+export default waitFetching;

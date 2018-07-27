@@ -3,16 +3,11 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import LSConfig from 'root/config/local-storage';
-import waitCaching from 'root/helpers/caching';
+import cacheConfig from 'root/config/cache';
+import waitFetching from 'root/helpers/caching';
 import Base64Decode from 'root/helpers/decoder-base64';
 
-import countriesList from 'root/static/countries';
-
-import moment from 'moment-timezone';
-
-console.log(moment.tz.guess());
-console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+import countriesList from 'root/static/timezones';
 
 import {ZoomableGroup, Geographies, Geography} from 'react-simple-maps';
 import {Motion} from 'react-motion';
@@ -50,14 +45,14 @@ class WorldMap extends React.PureComponent {
 
 
   componentDidMount() {
-    const {key} = LSConfig.geographyMap;
+    const {key} = cacheConfig.geographyMap;
     const geographyMapCache = localStorage.getItem(key);
 
     if (geographyMapCache) {
       geographyMap = Base64Decode(geographyMapCache);
       this.setState({geoMapReady: true})
     } else {
-      waitCaching(key).then(value => {
+      waitFetching(key).then(value => {
         geographyMap = Base64Decode(value);
         this.setState({geoMapReady: true})
       })

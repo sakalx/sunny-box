@@ -9,22 +9,22 @@ const firestore = firebase.firestore();
 firestore.settings({timestampsInSnapshots: true});
 
 
-export const getCountries = () => firestore.collection('countries').get()
+export const getCountries = () => firestore.collection('stations').get()
   .then(querySnapshot => {
-      const data = [];
-      querySnapshot.forEach(doc => data.push(doc.id));
+      const list = {};
 
-      return data;
+      querySnapshot.forEach(doc => list[doc.id] = null);
+      return list;
     }
   );
 
 export const getStationsByCountry = country =>
-  firestore.doc(`countries/${country}`).get().then(doc => doc.data());
+  firestore.doc(`stations/${country}`).get().then(doc => doc.data());
 
 export const getSvgAlphabet = () =>
   firestore.doc('svg/alphabet').get().then(doc => doc.data());
 
-export const addRadio = ({country, genre, ...other}) => {
+const addRadio = ({country, genre, ...other}) => {
   const newRadio = {...other};
 
   return getStationsByCountry(country)
@@ -38,3 +38,5 @@ export const addRadio = ({country, genre, ...other}) => {
       return firestore.doc(`stations/${country}`).update(newData);
     });
 };
+
+const add = data => firestore.doc(`stations/${country}`).set(data);
