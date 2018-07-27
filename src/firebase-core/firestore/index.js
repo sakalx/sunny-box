@@ -5,7 +5,6 @@ import FIREBASEConfig from 'root/config/firebase';
 
 firebase.initializeApp(FIREBASEConfig);
 
-
 const firestore = firebase.firestore();
 firestore.settings({timestampsInSnapshots: true});
 
@@ -19,10 +18,11 @@ export const getCountries = () => firestore.collection('countries').get()
     }
   );
 
-
 export const getStationsByCountry = country =>
   firestore.doc(`countries/${country}`).get().then(doc => doc.data());
 
+export const getSvgAlphabet = () =>
+  firestore.doc('svg/alphabet').get().then(doc => doc.data());
 
 export const addRadio = ({country, genre, ...other}) => {
   const newRadio = {...other};
@@ -35,7 +35,6 @@ export const addRadio = ({country, genre, ...other}) => {
         [genre]: [...prevData[genre], newRadio]
       };
 
-      return firestore.doc(`countries/${country}`).update(newData);
+      return firestore.doc(`stations/${country}`).update(newData);
     });
 };
-

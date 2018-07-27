@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import LSConfig from 'root/config/local-storage';
-import {waitStorage} from 'root/helpers/caching-local-storage';
+import waitCaching from 'root/helpers/caching';
 import Base64Decode from 'root/helpers/decoder-base64';
 
 import countriesList from 'root/static/countries';
@@ -50,9 +50,15 @@ class WorldMap extends React.PureComponent {
 
 
   componentDidMount() {
-    if (!geographyMap) {
-      waitStorage().then(() => {
-        geographyMap = Base64Decode(LSConfig.geographyMap.key);
+    const {key} = LSConfig.geographyMap;
+    const geographyMapCache = localStorage.getItem(key);
+
+    if (geographyMapCache) {
+      geographyMap = Base64Decode(geographyMapCache);
+      this.setState({geoMapReady: true})
+    } else {
+      waitCaching(key).then(value => {
+        geographyMap = Base64Decode(value);
         this.setState({geoMapReady: true})
       })
     }

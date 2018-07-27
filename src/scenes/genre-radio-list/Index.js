@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import LSConfig from 'root/config/local-storage';
-import {waitStorage} from 'root/helpers/caching-local-storage';
+import waitCaching from 'root/helpers/caching';
 import Base64Decode from 'root/helpers/decoder-base64';
 
 import radioList from 'root/static/radio-list';
@@ -33,9 +33,15 @@ class RadioList extends React.PureComponent {
   };
 
   componentDidMount() {
-    if (!alphabet) {
-      waitStorage().then(() => {
-        alphabet = Base64Decode(LSConfig.alphabet.key);
+    const {key} = LSConfig.alphabet;
+    const alphabetCache = localStorage.getItem(key);
+
+    if (alphabetCache) {
+      alphabet = JSON.parse(alphabetCache);
+      this.setState({alphabetReady: true})
+    } else {
+      waitCaching(key).then(value => {
+        alphabet = JSON.parse(value);
         this.setState({alphabetReady: true})
       })
     }

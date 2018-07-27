@@ -4,6 +4,9 @@ import {
   radioStationList,
 } from '../types';
 
+import LSConfig from 'root/config/local-storage';
+
+
 const {PENDING, REJECTED, FULFILLED} = promise;
 const {GET_COUNTRIES_LIST, FETCH_COUNTRIES_LIST} = countryList;
 const {GET_STATIONS_BY_COUNTRY, FETCH_STATIONS_BY_COUNTRY} = radioStationList;
@@ -62,7 +65,8 @@ export default function sunny(state = initState, {type, payload}) {
 
     case FETCH_COUNTRIES_LIST + FULFILLED:
       const list = createList(payload);
-      localStorage.setItem('country-list', JSON.stringify(list));
+      const {key} = LSConfig.countryList;
+      localStorage.setItem(key, JSON.stringify(list));
 
       return setList(list);
 
@@ -78,8 +82,8 @@ export default function sunny(state = initState, {type, payload}) {
       return onRejected('Stations', payload);
 
     case FETCH_STATIONS_BY_COUNTRY + FULFILLED:
-      const key = Object.keys(payload)[0];
-      localStorage.setItem(key, JSON.stringify(payload));
+      const keyCountry = Object.keys(payload)[0];
+      localStorage.setItem(keyCountry, JSON.stringify(payload));
 
       return setStations(payload);
   }

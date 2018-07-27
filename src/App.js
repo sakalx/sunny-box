@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import LSConfig from 'root/config/local-storage';
+
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
@@ -40,7 +42,7 @@ class App extends React.PureComponent {
       getCountriesListCache,
       getStationsCache,
     } = this.props;
-    const listCache = localStorage.getItem('country-list');
+    const listCache = localStorage.getItem(LSConfig.countryList.key);
     const stationsCache = localStorage.getItem('Russia');
 
     listCache
