@@ -1,25 +1,43 @@
-import {
-  promise,
-  countryList,
-  radioStationList,
-} from '../types';
-
 import cacheConfig from 'root/config/cache';
 
+import {promise, countryList, radioStationList} from '../types';
 
-const {PENDING, REJECTED, FULFILLED} = promise;
-const {GET_COUNTRIES_LIST, FETCH_COUNTRIES_LIST} = countryList;
-const {GET_STATIONS_BY_COUNTRY, FETCH_STATIONS_BY_COUNTRY} = radioStationList;
+const {
+  FULFILLED,
+  PENDING,
+  REJECTED,
+} = promise;
+const {
+  FETCH_COUNTRIES_LIST,
+  GET_COUNTRIES_LIST,
+  SET_COUNTRY,
+} = countryList;
+const {
+  FETCH_STATIONS_BY_COUNTRY,
+  GET_STATIONS_BY_COUNTRY,
+  SET_GENRE,
+} = radioStationList;
 
 const initState = {
   fetchingCountryList: false,
   fetchingStations: false,
   errorCountryList: null,
   errorStations: null,
-  list: {},
+  list: null,
+  currentCountry: {
+    index: false,
+    label: '',
+  },
+  currentGenre: {
+    index: false,
+    label: '',
+  },
 };
 
-export default function sunny(state = initState, {type, payload}) {
+export default function sunny(state = initState, {
+  type,
+  payload
+}) {
 
   const onPending = key => ({
     ...state,
@@ -40,7 +58,6 @@ export default function sunny(state = initState, {type, payload}) {
 
   const setStations = stations => ({
     ...state,
-    fetchingStations: false,
     list: {
       ...state.list,
       ...stations,
@@ -59,7 +76,9 @@ export default function sunny(state = initState, {type, payload}) {
       return onRejected('CountryList', payload);
 
     case FETCH_COUNTRIES_LIST + FULFILLED:
-      const {key} = cacheConfig.countryList;
+      const {
+        key
+      } = cacheConfig.countryList;
       localStorage.setItem(key, JSON.stringify(payload));
 
       return setList(payload);
@@ -83,6 +102,18 @@ export default function sunny(state = initState, {type, payload}) {
         return setStations(payload);
       } else {
         return state
+      }
+
+
+    case SET_COUNTRY:
+      return {
+        ...state,
+        currentCountry: payload,
+      };
+    case SET_GENRE:
+      return {
+        ...state,
+        currentGenre: payload,
       }
   }
 

@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import store from './redux-core/store';
 
 import cacheConfig from 'root/config/cache';
-import {fetchCacheHost, fetchCacheFireStore} from 'root/helpers/caching';
+import {fetchCacheHost, fetchCacheFireStore} from 'root/helpers/cache';
 import {getSvgAlphabet} from 'root/firebase-core/firestore';
 
 import CssBaseline from '@material-ui/core/CssBaseline';

@@ -60,10 +60,10 @@ const uglifyJs = new webpack.optimize.UglifyJsPlugin({
 
 const pwaManifest = new WebpackPwaManifest({
   name: 'BidWin project reWriter',
-  short_name: 'bidWin',
-  description: 'BidWin is a next-generation content delivery!',
-  background_color: '#303f9f',
-  theme_color: '#303f9f',
+  short_name: 'Sunny-box',
+  description: 'Sunny-box is a next-generation of online radio!',
+  background_color: '#2196f3',
+  theme_color: '#2196f3',
   start_url: '/',
   icons: [
     {

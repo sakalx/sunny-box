@@ -1,19 +1,19 @@
 import React from 'react';
-import waitFetching from "root/helpers/caching";
-import Base64Decode from "root/helpers/decoder-base64";
 import styled from 'styled-components';
 
-import moment from 'moment-timezone';
-
 import cacheConfig from 'root/config/cache';
+import waitFetching from 'root/helpers/cache';
+
+import getLocation from 'root/helpers/location';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
   fetchCountriesList,
-  fetchStationsByCountry,
   getCountriesListCache,
-  getStationsCache,
+  getStations,
+  setCountry,
+  setGenre,
 } from 'root/redux-core/actions';
 
 //import Player from './scenes/player';
@@ -24,11 +24,6 @@ import StationList from './scenes/station-list';
 
 import Typography from '@material-ui/core/Typography';
 
-const getTimezone = () =>
-  Intl.DateTimeFormat().resolvedOptions().timeZone
-  || moment.tz.guess()
-  || 'America/New_York';
-
 const Wrap = styled('section')`
   overflow: hidden;
   //overflow-x: auto;
@@ -37,7 +32,6 @@ const Wrap = styled('section')`
 class App extends React.PureComponent {
   state = {
     genreIndex: 0,
-    location: null,
   };
 
   handleChangeGenre = (event, genreIndex) => {
@@ -45,46 +39,68 @@ class App extends React.PureComponent {
   };
 
   componentDidMount() {
-    const {timezones, countryList} = cacheConfig;
-    const {fetchCountriesList, getCountriesListCache} = this.props;
+    const {fetchCountriesList, getCountriesListCache, setGenre, sunny} = this.props;
+    const countriesCache = localStorage.getItem(cacheConfig.countryList.key);
 
-    const setStations = timezone => {
-      const location = this._getLocation(timezone).label;
-
-      this._getStations(location);
-      this.setState({location});
-    };
-
-    const timezonesCache = localStorage.getItem(timezones.key);
-
-    timezonesCache
-      ? setStations(timezonesCache)
-      : waitFetching(timezones.key).then(value => setStations(value));
-
-
-    const countriesCache = localStorage.getItem(countryList.key);
-
-    countriesCache
-      ? getCountriesListCache(countriesCache)
-      : fetchCountriesList();
+    if (countriesCache) {
+      getCountriesListCache(countriesCache);
+    } else {
+      fetchCountriesList()
+    }
   }
 
-  _getLocation = timezones =>
-    Base64Decode(timezones).timezones
-      .find(({timezones}) => timezones
-        .find(timezone => timezone === getTimezone()));
+  static getDerivedStateFromProps(props) {
+    const {sunny, getStations, setCountry} = props;
+    const timezonesCache = localStorage.getItem(cacheConfig.timezones.key);
 
-  _getStations = country => {
-    const {fetchStationsByCountry, getStationsCache} = this.props;
-    const stationsCache = localStorage.getItem(country);
+    if (sunny.list && !sunny.currentCountry.index) {
+      timezonesCache
+        ? setCurrentCountry(timezonesCache)
+        : waitFetching(cacheConfig.timezones.key)
+          .then(timezones => setCurrentCountry(timezones));
 
-    stationsCache
-      ? getStationsCache(stationsCache)
-      : fetchStationsByCountry(country);
+      function setCurrentCountry(timezones) {
+        const countries = Object.keys(sunny.list);
+        const country = getLocation(timezones).label;
+        const index = countries.indexOf(country);
+
+        setCountry({index, label: country});
+        getStations(country);
+      }
+
+      return null;
+    }
+    // Return null to indicate no change to state.
+    return null;
+  }
+
+  _handleCurrentCountry = () => {
+    const timezonesCache = localStorage.getItem(cacheConfig.timezones.key);
+    const {sunny, getStations, setCountry} = this.props;
+
+    const setCurrentCountry = timezones => {
+      const countries = Object.keys(sunny.list);
+      const country = getLocation(timezones).label;
+      const index = countries.indexOf(country);
+
+      setCountry({index, label: country});
+      getStations(country);
+    };
+
+
+    if (timezonesCache) {
+      setCurrentCountry(timezonesCache);
+    } else {
+      waitFetching(cacheConfig.timezones.key)
+        .then(timezones => {
+          setCurrentCountry(timezones);
+        });
+    }
   };
 
   render() {
-    const {genreIndex, location} = this.state;
+    const {sunny,} = this.props;
+    const {genreIndex} = this.state;
 
     return (
       <Wrap>
@@ -122,9 +138,10 @@ const mapStateToProps = ({sunny}) => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchCountriesList,
-  fetchStationsByCountry,
   getCountriesListCache,
-  getStationsCache,
+  getStations,
+  setCountry,
+  setGenre,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

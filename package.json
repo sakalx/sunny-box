@@ -1,7 +1,7 @@
 {
-  "name": "Sterling",
+  "name": "Sunny-box",
   "version": "1.0.0",
-  "description": "Online Radio",
+  "description": "Sunny-box is a next-generation of online radio",
   "main": "index.js",
   "browserslist": [
     "> 1%",

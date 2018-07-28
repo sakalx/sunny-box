@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import cacheConfig from 'root/config/cache';
-import waitFetching from 'root/helpers/caching';
+import waitFetching from 'root/helpers/cache';
 import Base64Decode from 'root/helpers/decoder-base64';
 
 import countriesList from 'root/static/timezones';
