@@ -14,7 +14,7 @@ import {
   Wrap,
 } from './style';
 
-class CountriesList extends React.PureComponent {
+class CountryList extends React.PureComponent {
   state = {
     tabIndex: false,
     isSearch: false,
@@ -86,4 +86,4 @@ class CountriesList extends React.PureComponent {
   }
 }
 
-export default CountriesList;
+export default CountryList;

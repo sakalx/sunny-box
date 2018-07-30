@@ -1,6 +1,6 @@
 import cacheConfig from 'root/config/cache';
 
-import {promise, countryList, radioStationList} from '../types';
+import {promise, countryList, radioStation} from '../types';
 
 const {
   FULFILLED,
@@ -16,7 +16,8 @@ const {
   FETCH_STATIONS_BY_COUNTRY,
   GET_STATIONS_BY_COUNTRY,
   SET_GENRE,
-} = radioStationList;
+  SET_STATION,
+} = radioStation;
 
 const initState = {
   fetchingCountryList: false,
@@ -31,6 +32,12 @@ const initState = {
   currentGenre: {
     index: false,
     label: '',
+  },
+  currentStation: {
+    uid: false,
+    label: '',
+    src: [],
+    logo: null,
   },
 };
 
@@ -114,6 +121,19 @@ export default function sunny(state = initState, {
       return {
         ...state,
         currentGenre: payload,
+      }
+    case SET_STATION:
+    const station = {
+      country: state.currentCountry,
+      genre: state.currentGenre,
+      station: payload,
+    };
+
+    localStorage.setItem(cacheConfig.lastStation.key, JSON.stringify(station));
+    
+      return {
+        ...state,
+        currentStation: payload,
       }
   }
 

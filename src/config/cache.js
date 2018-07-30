@@ -2,7 +2,10 @@ import 'root/static/json/geography-map.json';
 import 'root/static/json/timezones.json';
 
 const cacheConfig = {
-  "version": "0.0.1",
+  "version": {
+    "key": "cache-version",
+    "value": "0.0.1",
+  },
   "geographyMap": {
     "key": "geography-map",
     "src": "static/json/geography-map.json",
@@ -16,6 +19,9 @@ const cacheConfig = {
   "timezones": {
     "key": "timezones",
     "src": "static/json/timezones.json",
+  },
+  "lastStation": {
+    "key": "last-station",
   },
 };
 

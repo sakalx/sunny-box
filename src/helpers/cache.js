@@ -1,3 +1,14 @@
+import cacheConfig from 'root/config/cache';
+
+export const checkCacheVersion = () => {
+  const {version} = cacheConfig;
+  const cacheVersion = localStorage.getItem(version.key);
+
+  cacheVersion
+    ? cacheVersion !== version.value && localStorage.clear()
+    : localStorage.setItem(version.key, version.value);
+};
+
 export const fetchCacheHost = (config) => {
   if (!localStorage.getItem(config.key)) {
     const fileReader = new FileReader();

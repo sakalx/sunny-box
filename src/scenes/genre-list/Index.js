@@ -1,13 +1,11 @@
 import React from 'react';
 
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-
 import cacheConfig from 'root/config/cache';
 import waitFetching from 'root/helpers/cache';
 
-import radioList from 'root/static/radio-list';
-import genreList from 'root/static/genre-list';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {setGenre} from 'root/redux-core/actions'
 
 import AppBar from '@material-ui/core/AppBar';
 import Fade from '@material-ui/core/Fade';
@@ -24,11 +22,26 @@ import {
 
 let alphabet = null;
 
-class RadioList extends React.PureComponent {
+
+class GenreList extends React.PureComponent {
+  getSuggestionList = () => {
+    const {list, currentCountry} = this.props;
+    const genreList = Object.entries(list[currentCountry.label]);
+
+    return genreList.reduce((acc, next) => {
+      const suggestion = next[1].map(({title}) =>
+        ({label: `${title} \uD83C\uDF99${next[0].toUpperCase()}`})
+      );
+
+      return [...acc, ...suggestion]
+    }, []);
+  };
+
   state = {
+    alphabetReady: false,
     isSearch: false,
     searchRadio: {value: ''},
-    alphabetReady: false,
+    suggestions: this.getSuggestionList(),
   };
 
   componentDidMount() {
@@ -46,13 +59,25 @@ class RadioList extends React.PureComponent {
     }
   }
 
+  handleChangeGenre = (event, index) => {
+    const {list, currentCountry, currentGenre, setGenre} = this.props;
+
+    if (currentGenre.index !== index) {
+      const country = currentCountry.label;
+      const label = Object.keys(list[country])[index];
+
+      setGenre({index, label})
+    }
+  };
+
   handleSearchRadio = (event, {newValue}) => {
     this.setState({searchRadio: {value: newValue.trimStart()}});
   };
 
   render() {
-    const {genreIndex, handleChangeGenre} = this.props;
-    const {alphabetReady, isSearch, searchRadio} = this.state;
+    const {list, currentCountry, currentGenre} = this.props;
+    const {alphabetReady, isSearch, searchRadio, suggestions} = this.state;
+    const genreList = Object.keys(list[currentCountry.label]);
 
     if (!alphabetReady) {
       return <span>Loading ...</span>
@@ -60,7 +85,6 @@ class RadioList extends React.PureComponent {
 
     return (
       <Wrap>
-
         <Slide
           in={!isSearch}
           mountOnEnter
@@ -70,37 +94,31 @@ class RadioList extends React.PureComponent {
           <AppBar color="default" position="absolute">
             <Tabs
               indicatorColor="primary"
-              onChange={handleChangeGenre}
+              onChange={this.handleChangeGenre}
               scrollable
               textColor="primary"
-              value={genreIndex}
+              value={currentGenre.index}
             >
-              {
-                genreList.map(({label}) => {
-                  const chart = label[0];
-
-                  return (
-                    <Tab
-                      key={label}
-                      label={label}
-                      icon={
-                        <SvgIcon viewBox="0 0 32 32">
-                          <path d={alphabet[chart]}/>
-                        </SvgIcon>
-                      }
-                    />
-                  )
-                })
-              }
+              {genreList.map(genre => (
+                <Tab
+                  key={genre}
+                  label={genre}
+                  icon={
+                    <SvgIcon viewBox="0 0 32 32">
+                      <path d={alphabet[genre[0].toUpperCase()]}/>
+                    </SvgIcon>
+                  }
+                />
+              ))}
             </Tabs>
           </AppBar>
         </Slide>
 
-        <Fade in={isSearch} mountOnEnter unmountOnExit>
+        <Fade in={isSearch} mountOnEnter>
           <SearchRadio
             label="searchRadio"
             onChange={this.handleSearchRadio}
-            suggestions={radioList}
+            suggestions={suggestions}
             value={searchRadio.value}
           />
         </Fade>
@@ -116,8 +134,14 @@ class RadioList extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({}) => ({});
+const mapStateToProps = ({sunny: {list, currentCountry, currentGenre}}) => ({
+  list,
+  currentCountry,
+  currentGenre,
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  setGenre,
+}, dispatch);
 
-export default connect(null, null)(RadioList);
+export default connect(mapStateToProps, mapDispatchToProps)(GenreList);

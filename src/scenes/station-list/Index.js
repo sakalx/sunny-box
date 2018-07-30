@@ -1,5 +1,9 @@
 import React from 'react';
 
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {setStation} from 'root/redux-core/actions';
+
 import StationCard from 'root/scenes/card';
 
 import Tab from '@material-ui/core/Tab';
@@ -9,36 +13,39 @@ import {
 } from './style';
 
 class StationList extends React.PureComponent {
-  state = {
-    tabIndex: false,
 
-  };
+  handleChangeStation = (event, uid) => {
+    const {currentStation, setStation} = this.props;
+    console.log(uid);
+    const station = {
+      ...currentStation,
+      uid: currentStation.uid !== uid ? uid : false,
+    };
 
-  handleChange = (event, tabIndex) => {
-    this.setState(state =>
-      ({tabIndex: tabIndex === state.tabIndex
-          ? false
-          : tabIndex
-      }));
+    setStation(station)
   };
 
 
   render() {
-    const {tabIndex} = this.state;
+    const {list, currentCountry, currentGenre, currentStation} = this.props;
+    const stationList = list[currentCountry.label][currentGenre.label];
+    const selectedStation = stationList.find(station => station.uid === currentStation.uid);
+
 
     return (
       <WrapTabs
         indicatorColor="primary"
-        onChange={this.handleChange}
+        onChange={this.handleChangeStation}
         scrollable
         textColor="primary"
-        value={tabIndex}
+        value={selectedStation ? selectedStation.uid : false }
       >
-        {[1, 2, 3, 4, 5, 6].map((c, index) => (
+        {stationList.map(station => (
           <Tab
-            icon={<StationCard playing={tabIndex === index}/>}
-            key={String(index)}
+            icon={<StationCard playing={currentStation.uid === station.uid}/>}
+            key={station.uid}
             label="Brooklyn"
+            value={station.uid}
           />
         ))}
       </WrapTabs>
@@ -47,4 +54,15 @@ class StationList extends React.PureComponent {
   }
 }
 
-export default StationList;
+const mapStateToProps = ({sunny: {list, currentCountry, currentGenre, currentStation}}) => ({
+  list,
+  currentCountry,
+  currentGenre,
+  currentStation,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  setStation,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(StationList);

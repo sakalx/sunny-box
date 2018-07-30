@@ -14,15 +14,15 @@ import {
   getStations,
   setCountry,
   setGenre,
+  setStation,
 } from 'root/redux-core/actions';
 
 //import Player from './scenes/player';
 import WorldMap from './scenes/world-map';
-import CountriesList from './scenes/countries-list';
-import RadioList from './scenes/genre-radio-list';
+import CountryList from './scenes/country-list';
+import GenreList from './scenes/genre-list';
 import StationList from './scenes/station-list';
 
-import Typography from '@material-ui/core/Typography';
 
 const Wrap = styled('section')`
   overflow: hidden;
@@ -30,37 +30,51 @@ const Wrap = styled('section')`
 `;
 
 class App extends React.PureComponent {
-  state = {
-    genreIndex: 0,
-  };
-
-  handleChangeGenre = (event, genreIndex) => {
-    this.setState({genreIndex});
-  };
+  state = {};
 
   componentDidMount() {
-    const {fetchCountriesList, getCountriesListCache, setGenre, sunny} = this.props;
-    const countriesCache = localStorage.getItem(cacheConfig.countryList.key);
+    const {
+      fetchCountriesList,
+      getCountriesListCache,
+      getStations,
+      setCountry,
+      setGenre,
+      setStation,
+    } = this.props;
 
-    if (countriesCache) {
-      getCountriesListCache(countriesCache);
-    } else {
-      fetchCountriesList()
+    const countriesCache = localStorage.getItem(cacheConfig.countryList.key);
+    const stationCache = localStorage.getItem(cacheConfig.lastStation.key);
+
+    countriesCache
+      ? getCountriesListCache(countriesCache)
+      : fetchCountriesList();
+
+    if (stationCache) {
+      const {country, genre, station} = JSON.parse(stationCache);
+
+      setCountry(country);
+      setGenre(genre);
+      getStations(country.label);
+      setStation(station);
     }
   }
 
   static getDerivedStateFromProps(props) {
-    const {sunny, getStations, setCountry} = props;
-    const timezonesCache = localStorage.getItem(cacheConfig.timezones.key);
+    const {sunny, getStations, setCountry, setGenre} = props;
+    const currentCountry = sunny.currentCountry.label;
+    const currentGenre = sunny.currentGenre.label;
+    const list = sunny.list;
 
-    if (sunny.list && !sunny.currentCountry.index) {
+    if (list && !currentCountry) {
+      const timezonesCache = localStorage.getItem(cacheConfig.timezones.key);
+
       timezonesCache
         ? setCurrentCountry(timezonesCache)
         : waitFetching(cacheConfig.timezones.key)
           .then(timezones => setCurrentCountry(timezones));
 
       function setCurrentCountry(timezones) {
-        const countries = Object.keys(sunny.list);
+        const countries = Object.keys(list);
         const country = getLocation(timezones).label;
         const index = countries.indexOf(country);
 
@@ -70,63 +84,32 @@ class App extends React.PureComponent {
 
       return null;
     }
+
+    if (currentCountry && list[currentCountry] && !currentGenre) {
+      const genre = Object.keys(list[currentCountry])[0];
+
+      setGenre({index: 0, label: genre})
+    }
     // Return null to indicate no change to state.
     return null;
   }
 
-  _handleCurrentCountry = () => {
-    const timezonesCache = localStorage.getItem(cacheConfig.timezones.key);
-    const {sunny, getStations, setCountry} = this.props;
-
-    const setCurrentCountry = timezones => {
-      const countries = Object.keys(sunny.list);
-      const country = getLocation(timezones).label;
-      const index = countries.indexOf(country);
-
-      setCountry({index, label: country});
-      getStations(country);
-    };
-
-
-    if (timezonesCache) {
-      setCurrentCountry(timezonesCache);
-    } else {
-      waitFetching(cacheConfig.timezones.key)
-        .then(timezones => {
-          setCurrentCountry(timezones);
-        });
-    }
-  };
-
   render() {
-    const {sunny,} = this.props;
-    const {genreIndex} = this.state;
+    const {sunny: {list, currentCountry, currentGenre}} = this.props;
+
+    if (!list && !currentCountry.label && !currentGenre.label) {
+      return <h1>Loading ...</h1>
+    }
+    if (!list[currentCountry.label]) {
+      return <h1>Loading ...</h1>
+    }
 
     return (
       <Wrap>
-        <RadioList
-          genreIndex={genreIndex}
-          handleChangeGenre={this.handleChangeGenre}
-
-        />
-
-        {genreIndex === 0 &&
-
+        <GenreList/>
         <StationList/>
-
-        }
-        {genreIndex === 1 && <Typography style={{minHeight: '305px'}}>Item Two</Typography>}
-        {genreIndex === 2 && <Typography>Item Three</Typography>}
-        {genreIndex === 3 && <Typography>Item Four</Typography>}
-        {genreIndex === 4 && <Typography>Item Five</Typography>}
-        {genreIndex === 5 && <Typography>Item Six</Typography>}
-        {genreIndex === 6 && <Typography>Item Seven</Typography>}
-
-        <CountriesList/>
+        <CountryList/>
         <WorldMap/>
-        {/*<Player/>*/}
-        {/*<SnackBarMessage/>*/}
-        {/*<AlertMessage/>*/}
       </Wrap>
     )
   }
@@ -142,6 +125,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getStations,
   setCountry,
   setGenre,
+  setStation,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

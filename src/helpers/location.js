@@ -6,9 +6,12 @@ const getTimezone = () =>
   || moment.tz.guess()
   || 'America/New_York';
 
-const getLocation = timezones =>
-  Base64Decode(timezones).timezones
+const getLocation = timezones => {
+  const currentTimezone = getTimezone();
+  
+  return  Base64Decode(timezones).timezones
     .find(({timezones}) => timezones
-      .find(timezone => timezone === getTimezone()));
+      .find(timezone => timezone === currentTimezone))
+};
 
 export default getLocation;

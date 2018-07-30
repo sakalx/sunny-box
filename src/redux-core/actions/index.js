@@ -1,4 +1,4 @@
-import {countryList, radioStationList} from '../types';
+import {countryList, radioStation} from '../types';
 
 import {
   getCountries,
@@ -14,7 +14,8 @@ const {
   GET_STATIONS_BY_COUNTRY,
   FETCH_STATIONS_BY_COUNTRY,
   SET_GENRE,
-} = radioStationList;
+  SET_STATION,
+} = radioStation;
 
 
 export const fetchCountriesList = () => ({
@@ -54,4 +55,9 @@ export const setCountry = country => ({
 export const setGenre = genre => ({
   type: SET_GENRE,
   payload: genre,
+});
+
+export const setStation = station => ({
+  type: SET_STATION,
+  payload: station,
 });
