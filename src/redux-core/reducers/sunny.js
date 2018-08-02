@@ -10,7 +10,6 @@ const {
 const {
   FETCH_COUNTRIES_LIST,
   GET_COUNTRIES_LIST,
-  SET_COUNTRY,
 } = countryList;
 const {
   FETCH_STATIONS_BY_COUNTRY,
@@ -24,13 +23,14 @@ const initState = {
   fetchingStations: false,
   errorCountryList: null,
   errorStations: null,
-  list: null,
+  countryList: [],
   currentCountry: {
+    genres: {},
     index: false,
     label: '',
   },
   currentGenre: {
-    index: false,
+    index: 0,
     label: '',
   },
   currentStation: {
@@ -57,24 +57,15 @@ export default function sunny(state = initState, {
     [`error${key}`]: error,
   });
 
-  const setList = list => ({
+  const setCountryList = countryList => ({
     ...state,
     fetchingCountryList: false,
-    list,
-  });
-
-  const setStations = stations => ({
-    ...state,
-    list: {
-      ...state.list,
-      ...stations,
-    },
+    countryList,
   });
 
   switch (type) {
-    // Create list of countries
     case GET_COUNTRIES_LIST:
-      return setList(payload);
+      return setCountryList(payload);
 
     case FETCH_COUNTRIES_LIST + PENDING:
       return onPending('CountryList', true);
@@ -83,17 +74,23 @@ export default function sunny(state = initState, {
       return onRejected('CountryList', payload);
 
     case FETCH_COUNTRIES_LIST + FULFILLED:
-      const {
-        key
-      } = cacheConfig.countryList;
+      const {key} = cacheConfig.countryList;
       localStorage.setItem(key, JSON.stringify(payload));
 
-      return setList(payload);
+      return setCountryList(payload);
 
 
-    // Add radio stations to list
     case GET_STATIONS_BY_COUNTRY:
-      return setStations(payload);
+      const currentGenre = Object.keys(payload.genres)[0];
+
+      return ({
+        ...state,
+        currentCountry: payload,
+        currentGenre: {
+          index: 0,
+          label: currentGenre,
+        },
+      });
 
     case FETCH_STATIONS_BY_COUNTRY + PENDING:
       return onPending('Stations', true);
@@ -103,34 +100,39 @@ export default function sunny(state = initState, {
 
     case FETCH_STATIONS_BY_COUNTRY + FULFILLED:
       if (payload) {
-        const keyCountry = Object.keys(payload)[0];
-        localStorage.setItem(keyCountry, JSON.stringify(payload));
+        const countryStations = Object.entries(payload)[0];
+        const index = state.countryList.indexOf(countryStations[0]);
+        const currentGenre = Object.keys(countryStations[1])[0];
 
-        return setStations(payload);
+        const currentCountry = {
+          genres: countryStations[1],
+          index,
+          label: countryStations[0],
+        };
+
+        localStorage.setItem(cacheConfig.currentCountry.key, JSON.stringify(currentCountry));
+
+        return ({
+          ...state,
+          fetchingStations: false,
+          currentCountry,
+          currentGenre: {
+            index: 0,
+            label: currentGenre,
+          },
+        })
       } else {
         return state
       }
 
-
-    case SET_COUNTRY:
-      return {
-        ...state,
-        currentCountry: payload,
-      };
     case SET_GENRE:
       return {
         ...state,
         currentGenre: payload,
-      }
+      };
     case SET_STATION:
-    const station = {
-      country: state.currentCountry,
-      genre: state.currentGenre,
-      station: payload,
-    };
+      localStorage.setItem(cacheConfig.lastStation.key, JSON.stringify(payload));
 
-    localStorage.setItem(cacheConfig.lastStation.key, JSON.stringify(station));
-    
       return {
         ...state,
         currentStation: payload,

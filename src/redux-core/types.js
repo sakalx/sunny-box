@@ -7,7 +7,6 @@ export const promise = {
 export const countryList = {
   FETCH_COUNTRIES_LIST: 'FETCH_LIST_OF_COUNTRIES',
   GET_COUNTRIES_LIST: 'GET_LIST_OF_COUNTRIES_CACHE',
-  SET_COUNTRY: 'SET_CURRENT_COUNTRY',
 };
 
 export const radioStation = {

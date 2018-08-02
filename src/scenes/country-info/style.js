@@ -6,6 +6,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 export const Wrap = styled(Paper)`
   flex: 1;
+  margin-top: 15px;
 `;
 
 export const RowTable = styled(TableRow)`

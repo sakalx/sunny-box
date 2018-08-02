@@ -8,10 +8,17 @@ const getTimezone = () =>
 
 const getLocation = timezones => {
   const currentTimezone = getTimezone();
-  
-  return  Base64Decode(timezones).timezones
+
+  const defaultCountry = {
+    "code": "US",    
+    "label": "United States of America",
+  };
+
+  const country = Base64Decode(timezones).data
     .find(({timezones}) => timezones
-      .find(timezone => timezone === currentTimezone))
+      .find(timezone => timezone === currentTimezone));
+
+      return country || defaultCountry;
 };
 
 export default getLocation;

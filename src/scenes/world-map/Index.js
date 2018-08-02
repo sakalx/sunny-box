@@ -1,18 +1,18 @@
 import React from 'react';
 
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-
 import cacheConfig from 'root/config/cache';
 import waitFetching from 'root/helpers/cache';
 import Base64Decode from 'root/helpers/decoder-base64';
 
-import countriesList from 'root/static/timezones';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {getCountryStations} from 'root/redux-core/actions';
 
 import {ZoomableGroup, Geographies, Geography} from 'react-simple-maps';
 import {Motion} from 'react-motion';
 
-import CountryInfo from './country-info';
+import CountryTabs from '../country-tabs';
+import CountryInfo from '../country-info';
 
 import {
   ComponentMap,
@@ -27,34 +27,26 @@ import {
   ZoomOutIcon,
 } from './style';
 
-let geographyMap = null;
-
 class WorldMap extends React.PureComponent {
   state = {
-    selectedCountry: {
-      label: '',
-      code: '',
-    },
     center: [0, 20],
-    zoom: 1,
+    disableOptimization: false,
+    geo: null,
+    selectedCountry: this.props.currentCountry.label,
     tooltip: '',
     tooltipPosition: [0, 0],
-    disableOptimization: false,
-    geoMapReady: false,
+    zoom: 1,
   };
 
-
   componentDidMount() {
-    const {key} = cacheConfig.geographyMap;
-    const geographyMapCache = localStorage.getItem(key);
+    const {geographyMap} = cacheConfig;
+    const geographyMapCache = localStorage.getItem(geographyMap.key);
 
     if (geographyMapCache) {
-      geographyMap = Base64Decode(geographyMapCache);
-      this.setState({geoMapReady: true})
+      this.setState({geo: Base64Decode(geographyMapCache)});
     } else {
-      waitFetching(key).then(value => {
-        geographyMap = Base64Decode(value);
-        this.setState({geoMapReady: true})
+      waitFetching(geographyMap.key).then(value => {
+        this.setState({geo: Base64Decode(value)})
       })
     }
   }
@@ -66,29 +58,27 @@ class WorldMap extends React.PureComponent {
     });
   };
 
-
   handleCountryClick = ({properties}) => {
-    const country = countriesList.find(({country_code}) =>
-      country_code === properties['Alpha-2']
-    );
+    const {countryList, getCountryStations} = this.props;
+    const index = countryList.indexOf(properties.name);
 
-    this.setState({
-        selectedCountry: {
-          label: country.label,
-          code: country.country_code,
-        },
-        center: [country.latlng[1], country.latlng[0]],
-        zoom: 2,
-        disableOptimization: true,
-        tooltip: '',
-      },
-      () => {
-        this.setState({disableOptimization: false})
-      }
-    );
+    if (index >= 0) {
+      getCountryStations(properties.name);
+
+      this._moving(properties);
+    }
   };
 
-  handleMove = ({properties}, event) => {
+  handleCountryTabClick = country => {
+    const {geometries} = this.state.geo.objects.countries1;
+
+    const properties = geometries.find(({properties}) =>
+      properties.name === country).properties;
+
+    this._moving(properties);
+  };
+
+  handleMoveTooltip = ({properties}, event) => {
     const x = event.clientX;
     const y = event.clientY + window.pageYOffset;
 
@@ -98,87 +88,110 @@ class WorldMap extends React.PureComponent {
     });
   };
 
+  _moving = properties =>
+    this.setState({
+        center: [properties.latlng[1], properties.latlng[0]],
+        disableOptimization: true,
+        selectedCountry: properties.name,
+        tooltip: '',
+        zoom: 2,
+      },
+      () => {
+        this.setState({disableOptimization: false})
+      }
+    );
+
   render() {
+    const {countryList, currentCountry} = this.props;
     const {
       center,
       disableOptimization,
-      geoMapReady,
+      geo,
       selectedCountry,
       tooltip,
       tooltipPosition,
       zoom,
     } = this.state;
 
-    if (!geoMapReady) {
+    if (!geo) {
       return <span>Loading ...</span>
     }
+
     return (
-      <Wrap>
-        <WrapMap>
-          <Head>
-            <CountryName variant="display1">
-              {selectedCountry.label}
-            </CountryName>
-            {zoom > 1 &&
-            <ZoomOutButton
-              aria-label="Zoom-out-map"
-              onClick={this.handleZoomOut}
-            >
-              <ZoomOutIcon/>
-            </ZoomOutButton>
-            }
-          </Head>
-
-          <Motion
-            defaultStyle={motionStyle.default}
-            style={motionStyle.motion(zoom, center)}
-          >
-            {({zoom, x, y}) => (
-              <ComponentMap
-                projectionConfig={{scale: 205}}
-                width={980}
-                height={551}
+      <React.Fragment>
+        <CountryTabs onTabClick={this.handleCountryTabClick}/>
+        <Wrap>
+          <WrapMap>
+            <Head>
+              <CountryName color="textSecondary" variant="headline">
+                {currentCountry.label}
+              </CountryName>
+              {zoom > 1 &&
+              <ZoomOutButton
+                aria-label="Zoom-out-map"
+                onClick={this.handleZoomOut}
               >
-                <ZoomableGroup center={[x, y]} zoom={zoom}>
-                  <Geographies
-                    disableOptimization={disableOptimization}
-                    geography={geographyMap}>
-                    {(geographies, projection) =>
-                      geographies.map((geography) => {
-                        const isSelected = selectedCountry.code === geography.properties['Alpha-2'];
+                <ZoomOutIcon/>
+              </ZoomOutButton>
+              }
+            </Head>
 
-                        return (
-                          <Geography
-                            key={geography.properties.name}
-                            geography={geography}
-                            projection={projection}
-                            onMouseMove={this.handleMove}
-                            onMouseLeave={() => this.setState({tooltip: ''})}
-                            style={geographyStyle(isSelected)}
-                            onClick={this.handleCountryClick}
-                          />
-                        )
-                      })
-                    }
-                  </Geographies>
-                </ZoomableGroup>
-              </ComponentMap>
-            )}
-          </Motion>
+            <Motion
+              defaultStyle={motionStyle.default}
+              style={motionStyle.motion(zoom, center)}
+            >
+              {({zoom, x, y}) => (
+                <ComponentMap
+                  projectionConfig={{scale: 205}}
+                  width={980}
+                  height={551}
+                >
+                  <ZoomableGroup center={[x, y]} zoom={zoom}>
+                    <Geographies
+                      disableOptimization={disableOptimization}
+                      geography={geo}>
+                      {(geographies, projection) =>
+                        geographies.map((geography) => {
+                          const isSelected = selectedCountry === geography.properties.name;
+                          const hasStations = countryList.includes(geography.properties.name);
 
-          <h5 style={tooltipStyle(tooltipPosition)}>
-            {tooltip}
-          </h5>
-        </WrapMap>
+                          return (
+                            <Geography
+                              key={geography.properties.name}
+                              geography={geography}
+                              projection={projection}
+                              onMouseMove={this.handleMoveTooltip}
+                              onMouseLeave={() => this.setState({tooltip: ''})}
+                              style={geographyStyle(isSelected, hasStations)}
+                              onClick={this.handleCountryClick}
+                            />
+                          )
+                        })
+                      }
+                    </Geographies>
+                  </ZoomableGroup>
+                </ComponentMap>
+              )}
+            </Motion>
 
-        <CountryInfo/>
-      </Wrap>
+            <h5 style={tooltipStyle(tooltipPosition)}>
+              {tooltip}
+            </h5>
+          </WrapMap>
+          <CountryInfo/>
+        </Wrap>
+      </React.Fragment>
     )
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({sunny: {countryList, currentCountry}}) => ({
+  countryList,
+  currentCountry,
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getCountryStations,
+}, dispatch);
 
-export default connect(null, null)(WorldMap);
+export default connect(mapStateToProps, mapDispatchToProps)(WorldMap);

@@ -1,3 +1,5 @@
+import cacheConfig from 'root/config/cache';
+
 import {countryList, radioStation} from '../types';
 
 import {
@@ -8,7 +10,6 @@ import {
 const {
   GET_COUNTRIES_LIST,
   FETCH_COUNTRIES_LIST,
-  SET_COUNTRY,
 } = countryList;
 const {
   GET_STATIONS_BY_COUNTRY,
@@ -28,29 +29,30 @@ export const getCountriesListCache = list => ({
   payload: JSON.parse(list),
 });
 
-export const getStations = country => {
-  const stationsCache = localStorage.getItem(country);
-
-  return dispatch => stationsCache
-    ? dispatch({
-      type: GET_STATIONS_BY_COUNTRY,
-      payload: JSON.parse(stationsCache),
-    })
-    : dispatch({
-      type: FETCH_STATIONS_BY_COUNTRY,
-      payload: getStationsByCountry(country)
-        .then(stations =>
-          stations
-            ? ({[country]: stations})
-            : null
-        ),
-    })
-};
-
-export const setCountry = country => ({
-  type: SET_COUNTRY,
-  payload: country,
+export const getLastCountryStations = lastCountry => ({
+  type: GET_STATIONS_BY_COUNTRY,
+  payload: lastCountry,
 });
+
+export const getCountryStations = country => {
+  const cache = localStorage.getItem(cacheConfig.currentCountry.key);
+
+  return dispatch =>
+    (!cache || JSON.parse(cache).label !== country)
+      ? dispatch({
+        type: FETCH_STATIONS_BY_COUNTRY,
+        payload: getStationsByCountry(country)
+          .then(stations =>
+            stations
+              ? ({[country]: stations})
+              : null
+          ),
+      })
+      : dispatch({
+        type: GET_STATIONS_BY_COUNTRY,
+        payload: JSON.parse(cache),
+      })
+};
 
 export const setGenre = genre => ({
   type: SET_GENRE,

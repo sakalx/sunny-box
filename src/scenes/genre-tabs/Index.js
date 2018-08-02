@@ -5,7 +5,7 @@ import waitFetching from 'root/helpers/cache';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {setGenre} from 'root/redux-core/actions'
+import {setGenre} from 'root/redux-core/actions';
 
 import AppBar from '@material-ui/core/AppBar';
 import Fade from '@material-ui/core/Fade';
@@ -22,15 +22,13 @@ import {
 
 let alphabet = null;
 
-
-class GenreList extends React.PureComponent {
+class GenreTabs extends React.PureComponent {
   getSuggestionList = () => {
-    const {list, currentCountry} = this.props;
-    const genreList = Object.entries(list[currentCountry.label]);
+    const genreList = Object.entries(this.props.currentCountry.genres);
 
     return genreList.reduce((acc, next) => {
       const suggestion = next[1].map(({title}) =>
-        ({label: `${title} \uD83C\uDF99${next[0].toUpperCase()}`})
+        ({label: `${title} -${next[0].toUpperCase()}`})
       );
 
       return [...acc, ...suggestion]
@@ -60,12 +58,10 @@ class GenreList extends React.PureComponent {
   }
 
   handleChangeGenre = (event, index) => {
-    const {list, currentCountry, currentGenre, setGenre} = this.props;
+    const {currentCountry, currentGenre, setGenre} = this.props;
 
     if (currentGenre.index !== index) {
-      const country = currentCountry.label;
-      const label = Object.keys(list[country])[index];
-
+      const label = Object.keys(currentCountry.genres)[index];
       setGenre({index, label})
     }
   };
@@ -75,9 +71,8 @@ class GenreList extends React.PureComponent {
   };
 
   render() {
-    const {list, currentCountry, currentGenre} = this.props;
+    const {currentCountry, currentGenre} = this.props;
     const {alphabetReady, isSearch, searchRadio, suggestions} = this.state;
-    const genreList = Object.keys(list[currentCountry.label]);
 
     if (!alphabetReady) {
       return <span>Loading ...</span>
@@ -99,7 +94,7 @@ class GenreList extends React.PureComponent {
               textColor="primary"
               value={currentGenre.index}
             >
-              {genreList.map(genre => (
+              {Object.keys(currentCountry.genres).map(genre => (
                 <Tab
                   key={genre}
                   label={genre}
@@ -134,8 +129,8 @@ class GenreList extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({sunny: {list, currentCountry, currentGenre}}) => ({
-  list,
+const mapStateToProps = ({sunny: {countryList, currentCountry, currentGenre}}) => ({
+  countryList,
   currentCountry,
   currentGenre,
 });
@@ -144,4 +139,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   setGenre,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(GenreList);
+export default connect(mapStateToProps, mapDispatchToProps)(GenreTabs);

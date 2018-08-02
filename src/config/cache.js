@@ -16,6 +16,9 @@ const cacheConfig = {
   "countryList": {
     "key": "country-list",
   },
+  "currentCountry": {
+    "key": "current-country",
+  },
   "timezones": {
     "key": "timezones",
     "src": "static/json/timezones.json",

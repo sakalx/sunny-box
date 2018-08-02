@@ -11,9 +11,10 @@ firestore.settings({timestampsInSnapshots: true});
 
 export const getCountries = () => firestore.collection('stations').get()
   .then(querySnapshot => {
-      const list = {};
+      const list = [];
 
-      querySnapshot.forEach(doc => list[doc.id] = null);
+      querySnapshot.forEach(doc => list.push(doc.id));
+
       return list;
     }
   );

@@ -62,27 +62,47 @@ export const motionStyle = {
   }
 };
 
-export const geographyStyle = isSelected => ({
-  default: {
-    fill: isSelected ? palette.primary.light : palette.grey['100'],
-    stroke: palette.grey['700'],
-    strokeWidth: .75,
-    outline: 'none',
-  },
-  hover: {
-    fill: isSelected ? palette.primary.light : palette.grey['A100'],
-    stroke: palette.grey['700'],
-    strokeWidth: .75,
-    outline: 'none',
-    cursor: 'pointer',
-  },
-  pressed: {
-    fill: palette.primary.main,
-    stroke: palette.grey['700'],
-    strokeWidth: .75,
-    outline: 'none',
-  },
-});
+export const geographyStyle = (isSelected, hasStations) => {
+
+  const defaultFill = () => {
+    if (hasStations) {
+      return isSelected ? palette.primary.light : palette.grey['300']
+    } else {
+      return palette.grey['50']
+    }
+  };
+  const hoverFill = () => {
+    if (hasStations) {
+      return isSelected ? palette.primary.light : palette.grey['400']
+    } else {
+      return palette.grey['50']
+    }
+  };
+  const strokeColor = hasStations ? palette.grey['700'] : palette.grey['400'];
+
+  return ({
+    default: {
+      fill: defaultFill(),
+
+      stroke: strokeColor,
+      strokeWidth: .75,
+      outline: 'none',
+    },
+    hover: {
+      fill: hoverFill(),
+      stroke: strokeColor,
+      strokeWidth: .75,
+      outline: 'none',
+      cursor: 'pointer',
+    },
+    pressed: {
+      fill: hasStations ? palette.primary.main : palette.grey['50'],
+      stroke: strokeColor,
+      strokeWidth: .75,
+      outline: 'none',
+    },
+  })
+};
 
 export const tooltipStyle = position => ({
   color: palette.grey['A700'],

@@ -11,22 +11,19 @@ import {connect} from 'react-redux';
 import {
   fetchCountriesList,
   getCountriesListCache,
-  getStations,
-  setCountry,
+  getCountryStations,
+  getLastCountryStations,
   setGenre,
   setStation,
 } from 'root/redux-core/actions';
 
 //import Player from './scenes/player';
 import WorldMap from './scenes/world-map';
-import CountryList from './scenes/country-list';
-import GenreList from './scenes/genre-list';
-import StationList from './scenes/station-list';
-
+import GenreTabs from './scenes/genre-tabs';
+import StationTabs from './scenes/station-tabs';
 
 const Wrap = styled('section')`
   overflow: hidden;
-  //overflow-x: auto;
 `;
 
 class App extends React.PureComponent {
@@ -36,79 +33,64 @@ class App extends React.PureComponent {
     const {
       fetchCountriesList,
       getCountriesListCache,
-      getStations,
-      setCountry,
+      getLastCountryStations,
       setGenre,
       setStation,
     } = this.props;
 
-    const countriesCache = localStorage.getItem(cacheConfig.countryList.key);
+    const countriesListCache = localStorage.getItem(cacheConfig.countryList.key);
     const stationCache = localStorage.getItem(cacheConfig.lastStation.key);
 
-    countriesCache
-      ? getCountriesListCache(countriesCache)
+    countriesListCache
+      ? getCountriesListCache(countriesListCache)
       : fetchCountriesList();
 
     if (stationCache) {
-      const {country, genre, station} = JSON.parse(stationCache);
+      const station = JSON.parse(stationCache);
 
-      setCountry(country);
-      setGenre(genre);
-      getStations(country.label);
+      getLastCountryStations(station.country);
+      setGenre(station.genre);
       setStation(station);
     }
   }
 
   static getDerivedStateFromProps(props) {
-    const {sunny, getStations, setCountry, setGenre} = props;
-    const currentCountry = sunny.currentCountry.label;
-    const currentGenre = sunny.currentGenre.label;
-    const list = sunny.list;
+    const {
+      sunny: {
+        countryList, currentCountry, fetchingStations
+      }, getCountryStations,
+    } = props;
 
-    if (list && !currentCountry) {
+    if (countryList.length && !currentCountry.label && !fetchingStations) {
       const timezonesCache = localStorage.getItem(cacheConfig.timezones.key);
 
-      timezonesCache
-        ? setCurrentCountry(timezonesCache)
-        : waitFetching(cacheConfig.timezones.key)
-          .then(timezones => setCurrentCountry(timezones));
-
-      function setCurrentCountry(timezones) {
-        const countries = Object.keys(list);
+      const setCountryStations = timezones => {
         const country = getLocation(timezones).label;
-        const index = countries.indexOf(country);
 
-        setCountry({index, label: country});
-        getStations(country);
-      }
+        getCountryStations(country);
 
-      return null;
+      };
+
+      timezonesCache
+        ? setCountryStations(timezonesCache)
+        : waitFetching(cacheConfig.timezones.key)
+          .then(timezones => setCountryStations(timezones));
     }
 
-    if (currentCountry && list[currentCountry] && !currentGenre) {
-      const genre = Object.keys(list[currentCountry])[0];
-
-      setGenre({index: 0, label: genre})
-    }
-    // Return null to indicate no change to state.
     return null;
   }
 
   render() {
-    const {sunny: {list, currentCountry, currentGenre}} = this.props;
+    const {sunny: {currentCountry},} = this.props;
 
-    if (!list && !currentCountry.label && !currentGenre.label) {
-      return <h1>Loading ...</h1>
-    }
-    if (!list[currentCountry.label]) {
+    if (!currentCountry.label && !currentCountry.genres.length) {
       return <h1>Loading ...</h1>
     }
 
     return (
       <Wrap>
-        <GenreList/>
-        <StationList/>
-        <CountryList/>
+        <GenreTabs/>
+        <StationTabs/>
         <WorldMap/>
       </Wrap>
     )
@@ -122,8 +104,8 @@ const mapStateToProps = ({sunny}) => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   fetchCountriesList,
   getCountriesListCache,
-  getStations,
-  setCountry,
+  getCountryStations,
+  getLastCountryStations,
   setGenre,
   setStation,
 }, dispatch);

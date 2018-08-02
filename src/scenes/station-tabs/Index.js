@@ -12,14 +12,21 @@ import {
   WrapTabs,
 } from './style';
 
-class StationList extends React.PureComponent {
+class StationTabs extends React.PureComponent {
 
   handleChangeStation = (event, uid) => {
-    const {currentStation, setStation} = this.props;
-    console.log(uid);
+    const {
+      currentCountry, currentGenre, currentStation, setStation,
+    } = this.props;
+
+    const selectedStation = currentCountry.genres[currentGenre.label]
+      .find(station => station.uid === uid);
+
     const station = {
-      ...currentStation,
+      ...selectedStation,
       uid: currentStation.uid !== uid ? uid : false,
+      country: currentCountry,
+      genre: currentGenre,
     };
 
     setStation(station)
@@ -27,18 +34,19 @@ class StationList extends React.PureComponent {
 
 
   render() {
-    const {list, currentCountry, currentGenre, currentStation} = this.props;
-    const stationList = list[currentCountry.label][currentGenre.label];
+    const {currentCountry, currentGenre, currentStation} = this.props;
+    const stationList = currentCountry.genres[currentGenre.label];
+
     const selectedStation = stationList.find(station => station.uid === currentStation.uid);
 
-
+// add transition fade
     return (
       <WrapTabs
         indicatorColor="primary"
         onChange={this.handleChangeStation}
         scrollable
         textColor="primary"
-        value={selectedStation ? selectedStation.uid : false }
+        value={selectedStation ? selectedStation.uid : false}
       >
         {stationList.map(station => (
           <Tab
@@ -54,8 +62,8 @@ class StationList extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({sunny: {list, currentCountry, currentGenre, currentStation}}) => ({
-  list,
+const mapStateToProps = ({sunny: {countryList, currentCountry, currentGenre, currentStation}}) => ({
+  countryList,
   currentCountry,
   currentGenre,
   currentStation,
@@ -65,4 +73,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   setStation,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(StationList);
+export default connect(mapStateToProps, mapDispatchToProps)(StationTabs);
