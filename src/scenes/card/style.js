@@ -4,8 +4,8 @@ import muiTheme from 'root/theme';
 import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
-import PauseIcn from '@material-ui/icons/PauseCircleFilled';
-import PlayIcn from '@material-ui/icons/PlayCircleOutline';
+import StopIc from '@material-ui/icons/Stop';
+import PlayIc from '@material-ui/icons/PlayCircleOutline';
 import Typography from '@material-ui/core/Typography';
 
 const _playPauseIcon = styled('div')`
@@ -52,9 +52,9 @@ export const Title = styled(Typography)`
   `};
 `;
 
-export const PlayIcon = _playPauseIcon.withComponent(PlayIcn);
+export const PlayIcon = _playPauseIcon.withComponent(PlayIc);
 
-export const PauseIcon = _playPauseIcon.withComponent(PauseIcn);
+export const StopIcon = _playPauseIcon.withComponent(StopIc);
 
 export const Spinner = styled(CircularProgress)`
   bottom: 0;

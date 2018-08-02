@@ -17,10 +17,10 @@ import {
   setStation,
 } from 'root/redux-core/actions';
 
-//import Player from './scenes/player';
-import WorldMap from './scenes/world-map';
 import GenreTabs from './scenes/genre-tabs';
+import Player from './scenes/player';
 import StationTabs from './scenes/station-tabs';
+import WorldMap from './scenes/world-map';
 
 const Wrap = styled('section')`
   overflow: hidden;
@@ -68,7 +68,6 @@ class App extends React.PureComponent {
         const country = getLocation(timezones).label;
 
         getCountryStations(country);
-
       };
 
       timezonesCache
@@ -91,6 +90,7 @@ class App extends React.PureComponent {
       <Wrap>
         <GenreTabs/>
         <StationTabs/>
+        <Player/>
         <WorldMap/>
       </Wrap>
     )

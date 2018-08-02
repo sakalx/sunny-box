@@ -1,39 +1,45 @@
 import styled from 'styled-components';
 
+import Avatar from '@material-ui/core/Avatar';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Paper from '@material-ui/core/Paper';
-import PauseIcn from '@material-ui/icons/PauseCircleFilled';
-import PlayIcn from '@material-ui/icons/PlayCircleOutline';
-import Typography from '@material-ui/core/Typography';
+import PauseIc from '@material-ui/icons/PauseCircleFilled';
+import PlayIc from '@material-ui/icons/PlayCircleOutline';
+import SvgIcon from '@material-ui/core/SvgIcon';
 
-export const Wrap = styled('div')`
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  width: 100%;
-`;
-
-export const Content = styled(Paper)`
-  margin: 15px 15px 0;
-  width: 100%;
-`;
-
-export const Main = styled('div')`
+export const Content = styled('div')`
   align-items: center;
   display: flex;
-  padding: 5px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
 `;
 
-export const Controller = styled('section')`
+export const Logo = styled(Avatar)`
+  width: 60px !important;
+  height: 60px !important;
+`;
+
+export const Info = styled('div')`
   align-items: center;
   display: flex;
-  flex: 1;
+  flex: 1 1 250px;
   justify-content: space-evenly;
 `;
 
-export const Title = styled(Typography)`
-  margin: auto 5px !important;
+export const Title = styled('section')`
+  margin: auto 15px;
+`;
+
+export const ChartIcon = styled(SvgIcon)`
+  height: 50px !important;
+  width: 50px !important;
+`;
+
+export const Controller = styled('div')`
+  align-items: center;
+  display: flex;
+  flex: 1 1 250px;
+  justify-content: space-evenly;
 `;
 
 const playPauseIcon = `
@@ -41,14 +47,14 @@ const playPauseIcon = `
   width: 50px !important;
 `;
 
-export const PlayIcon = styled(PlayIcn)`
+export const PlayIcon = styled(PlayIc)`
   ${playPauseIcon};
 `;
 
-export const PauseIcon = styled(PauseIcn)`
+export const PauseIcon = styled(PauseIc)`
   ${playPauseIcon};
 `;
 
 export const ProgressBar = styled(LinearProgress)`
-  height: 7px !important;
+  height: 5px !important;
 `;

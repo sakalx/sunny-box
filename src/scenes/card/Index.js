@@ -3,7 +3,7 @@ import React from 'react';
 import {
   City,
   Cover,
-  PauseIcon,
+  StopIcon,
   PlayIcon,
   Spinner,
   Title,
@@ -23,7 +23,7 @@ const StationCard = ({playing}) => {
       <Title variant="title" playing={String(playing)}>Gop Fm</Title>
       {playing ?
         <React.Fragment>
-          <PauseIcon color="secondary"/>
+          <StopIcon color="secondary"/>
           <Spinner color="secondary" thickness={1} size={45}/>
         </React.Fragment> :
         <PlayIcon color="primary"/>

@@ -35,7 +35,7 @@ const initState = {
   },
   currentStation: {
     uid: false,
-    label: '',
+    title: '',
     src: [],
     logo: null,
   },
@@ -133,9 +133,17 @@ export default function sunny(state = initState, {
     case SET_STATION:
       localStorage.setItem(cacheConfig.lastStation.key, JSON.stringify(payload));
 
+      const currentStation = {
+        ...payload,
+        country: {
+          index: payload.country.index,
+          label: payload.country.label,
+        }
+      };
+
       return {
         ...state,
-        currentStation: payload,
+        currentStation,
       }
   }
 

@@ -47,7 +47,8 @@ class CountryTabs extends React.PureComponent {
 
     if (index >= 0) {
       getCountryStations(countryList[index]);
-      onTabClick(countryList[index])
+      onTabClick(countryList[index]);
+      this.setState({isSearch: false});
     }
 
     this.setState({searchCountry: {value}});
@@ -59,10 +60,7 @@ class CountryTabs extends React.PureComponent {
 
     return (
       <Wrap>
-        <Slide
-          direction="left"
-          in={!isSearch}
-        >
+        <Slide direction="left" in={!isSearch}>
           <TabBar color="default" position="absolute">
             <Tabs
               indicatorColor="primary"

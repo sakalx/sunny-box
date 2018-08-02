@@ -6,19 +6,28 @@ import {setStation} from 'root/redux-core/actions';
 
 import StationCard from 'root/scenes/card';
 
+import Fade from '@material-ui/core/Fade';
 import Tab from '@material-ui/core/Tab';
 
 import {
   WrapTabs,
 } from './style';
 
-class StationTabs extends React.PureComponent {
+const StationTabs = ({
+                       countryList,
+                       currentCountry,
+                       currentGenre,
+                       currentStation,
+                       setStation,
+                     }) => {
 
-  handleChangeStation = (event, uid) => {
-    const {
-      currentCountry, currentGenre, currentStation, setStation,
-    } = this.props;
+  const stationList = currentCountry.genres[currentGenre.label];
 
+  const selectedStation = stationList
+    .find(station => station.uid === currentStation.uid);
+
+
+  const handleChangeStation = (event, uid) => {
     const selectedStation = currentCountry.genres[currentGenre.label]
       .find(station => station.uid === uid);
 
@@ -32,35 +41,30 @@ class StationTabs extends React.PureComponent {
     setStation(station)
   };
 
-
-  render() {
-    const {currentCountry, currentGenre, currentStation} = this.props;
-    const stationList = currentCountry.genres[currentGenre.label];
-
-    const selectedStation = stationList.find(station => station.uid === currentStation.uid);
-
-// add transition fade
-    return (
-      <WrapTabs
-        indicatorColor="primary"
-        onChange={this.handleChangeStation}
-        scrollable
-        textColor="primary"
-        value={selectedStation ? selectedStation.uid : false}
-      >
-        {stationList.map(station => (
+  return (
+    <WrapTabs
+      indicatorColor="primary"
+      onChange={handleChangeStation}
+      scrollable
+      textColor="primary"
+      value={selectedStation ? selectedStation.uid : false}
+    >
+      {stationList.map((station, i) => (
+        <Fade
+          key={station.uid}
+          mountOnEnter unmountOnExit
+          timeout={1200 + (i * 200)} in={true}
+          value={station.uid}
+        >
           <Tab
             icon={<StationCard playing={currentStation.uid === station.uid}/>}
-            key={station.uid}
             label="Brooklyn"
-            value={station.uid}
           />
-        ))}
-      </WrapTabs>
-
-    );
-  }
-}
+        </Fade>
+      ))}
+    </WrapTabs>
+  );
+};
 
 const mapStateToProps = ({sunny: {countryList, currentCountry, currentGenre, currentStation}}) => ({
   countryList,

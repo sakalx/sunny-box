@@ -66,31 +66,28 @@ class GenreTabs extends React.PureComponent {
   };
 
   handleSearchRadio = (event, {newValue}) => {
-    const {
-      currentCountry: {genres}, currentCountry, setGenre, setStation,
-    } = this.props;
+    const {currentCountry, setGenre, setStation} = this.props;
+    const value = newValue.split('--');
 
-    const value = newValue.split('--')[0].trim();
-    let index = -1;
+    if (value[1]) {
+      const search = value[0].trim();
+      const genre = value[1].trim().toLocaleLowerCase();
+      const index = Object.keys(currentCountry.genres).indexOf(genre);
 
-    for (let genre in genres) {
-      const foundStation = genres[genre].find(({title}) => title === value);
-      index++;
+      const foundStation = currentCountry.genres[genre]
+        .find(({title}) => title === search);
 
-      if(foundStation) {
-        const station = {
-          ...foundStation,
-          country: currentCountry,
-          genre: {index, label: genre},
-        };
+      const station = {
+        ...foundStation,
+        country: currentCountry,
+        genre: {index, label: genre},
+      };
 
-        setGenre({index, label: genre});
-        setStation(station);
-        break;
-      }
+      setGenre({index, label: genre});
+      setStation(station);
+      this.setState({isSearch: false});
     }
-
-    this.setState({searchRadio: {value}});
+    this.setState({searchRadio: {value: value[0]}});
   };
 
   render() {
@@ -103,12 +100,7 @@ class GenreTabs extends React.PureComponent {
 
     return (
       <Wrap>
-        <Slide
-          in={!isSearch}
-          mountOnEnter
-          timeout={{enter: 800, exit: 500}}
-          unmountOnExit
-        >
+        <Slide in={!isSearch}>
           <AppBar color="default" position="absolute">
             <Tabs
               indicatorColor="primary"

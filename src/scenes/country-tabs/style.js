@@ -11,11 +11,12 @@ export const Wrap = styled('section')`
 `;
 
 export const TabBar = styled(AppBar)`
-  top: 15px !important;
+  top: 16px !important;
 `;
 
 export const SearchCountry = styled(Autocomplete)`
   width: 100%;
+  
 `;
 
 export const SearchBtn = styled(SearchButton)`
