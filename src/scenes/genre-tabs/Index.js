@@ -5,7 +5,7 @@ import waitFetching from 'root/helpers/cache';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {setGenre} from 'root/redux-core/actions';
+import {setGenre, setStation} from 'root/redux-core/actions';
 
 import AppBar from '@material-ui/core/AppBar';
 import Fade from '@material-ui/core/Fade';
@@ -23,23 +23,10 @@ import {
 let alphabet = null;
 
 class GenreTabs extends React.PureComponent {
-  getSuggestionList = () => {
-    const genreList = Object.entries(this.props.currentCountry.genres);
-
-    return genreList.reduce((acc, next) => {
-      const suggestion = next[1].map(({title}) =>
-        ({label: `${title} -${next[0].toUpperCase()}`})
-      );
-
-      return [...acc, ...suggestion]
-    }, []);
-  };
-
   state = {
     alphabetReady: false,
     isSearch: false,
     searchRadio: {value: ''},
-    suggestions: this.getSuggestionList(),
   };
 
   componentDidMount() {
@@ -57,6 +44,18 @@ class GenreTabs extends React.PureComponent {
     }
   }
 
+  getSuggestionList = () => {
+    const genreList = Object.entries(this.props.currentCountry.genres);
+
+    return genreList.reduce((acc, next) => {
+      const suggestion = next[1].map(({title}) =>
+        ({label: `${title} --${next[0].toUpperCase()}`})
+      );
+
+      return [...acc, ...suggestion]
+    }, []);
+  };
+
   handleChangeGenre = (event, index) => {
     const {currentCountry, currentGenre, setGenre} = this.props;
 
@@ -67,12 +66,36 @@ class GenreTabs extends React.PureComponent {
   };
 
   handleSearchRadio = (event, {newValue}) => {
-    this.setState({searchRadio: {value: newValue.trimStart()}});
+    const {
+      currentCountry: {genres}, currentCountry, setGenre, setStation,
+    } = this.props;
+
+    const value = newValue.split('--')[0].trim();
+    let index = -1;
+
+    for (let genre in genres) {
+      const foundStation = genres[genre].find(({title}) => title === value);
+      index++;
+
+      if(foundStation) {
+        const station = {
+          ...foundStation,
+          country: currentCountry,
+          genre: {index, label: genre},
+        };
+
+        setGenre({index, label: genre});
+        setStation(station);
+        break;
+      }
+    }
+
+    this.setState({searchRadio: {value}});
   };
 
   render() {
     const {currentCountry, currentGenre} = this.props;
-    const {alphabetReady, isSearch, searchRadio, suggestions} = this.state;
+    const {alphabetReady, isSearch, searchRadio} = this.state;
 
     if (!alphabetReady) {
       return <span>Loading ...</span>
@@ -113,7 +136,7 @@ class GenreTabs extends React.PureComponent {
           <SearchRadio
             label="searchRadio"
             onChange={this.handleSearchRadio}
-            suggestions={suggestions}
+            suggestions={this.getSuggestionList()}
             value={searchRadio.value}
           />
         </Fade>
@@ -129,14 +152,14 @@ class GenreTabs extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({sunny: {countryList, currentCountry, currentGenre}}) => ({
-  countryList,
+const mapStateToProps = ({sunny: {currentCountry, currentGenre}}) => ({
   currentCountry,
   currentGenre,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   setGenre,
+  setStation,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenreTabs);
