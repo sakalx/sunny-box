@@ -64,32 +64,21 @@ export const motionStyle = {
 
 export const geographyStyle = (isSelected, hasStations) => {
 
-  const defaultFill = () => {
-    if (hasStations) {
-      return isSelected ? palette.primary.light : palette.grey['300']
-    } else {
-      return palette.grey['50']
-    }
-  };
-  const hoverFill = () => {
-    if (hasStations) {
-      return isSelected ? palette.primary.light : palette.grey['400']
-    } else {
-      return palette.grey['50']
-    }
-  };
   const strokeColor = hasStations ? palette.grey['700'] : palette.grey['400'];
 
   return ({
     default: {
-      fill: defaultFill(),
-
+      fill: hasStations
+        ? (isSelected ? palette.primary.light : palette.grey['300'])
+        : palette.grey['50'],
       stroke: strokeColor,
       strokeWidth: .75,
       outline: 'none',
     },
     hover: {
-      fill: hoverFill(),
+      fill: hasStations
+        ? (isSelected ? palette.primary.light : palette.grey['400'])
+        : palette.grey['50'],
       stroke: strokeColor,
       strokeWidth: .75,
       outline: 'none',

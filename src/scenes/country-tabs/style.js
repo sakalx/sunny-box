@@ -16,7 +16,6 @@ export const TabBar = styled(AppBar)`
 
 export const SearchCountry = styled(Autocomplete)`
   width: 100%;
-  
 `;
 
 export const SearchBtn = styled(SearchButton)`

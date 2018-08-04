@@ -1,13 +1,17 @@
 import styled from 'styled-components';
+import muiTheme from 'root/theme';
 
 import Avatar from '@material-ui/core/Avatar';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import IconButton from '@material-ui/core/IconButton';
 import PauseIc from '@material-ui/icons/PauseCircleFilled';
 import PlayIc from '@material-ui/icons/PlayCircleOutline';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
-export const Content = styled('div')`
+const {palette} = muiTheme;
+
+export const Wrap = styled('div')`
   align-items: center;
+  box-shadow: inset 0 35px 35px -25px ${palette.primary.light};
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -22,39 +26,37 @@ export const Logo = styled(Avatar)`
 export const Info = styled('div')`
   align-items: center;
   display: flex;
-  flex: 1 1 250px;
+  flex-wrap: wrap;
+  flex: 2 1 280px;
   justify-content: space-evenly;
 `;
 
 export const Title = styled('section')`
-  margin: auto 15px;
+  margin: 15px;
 `;
 
 export const ChartIcon = styled(SvgIcon)`
-  height: 50px !important;
-  width: 50px !important;
+  color: ${palette.text.primary};
+  font-size: 37px !important;
 `;
 
 export const Controller = styled('div')`
   align-items: center;
   display: flex;
-  flex: 1 1 250px;
+  flex: 1 1 auto;
   justify-content: space-evenly;
+  position: relative;
 `;
 
-const playPauseIcon = `
+const _icon = styled('div')`
   height: 50px !important;
   width: 50px !important;
 `;
 
-export const PlayIcon = styled(PlayIc)`
-  ${playPauseIcon};
-`;
+export const PlayIcon = _icon.withComponent(PlayIc);
+export const PauseIcon = _icon.withComponent(PauseIc);
 
-export const PauseIcon = styled(PauseIc)`
-  ${playPauseIcon};
-`;
-
-export const ProgressBar = styled(LinearProgress)`
-  height: 5px !important;
+export const PauseButton = styled(IconButton)`
+  top: 1px;
+  position: absolute !important;
 `;

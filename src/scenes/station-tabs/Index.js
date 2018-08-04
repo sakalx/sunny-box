@@ -38,7 +38,7 @@ const StationTabs = ({
       genre: currentGenre,
     };
 
-    setStation(station)
+    setStation(station);
   };
 
   return (
@@ -57,8 +57,8 @@ const StationTabs = ({
           value={station.uid}
         >
           <Tab
-            icon={<StationCard playing={currentStation.uid === station.uid}/>}
-            label="Brooklyn"
+            icon={<StationCard playing={station.uid === currentStation.uid}/>}
+            label={station.title}
           />
         </Fade>
       ))}

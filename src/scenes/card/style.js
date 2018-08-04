@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import muiTheme from 'root/theme';
 
 import CardMedia from '@material-ui/core/CardMedia';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Paper from '@material-ui/core/Paper';
-import StopIc from '@material-ui/icons/Stop';
 import PlayIc from '@material-ui/icons/PlayCircleOutline';
 import Typography from '@material-ui/core/Typography';
 
@@ -17,10 +15,12 @@ export const Wrap = styled(Paper)`
   align-items: center;
   display: flex;
   flex-direction: column;
+  height: 255px;
+  justify-content: space-between;
   margin: 15px;
-  min-width: 150px;
   position: relative;
   transition: all 0.3s linear;
+  width: 160px;
   &:hover {
     ${props => `
       box-shadow: 5px 5px 20px ${props.playing === 'true' 
@@ -45,18 +45,12 @@ export const City = styled(Typography)`
   top: 10px;
 `;
 
+/*
 export const Title = styled(Typography)`
   padding: 5px;
   ${({active}) => active === 'true' && `
     color: ${muiTheme.palette.primary.dark} !important;  
   `};
 `;
-
+*/
 export const PlayIcon = _playPauseIcon.withComponent(PlayIc);
-
-export const StopIcon = _playPauseIcon.withComponent(StopIc);
-
-export const Spinner = styled(CircularProgress)`
-  bottom: 0;
-  position: absolute;
-`;

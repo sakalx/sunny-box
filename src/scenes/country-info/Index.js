@@ -18,6 +18,14 @@ const CountryInfo = ({currentCountry, setGenre}) => {
 
   const genreList = Object.entries(currentCountry.genres);
 
+  const handleClickGenre = genre => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    setGenre(genre);
+  };
+
   return (
     <Wrap>
       <Table>
@@ -34,7 +42,7 @@ const CountryInfo = ({currentCountry, setGenre}) => {
               <RowTable
                 key={genre[0]}
                 hover
-                onClick={() => setGenre({index, label: genre[0]})}
+                onClick={() => handleClickGenre({index, label: genre[0]})}
               >
                 <TableCell component="th" scope="row">
                   {genre[0]}
