@@ -18,6 +18,7 @@ const StationTabs = ({
                        currentCountry,
                        currentGenre,
                        currentStation,
+                       howler,
                        setStation,
                      }) => {
 
@@ -28,17 +29,21 @@ const StationTabs = ({
 
 
   const handleChangeStation = (event, uid) => {
+    const play = currentStation.uid !== uid;
+
     const selectedStation = currentCountry.genres[currentGenre.label]
       .find(station => station.uid === uid);
 
     const station = {
       ...selectedStation,
-      uid: currentStation.uid !== uid ? uid : false,
+      uid: play ? uid : false,
       country: currentCountry,
       genre: currentGenre,
     };
 
-    setStation(station);
+
+    setStation({...station, uid: false});
+    setTimeout(setStation, 0, station)
   };
 
   return (

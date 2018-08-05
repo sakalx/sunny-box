@@ -11,7 +11,8 @@ const {palette} = muiTheme;
 
 export const Wrap = styled('div')`
   align-items: center;
-  box-shadow: inset 0 35px 35px -25px ${palette.primary.light};
+  border-bottom: 1px solid ${palette.action.disabledBackground};
+  box-shadow: inset 0 35px 35px -25px ${palette.action.disabledBackground};
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -48,13 +49,10 @@ export const Controller = styled('div')`
   position: relative;
 `;
 
-const _icon = styled('div')`
+export const PauseIcon = styled(PauseIc)`
   height: 50px !important;
   width: 50px !important;
 `;
-
-export const PlayIcon = _icon.withComponent(PlayIc);
-export const PauseIcon = _icon.withComponent(PauseIc);
 
 export const PauseButton = styled(IconButton)`
   top: 1px;

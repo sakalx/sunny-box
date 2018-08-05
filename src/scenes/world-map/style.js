@@ -22,15 +22,17 @@ export const WrapMap = styled('div')`
   flex: 1 1 750px;
 `;
 
+export const WraMapTitle = styled('div')`
+  position: absolute;
+  top: 0;
+`;
+
 export const Head = _flex.extend`
   justify-content: center;
   position: relative;
 `;
 
-export const CountryName = styled(Typography)`
-  position: absolute;
-  top: 0;
-`;
+export const CountryName = WraMapTitle.withComponent(Typography);
 
 export const ComponentMap = styled(ComposableMap)`
   height: auto;

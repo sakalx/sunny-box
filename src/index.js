@@ -21,7 +21,6 @@ fetchCacheHost(cacheConfig.geographyMap);
 fetchCacheHost(cacheConfig.timezones);
 fetchCacheFireStore(getSvgAlphabet, cacheConfig.alphabet.key);
 
-
 ReactDOM.render(
   <React.Fragment>
     <CssBaseline/>

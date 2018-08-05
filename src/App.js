@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import muiTheme from 'root/theme';
 
 import cacheConfig from 'root/config/cache';
 import waitFetching from 'root/helpers/cache';
-
 import getLocation from 'root/helpers/location';
 
 import {bindActionCreators} from 'redux';
@@ -24,19 +22,11 @@ import Player from './scenes/player';
 import StationTabs from './scenes/station-tabs';
 import WorldMap from './scenes/world-map';
 
-
-// TODO svg pulse loader full screen when featching or upload localstotage
-const {palette} = muiTheme;
-
 const Wrap = styled('section')`
   overflow: hidden;
 `;
-console.log(palette);
-const Splash = styled('div')`
-  height: 200%;
-  position: absolute;
-  width: 100%;
-  z-index: 3000;
+const Sound = styled('audio')`
+  display: none;
 `;
 
 class App extends React.PureComponent {
@@ -93,23 +83,26 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {sunny: {currentCountry, fetchingStations},} = this.props;
+    const {sunny: {currentCountry, currentStation}} = this.props;
 
     if (!currentCountry.label && !currentCountry.genres.length) {
-      return <Pulse color={palette.primary.main} height={'98vh'}/>
+      return <Pulse height={'98vh'}/>
     }
 
     return (
       <Wrap>
-        {fetchingStations && (
-          <Splash>
-            <Pulse height={'100%'}/>
-          </Splash>
-        )}
         <GenreTabs/>
         <StationTabs/>
         <Player/>
         <WorldMap/>
+        {currentStation.uid && (
+          <Sound autoPlay={currentStation.uid}>
+            {currentStation.src.map((src, i) =>
+              <source key={String(i)} src={src.stream} type={src.content_type}/>
+            )}
+            Your browser does not support the audio element.
+          </Sound>
+        )}
       </Wrap>
     )
   }

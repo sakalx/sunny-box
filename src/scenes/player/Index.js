@@ -15,7 +15,6 @@ import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
-
 import {
   ChartIcon,
   Controller,
@@ -23,7 +22,6 @@ import {
   Logo,
   PauseButton,
   PauseIcon,
-  PlayIcon,
   Title,
   Wrap,
 } from './style';
@@ -67,7 +65,14 @@ class Player extends React.PureComponent {
       ...accStation,
     };
 
-    setStation(station);
+    setStation({...station, uid: false});
+    setTimeout(setStation, 0, station)
+  };
+
+  handleStopPlay = () => {
+    const {currentStation, setStation} = this.props;
+
+    setStation({...currentStation, uid: false});
   };
 
 
@@ -111,17 +116,14 @@ class Player extends React.PureComponent {
             <Controller>
               {this.renderNavigationBtn('Previous')}
 
-              {1 === 1
-                ? <React.Fragment>
-                  <PauseButton aria-label="Player-pause-button" color="secondary">
-                    <CircularProgress color="secondary" thickness={1} size={47}/>
-                  </PauseButton>
-                  <PauseIcon color="secondary"/>
-                </React.Fragment>
-                : <IconButton aria-label="Player-play-button" color="primary">
-                  <PlayIcon color="primary"/>
-                </IconButton>
-              }
+              <PauseButton
+                aria-label="Player-pause-button"
+                color="secondary"
+                onClick={this.handleStopPlay}
+              >
+                <CircularProgress color="secondary" thickness={1} size={47}/>
+              </PauseButton>
+              <PauseIcon color="secondary"/>
 
               {this.renderNavigationBtn('Next')}
             </Controller>

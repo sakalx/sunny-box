@@ -11,6 +11,7 @@ import {getCountryStations} from 'root/redux-core/actions';
 import {ZoomableGroup, Geographies, Geography} from 'react-simple-maps';
 import {Motion} from 'react-motion';
 
+import Pulse from 'root/components/pulse';
 import CountryTabs from '../country-tabs';
 import CountryInfo from '../country-info';
 
@@ -21,6 +22,7 @@ import {
   Head,
   motionStyle,
   tooltipStyle,
+  WraMapTitle,
   Wrap,
   WrapMap,
   ZoomOutButton,
@@ -102,7 +104,7 @@ class WorldMap extends React.PureComponent {
     );
 
   render() {
-    const {countryList, currentCountry} = this.props;
+    const {countryList, currentCountry, fetchingStations} = this.props;
     const {
       center,
       disableOptimization,
@@ -123,9 +125,12 @@ class WorldMap extends React.PureComponent {
         <Wrap>
           <WrapMap>
             <Head>
-              <CountryName color="textSecondary" variant="headline">
-                {currentCountry.label}
-              </CountryName>
+              {fetchingStations
+                ? <WraMapTitle><Pulse/></WraMapTitle>
+                : <CountryName color="textSecondary" variant="headline">
+                    {currentCountry.label}
+                  </CountryName>
+              }
               {zoom > 1 &&
               <ZoomOutButton
                 aria-label="Zoom-out-map"
@@ -185,9 +190,10 @@ class WorldMap extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({sunny: {countryList, currentCountry}}) => ({
+const mapStateToProps = ({sunny: {countryList, currentCountry, fetchingStations}}) => ({
   countryList,
   currentCountry,
+  fetchingStations,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
