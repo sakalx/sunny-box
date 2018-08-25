@@ -1,9 +1,13 @@
 import {combineReducers} from 'redux';
 
-import sunny from './sunny';
+import countries from './countries';
+import genres from './genres';
+import stations from './stations';
 
 const rootReducer = combineReducers({
-  sunny,
+  countries,
+  genres,
+  stations,
 });
 
 export default rootReducer;

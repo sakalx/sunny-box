@@ -1,24 +1,19 @@
-import moment from 'moment-timezone';
-import Base64Decode from "root/helpers/decoder-base64";
+import cacheConfig from 'root/config/cache';
+import {getCache} from 'root/api';
 
 const getTimezone = () =>
-  Intl.DateTimeFormat().resolvedOptions().timeZone
-  || moment.tz.guess()
-  || 'America/New_York';
+  Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York';
 
-const getLocation = timezones => {
+const getLocation = () => {
   const currentTimezone = getTimezone();
 
-  const defaultCountry = {
-    "code": "US",    
-    "label": "United States of America",
-  };
+  return getCache(cacheConfig.geographyMap)
+    .then(geo => {
+      const country = geo.objects.countries1.geometries.find(({timezones}) =>
+        timezones.some(timezone => timezone === currentTimezone));
 
-  const country = Base64Decode(timezones).data
-    .find(({timezones}) => timezones
-      .find(timezone => timezone === currentTimezone));
-
-      return country || defaultCountry;
+      return country ? country.properties.name : 'United States of America';
+    });
 };
 
 export default getLocation;

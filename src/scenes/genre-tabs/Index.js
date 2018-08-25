@@ -1,11 +1,14 @@
 import React from 'react';
 
 import cacheConfig from 'root/config/cache';
-import waitFetching from 'root/helpers/cache';
+import {getCache} from 'root/api';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {setGenre, setStation} from 'root/redux-core/actions';
+import {setGenreIndex} from 'root/redux-core/actions/genres';
+import {setCurrentStation} from 'root/redux-core/actions/stations';
+
+import Pulse from 'root/components/pulse';
 
 import AppBar from '@material-ui/core/AppBar';
 import Fade from '@material-ui/core/Fade';
@@ -24,32 +27,21 @@ let alphabet = null;
 
 class GenreTabs extends React.PureComponent {
   state = {
-    alphabetReady: false,
     isSearch: false,
     searchRadio: {value: ''},
   };
 
   componentDidMount() {
-    const {key} = cacheConfig.alphabet;
-    const alphabetCache = localStorage.getItem(key);
-
-    if (alphabetCache) {
-      alphabet = JSON.parse(alphabetCache);
-      this.setState({alphabetReady: true})
-    } else {
-      waitFetching(key).then(value => {
-        alphabet = JSON.parse(value);
-        this.setState({alphabetReady: true})
-      })
-    }
+    getCache(cacheConfig.alphabet)
+  .then(alphabetCache => alphabet = Base64Decode(alphabetCache));
   }
 
   getSuggestionList = () => {
-    const genreList = Object.entries(this.props.currentCountry.genres);
+    const stationsList = Object.entries(this.props.stations);
 
-    return genreList.reduce((acc, next) => {
-      const suggestion = next[1].map(({title}) =>
-        ({label: `${title} --${next[0].toUpperCase()}`})
+    return stationsList.reduce((acc, next) => {
+      const suggestion = next[1].map(({name}) =>
+        ({label: `${name} --${next[0].toUpperCase()}`})
       );
 
       return [...acc, ...suggestion]
@@ -57,47 +49,42 @@ class GenreTabs extends React.PureComponent {
   };
 
   handleChangeGenre = (event, index) => {
-    const {currentCountry, currentGenre, setGenre} = this.props;
+    const {genres, setGenreIndex} = this.props;
 
-    if (currentGenre.index !== index) {
-      const label = Object.keys(currentCountry.genres)[index];
-      setGenre({index, label})
-    }
+    genres.index !== index && setGenreIndex(index);
   };
 
   handleSearchRadio = (event, {newValue}) => {
-    const {currentCountry, setGenre, setStation} = this.props;
+    const {countries, genres, stations, setGenreIndex, setCurrentStation} = this.props;
     const value = newValue.split('--');
 
     if (value[1]) {
-      const search = value[0].trim();
+      const searchedName = value[0].trim();
       const genre = value[1].trim().toLocaleLowerCase();
-      const index = Object.keys(currentCountry.genres).indexOf(genre);
+      const index = genres.list.indexOf(genre);
 
-      const foundStation = currentCountry.genres[genre]
-        .find(({title}) => title === search);
+      const matchStation = stations.list[genre]
+        .find(({name}) => name === searchedName);
 
       const station = {
-        ...foundStation,
-        country: currentCountry,
-        genre: {index, label: genre},
+        ...matchStation,
+        countryIndex: countries.index,
+        genreIndex: index,
       };
 
-      setGenre({index, label: genre});
-      setStation(station);
+      setGenreIndex(index);
+      setCurrentStation(station);
       this.setState({isSearch: false});
     }
     this.setState({searchRadio: {value: value[0]}});
   };
 
   render() {
-    const {currentCountry, currentGenre} = this.props;
-    const {alphabetReady, isSearch, searchRadio} = this.state;
+    const {genres} = this.props;
+    const {isSearch, searchRadio} = this.state;
 
-    if (!alphabetReady) {
-      return <span>Loading ...</span>
-    }
-
+    if (!alphabet) return <Pulse/>;
+    
     return (
       <Wrap>
         <Slide in={!isSearch}>
@@ -107,15 +94,15 @@ class GenreTabs extends React.PureComponent {
               onChange={this.handleChangeGenre}
               scrollable
               textColor="primary"
-              value={currentGenre.index}
+              value={genres.index}
             >
-              {Object.keys(currentCountry.genres).map(genre => (
+              {genres.list.map(name => (
                 <Tab
-                  key={genre}
-                  label={genre}
+                  key={name}
+                  label={name}
                   icon={
                     <SvgIcon viewBox="0 0 32 32">
-                      <path d={alphabet[genre[0].toUpperCase()]}/>
+                      <path d={alphabet[name[0].toUpperCase()]}/>
                     </SvgIcon>
                   }
                 />
@@ -144,14 +131,15 @@ class GenreTabs extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({sunny: {currentCountry, currentGenre}}) => ({
-  currentCountry,
-  currentGenre,
+const mapStateToProps = ({countries, genres, stations}) => ({
+  countries,
+  genres,
+  stations,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setGenre,
-  setStation,
+  setGenreIndex,
+  setCurrentStation,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenreTabs);

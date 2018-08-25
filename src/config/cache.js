@@ -1,30 +1,20 @@
-import 'root/static/json/geography-map.json';
-import 'root/static/json/timezones.json';
+import 'root/static/json/geography-map';
+import 'root/static/json/alphabet-paths';
 
 const cacheConfig = {
-  "version": {
-    "key": "cache-version",
-    "value": "0.0.1",
-  },
   "geographyMap": {
     "key": "geography-map",
     "src": "static/json/geography-map.json",
   },
   "alphabet": {
     "key": "alphabet-svg",
+    "src": "static/json/alphabet-paths.json",
   },
-  "countryList": {
-    "key": "country-list",
+  "station": {
+    "key": "station",
   },
-  "currentCountry": {
-    "key": "current-country",
-  },
-  "timezones": {
-    "key": "timezones",
-    "src": "static/json/timezones.json",
-  },
-  "lastStation": {
-    "key": "last-station",
+  "countriesList": {
+    "key": "countries-list",
   },
 };
 

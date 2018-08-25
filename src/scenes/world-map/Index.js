@@ -1,17 +1,18 @@
 import React from 'react';
+import Pulse from "root/components/pulse";
 
 import cacheConfig from 'root/config/cache';
-import waitFetching from 'root/helpers/cache';
-import Base64Decode from 'root/helpers/decoder-base64';
+import {getCache} from 'root/api';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {getCountryStations} from 'root/redux-core/actions';
+import {setStationsByCountry} from 'root/redux-core/actions/stations';
+
 
 import {ZoomableGroup, Geographies, Geography} from 'react-simple-maps';
 import {Motion} from 'react-motion';
 
-import Pulse from 'root/components/pulse';
+/*import Pulse from 'root/components/pulse';*/
 import CountryTabs from '../country-tabs';
 import CountryInfo from '../country-info';
 
@@ -29,28 +30,20 @@ import {
   ZoomOutIcon,
 } from './style';
 
+let geo = null;
+
 class WorldMap extends React.PureComponent {
   state = {
     center: [0, 20],
     disableOptimization: false,
-    geo: null,
-    selectedCountry: this.props.currentCountry.label,
+    selectedCountry: this.props.countries.list[this.props.countries.index],
     tooltip: '',
     tooltipPosition: [0, 0],
     zoom: 1,
   };
 
   componentDidMount() {
-    const {geographyMap} = cacheConfig;
-    const geographyMapCache = localStorage.getItem(geographyMap.key);
-
-    if (geographyMapCache) {
-      this.setState({geo: Base64Decode(geographyMapCache)});
-    } else {
-      waitFetching(geographyMap.key).then(value => {
-        this.setState({geo: Base64Decode(value)})
-      })
-    }
+    getCache(cacheConfig.geographyMap).then(geoCache => geo = geoCache)
   }
 
   handleZoomOut = () => {
@@ -61,18 +54,18 @@ class WorldMap extends React.PureComponent {
   };
 
   handleCountryClick = ({properties}) => {
-    const {countryList, getCountryStations} = this.props;
-    const index = countryList.indexOf(properties.name);
+    const {countries, setStationsByCountry} = this.props;
+    const index = countries.list.indexOf(properties.name);
 
     if (index >= 0) {
-      getCountryStations(properties.name);
+      setStationsByCountry(index);
 
       this._moving(properties);
     }
   };
 
   handleCountryTabClick = country => {
-    const {geometries} = this.state.geo.objects.countries1;
+    const {geometries} = geo.objects.countries1;
 
     const properties = geometries.find(({properties}) =>
       properties.name === country).properties;
@@ -104,20 +97,18 @@ class WorldMap extends React.PureComponent {
     );
 
   render() {
-    const {countryList, currentCountry, fetchingStations} = this.props;
+    const {countries, stations} = this.props;
     const {
       center,
       disableOptimization,
-      geo,
       selectedCountry,
       tooltip,
       tooltipPosition,
       zoom,
     } = this.state;
 
-    if (!geo) {
-      return <span>Loading ...</span>
-    }
+
+    const countryName = countries.list[countries.index];
 
     return (
       <React.Fragment>
@@ -125,11 +116,11 @@ class WorldMap extends React.PureComponent {
         <Wrap>
           <WrapMap>
             <Head>
-              {fetchingStations
+              {stations.fetching
                 ? <WraMapTitle><Pulse/></WraMapTitle>
                 : <CountryName color="textSecondary" variant="headline">
-                    {currentCountry.label}
-                  </CountryName>
+                  {countryName}
+                </CountryName>
               }
               {zoom > 1 &&
               <ZoomOutButton
@@ -158,7 +149,7 @@ class WorldMap extends React.PureComponent {
                       {(geographies, projection) =>
                         geographies.map((geography) => {
                           const isSelected = selectedCountry === geography.properties.name;
-                          const hasStations = countryList.includes(geography.properties.name);
+                          const hasStations = countries.list.includes(geography.properties.name);
 
                           return (
                             <Geography
@@ -186,18 +177,18 @@ class WorldMap extends React.PureComponent {
           <CountryInfo/>
         </Wrap>
       </React.Fragment>
+
     )
   }
 }
 
-const mapStateToProps = ({sunny: {countryList, currentCountry, fetchingStations}}) => ({
-  countryList,
-  currentCountry,
-  fetchingStations,
+const mapStateToProps = ({countries, stations}) => ({
+  countries,
+  stations,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getCountryStations,
+  setStationsByCountry,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorldMap);

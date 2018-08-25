@@ -168,6 +168,10 @@ const config = {
     open: true,
     inline: true,
     historyApiFallback: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+    },
   },
 
   // shortcuts

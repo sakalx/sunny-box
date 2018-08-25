@@ -2,7 +2,7 @@ import React from 'react';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {setGenre} from 'root/redux-core/actions/index';
+import {setGenreIndex} from 'root/redux-core/actions/genres';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,16 +14,16 @@ import {
   Wrap,
 } from './style';
 
-const CountryInfo = ({currentCountry, setGenre}) => {
+const CountryInfo = ({countries, stations, setGenreIndex}) => {
 
-  const genreList = Object.entries(currentCountry.genres);
+  const stationsListData = Object.entries(stations.list);
 
-  const handleClickGenre = genre => {
+  const handleClickGenre = index => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-    setGenre(genre);
+    setGenreIndex(index);
   };
 
   return (
@@ -32,22 +32,22 @@ const CountryInfo = ({currentCountry, setGenre}) => {
         <TableHead>
           <RowTable>
             <TableCell colSpan={2}>
-              <h1>{currentCountry.label}</h1>
+              <h1>{countries.list[countries.index]}</h1>
             </TableCell>
           </RowTable>
         </TableHead>
         <TableBody>
-          {genreList.map((genre, index) => {
+          {stationsListData.map((station, index) => {
             return (
               <RowTable
-                key={genre[0]}
+                key={station[0]}
                 hover
-                onClick={() => handleClickGenre({index, label: genre[0]})}
+                onClick={() => handleClickGenre(index)}
               >
                 <TableCell component="th" scope="row">
-                  {genre[0]}
+                  {station[0]}
                 </TableCell>
-                <TableCell numeric>{genre[1].length}</TableCell>
+                <TableCell numeric>{station[1].length}</TableCell>
               </RowTable>
             );
           })}
@@ -57,12 +57,13 @@ const CountryInfo = ({currentCountry, setGenre}) => {
   );
 };
 
-const mapStateToProps = ({sunny: {currentCountry}}) => ({
-  currentCountry,
+const mapStateToProps = ({countries, stations}) => ({
+  countries,
+  stations,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setGenre,
+  setGenreIndex,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CountryInfo);

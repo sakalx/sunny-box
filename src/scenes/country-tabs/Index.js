@@ -2,7 +2,7 @@ import React from 'react';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {getCountryStations} from 'root/redux-core/actions';
+import {setStationsByCountry} from 'root/redux-core/actions/stations';
 
 import Slide from '@material-ui/core/Slide';
 import Tab from '@material-ui/core/Tab';
@@ -17,7 +17,7 @@ import {
 
 class CountryTabs extends React.PureComponent {
   getSuggestionList = () =>
-    this.props.countryList.map(country => ({label: country}));
+    this.props.countries.list.map(country => ({label: country}));
 
   state = {
     isSearch: false,
@@ -26,36 +26,36 @@ class CountryTabs extends React.PureComponent {
   };
 
   handleChangeCountry = (event, index) => {
-    const {
-      countryList,
-      currentCountry,
-      getCountryStations,
-      onTabClick,
-    } = this.props;
+    const {countries, setStationsByCountry, onTabClick} = this.props;
 
-    if (currentCountry.index !== index) {
-      const country = countryList[index];
-      getCountryStations(country);
-      onTabClick(country)
+    if (countries.index !== index) {
+      setStationsByCountry(index);
+      onTabClick(countries.list[index])
     }
   };
 
   handleSearchCountry = (event, {newValue}) => {
-    const {countryList, getCountryStations, onTabClick} = this.props;
+    const {countries, setStationsByCountry, onTabClick} = this.props;
+
     const value = newValue.trimStart();
-    const index = countryList.indexOf(value);
+    const index = countries.list.indexOf(value);
 
     if (index >= 0) {
-      getCountryStations(countryList[index]);
-      onTabClick(countryList[index]);
-      this.setState({isSearch: false});
+      setStationsByCountry(index);
+      onTabClick(countries.list[index]);
+      this.setState({
+        isSearch: false,
+        searchCountry: {
+          value: '',
+        },
+      });
+    } else {
+      this.setState({searchCountry: {value}});
     }
-
-    this.setState({searchCountry: {value}});
   };
 
   render() {
-    const {countryList, currentCountry} = this.props;
+    const {countries} = this.props;
     const {isSearch, searchCountry, suggestions} = this.state;
 
     return (
@@ -67,10 +67,10 @@ class CountryTabs extends React.PureComponent {
               onChange={this.handleChangeCountry}
               scrollable
               textColor="primary"
-              value={currentCountry.index}
+              value={countries.index}
             >
-              {countryList.map((country, index) => (
-                <Tab key={String(index)} label={country}/>
+              {countries.list.map((name, index) => (
+                <Tab key={String(index)} label={name}/>
               ))}
             </Tabs>
           </TabBar>
@@ -94,13 +94,12 @@ class CountryTabs extends React.PureComponent {
   }
 }
 
-const mapStateToProps = ({sunny: {countryList, currentCountry}}) => ({
-  countryList,
-  currentCountry
+const mapStateToProps = ({countries}) => ({
+  countries,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getCountryStations,
+  setStationsByCountry,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CountryTabs);

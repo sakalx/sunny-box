@@ -2,7 +2,7 @@ import React from 'react';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {setStation} from 'root/redux-core/actions';
+import {setCurrentStation} from 'root/redux-core/actions/stations';
 
 import StationCard from 'root/scenes/card';
 
@@ -14,31 +14,29 @@ import {
 } from './style';
 
 const StationTabs = ({
-                       countryList,
-                       currentCountry,
-                       currentGenre,
-                       currentStation,
-                       howler,
-                       setStation,
+                       countries,
+                       genres,
+                       stations,
+                       setCurrentStation,
                      }) => {
 
-  const stationList = currentCountry.genres[currentGenre.label];
+  const genre = genres.list[genres.index]
+  const stationsByGenre = stations.list[genre];
+  const currentStation = stations.station;
 
-  const selectedStation = stationList
+  const selectedStation = stationsByGenre
     .find(station => station.uid === currentStation.uid);
-
 
   const handleChangeStation = (event, uid) => {
     const play = currentStation.uid !== uid;
 
-    const selectedStation = currentCountry.genres[currentGenre.label]
-      .find(station => station.uid === uid);
+    const selectedStation = stationsByGenre.find(station => station.uid === uid);
 
     const station = {
       ...selectedStation,
-      uid: play ? uid : false,
-      country: currentCountry,
-      genre: currentGenre,
+      
+      countryIndex: countries.index,
+      genreIndex: index,
     };
 
 
@@ -54,7 +52,7 @@ const StationTabs = ({
       textColor="primary"
       value={selectedStation ? selectedStation.uid : false}
     >
-      {stationList.map((station, i) => (
+      {stationsByGenre.map((station, i) => (
         <Fade
           key={station.uid}
           mountOnEnter unmountOnExit
@@ -63,7 +61,7 @@ const StationTabs = ({
         >
           <Tab
             icon={<StationCard playing={station.uid === currentStation.uid}/>}
-            label={station.title}
+            label={station.name}
           />
         </Fade>
       ))}
@@ -71,15 +69,14 @@ const StationTabs = ({
   );
 };
 
-const mapStateToProps = ({sunny: {countryList, currentCountry, currentGenre, currentStation}}) => ({
-  countryList,
-  currentCountry,
-  currentGenre,
-  currentStation,
+const mapStateToProps = ({countries, genres, stations}) => ({
+  countries,
+  genres,
+  stations,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setStation,
+  setCurrentStation,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(StationTabs);

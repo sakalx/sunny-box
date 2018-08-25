@@ -31,6 +31,7 @@ let alphabet = null;
 class Player extends React.PureComponent {
   state = {
     alphabetReady: false,
+    audio: new Audio(this.props.currentStation.src[0].stream)
   };
 
   componentDidMount() {
@@ -46,6 +47,8 @@ class Player extends React.PureComponent {
         this.setState({alphabetReady: true})
       })
     }
+
+
   }
 
   handleNavigationBtn = direct => {
@@ -86,13 +89,29 @@ class Player extends React.PureComponent {
     </Tooltip>
   );
 
+  ggg = () => {
+    const {audio} = this.state;
+    audio.pause();
+
+    this.setState(() => ({audio: new Audio(this.props.currentStation.src[0].stream)}),
+      () => {
+        this.state.audio.play();
+        this.state.audio.addEventListener('loadeddata',() => {
+          console.log(5555);
+        });
+      }
+      );
+
+  };
+
   render() {
     const {currentStation} = this.props;
     const {alphabetReady} = this.state;
 
     return (
       <Collapse mountOnEnter unmountOnExit timeout={800} in={!!currentStation.uid}>
-        {currentStation.title && alphabetReady && (
+        <button onClick={this.ggg}>srfese</button>
+        {currentStation.name && alphabetReady && (
           <Wrap>
             <Logo alt="Name Radio" src={"https://sakals.000webhostapp.com/share/nice.jpg"}/>
 

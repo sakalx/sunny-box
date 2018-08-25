@@ -1,15 +1,15 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-import FIREBASEConfig from 'root/config/firebase';
+import firebaseConfig from 'root/config/firebase';
 
-firebase.initializeApp(FIREBASEConfig);
+firebase.initializeApp(firebaseConfig);
 
 const firestore = firebase.firestore();
 firestore.settings({timestampsInSnapshots: true});
 
 
-export const getCountries = () => firestore.collection('stations').get()
+export const getCountriesList = () => firestore.collection('stations').get()
   .then(querySnapshot => {
       const list = [];
 
@@ -44,7 +44,6 @@ const add = data => firestore.doc(`stations/${country}`).set(data);
 
 
 //http://api.dirble.com/v2/countries/ru/stations/?token=146861067c97180b6e3fc79f34&per_page=3
-//http://api.dirble.com/v2/countries/ru/0/20/stations?token=146861067c97180b6e3fc79f34
 
 const foo = [{
   "id": 58750,
