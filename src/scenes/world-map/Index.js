@@ -57,7 +57,7 @@ class WorldMap extends React.PureComponent {
     const {countries, setStationsByCountry} = this.props;
     const index = countries.list.indexOf(properties.name);
 
-    if (index >= 0) {
+    if (index >= 0 && index !== countries.index) {
       setStationsByCountry(index);
 
       this._moving(properties);
@@ -106,7 +106,6 @@ class WorldMap extends React.PureComponent {
       tooltipPosition,
       zoom,
     } = this.state;
-
 
     const countryName = countries.list[countries.index];
 

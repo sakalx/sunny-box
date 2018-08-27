@@ -13,12 +13,13 @@ const {
 } = stationsTypes;
 
 const initState = {
-  error: null,
-  fetching: false,
+  errorList: null,
+  errorStation: null,
+  fetchingList: false,
+  fetchingStation: false,
   list: {},
   station: {
-    audio: null,
-    isPlaying: false,
+    audio: new Audio(),
     name: '',
     uid: false,
     countryIndex: false,
@@ -30,10 +31,32 @@ export default function stations(state = initState, {type, payload}) {
 
   switch (type) {
 
-    case SET_CURRENT_STATION:
+    case SET_CURRENT_STATION + FULFILLED:
       return ({
         ...state,
-        station: payload,
+        errorStation: null,
+        fetchingStation: false,
+        station: {
+          ...state.station,
+          ...payload,
+        },
+      });
+
+    case SET_CURRENT_STATION + PENDING:
+      return ({
+        ...state,
+        fetchingStation: true,
+      });
+
+    case SET_CURRENT_STATION + REJECTED:
+      return ({
+        ...state,
+        errorStation: true,
+        fetchingStation: false,
+        station: {
+          ...state.station,
+          ...payload,
+        },
       });
 
     case SET_LIST_OF_STATIONS:
@@ -45,20 +68,21 @@ export default function stations(state = initState, {type, payload}) {
     case SET_STATIONS_BY_COUNTRY + FULFILLED:
       return ({
         ...state,
-        fetching: false,
+        errorList: null,
+        fetchingList: false,
       });
 
     case SET_STATIONS_BY_COUNTRY + PENDING:
       return ({
         ...state,
-        fetching: true,
+        fetchingList: true,
       });
 
     case SET_STATIONS_BY_COUNTRY + REJECTED:
       return ({
         ...state,
-        error: payload,
-        // fetching leave as true
+        errorList: payload,
+        fetchingList: false,
       });
   }
 

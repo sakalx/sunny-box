@@ -45,9 +45,7 @@ class CountryTabs extends React.PureComponent {
       onTabClick(countries.list[index]);
       this.setState({
         isSearch: false,
-        searchCountry: {
-          value: '',
-        },
+        searchCountry: {value: ''},
       });
     } else {
       this.setState({searchCountry: {value}});

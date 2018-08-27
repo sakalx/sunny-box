@@ -11,9 +11,9 @@ import {setCountryList} from 'root/redux-core/actions/countries';
 import {setCurrentStation, setStationsByCountry} from 'root/redux-core/actions/stations';
 
 import Pulse from './components/pulse';
-// import GenreTabs from './scenes/genre-tabs';
-// import Player from './scenes/player';
-// import StationTabs from './scenes/station-tabs';
+import GenreTabs from './scenes/genre-tabs';
+import Player from './scenes/player';
+import StationTabs from './scenes/station-tabs';
 import WorldMap from './scenes/world-map';
 
 const Wrap = styled('section')`
@@ -56,17 +56,13 @@ class App extends React.PureComponent {
   render() {
     const {isReady} = this.state;
 
-    if (!isReady) {
-      return <Pulse height={'98vh'}/>
-    }
+    if (!isReady) return <Pulse height={'98vh'}/>;
 
     return (
       <Wrap>
-        <h1>seadew</h1>
-        {/*<GenreTabs/>
+        <GenreTabs/>
         <StationTabs/>
         <Player/>
-        */}
         <WorldMap/>
       </Wrap>
     )

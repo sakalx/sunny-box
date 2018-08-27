@@ -1,11 +1,12 @@
 import React from 'react';
 
 import cacheConfig from 'root/config/cache';
-import waitFetching from 'root/helpers/cache';
+import {getCache} from 'root/api';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {setStation} from 'root/redux-core/actions';
+import {setCurrentStation} from 'root/redux-core/actions/stations';
+
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Collapse from '@material-ui/core/Collapse';
@@ -30,54 +31,42 @@ let alphabet = null;
 
 class Player extends React.PureComponent {
   state = {
-    alphabetReady: false,
-    audio: new Audio(this.props.currentStation.src[0].stream)
+    alphabetIsReady: false,
   };
 
   componentDidMount() {
-    const {key} = cacheConfig.alphabet;
-    const alphabetCache = localStorage.getItem(key);
-
-    if (alphabetCache) {
-      alphabet = JSON.parse(alphabetCache);
-      this.setState({alphabetReady: true})
-    } else {
-      waitFetching(key).then(value => {
-        alphabet = JSON.parse(value);
-        this.setState({alphabetReady: true})
-      })
-    }
-
-
+    getCache(cacheConfig.alphabet)
+      .then(alphabetCache => {
+        alphabet = alphabetCache;
+        this.setState({alphabetIsReady: true})
+      });
   }
 
   handleNavigationBtn = direct => {
-    const {currentStation, setStation} = this.props;
+    const {genres, stations, setCurrentStation} = this.props;
 
-    const genre = currentStation.genre.label;
-    const stations = currentStation.country.genres[genre];
-    const currentIndex = stations.findIndex(({uid}) => uid === currentStation.uid);
-    const lastIndex = stations.length - 1;
+    const genre = genres.list[genres.index];
+    const stationByGenre = stations.list[genre];
+    const currentIndex = stationByGenre.findIndex(({uid}) => uid === stations.station.uid);
+    const lastIndex = stationByGenre.length - 1;
 
     const accStation = direct === 'Next'
-      ? (currentIndex === lastIndex ? stations[0] : stations[currentIndex + 1])
-      : (currentIndex === 0 ? stations[lastIndex] : stations[currentIndex - 1]);
+      ? (currentIndex === lastIndex ? stationByGenre[0] : stationByGenre[currentIndex + 1])
+      : (currentIndex === 0 ? stationByGenre[lastIndex] : stationByGenre[currentIndex - 1]);
 
     const station = {
-      ...currentStation,
+      ...stations.station,
       ...accStation,
     };
 
-    setStation({...station, uid: false});
-    setTimeout(setStation, 0, station)
+    setCurrentStation(station)
   };
 
   handleStopPlay = () => {
-    const {currentStation, setStation} = this.props;
+    const {stations, setCurrentStation} = this.props;
 
-    setStation({...currentStation, uid: false});
+    setCurrentStation({...stations.station, uid: false});
   };
-
 
   renderNavigationBtn = direct => (
     <Tooltip id={`tooltip__${direct}-station-player`} title={`${direct} station`} placement="top">
@@ -89,40 +78,31 @@ class Player extends React.PureComponent {
     </Tooltip>
   );
 
-  ggg = () => {
-    const {audio} = this.state;
-    audio.pause();
-
-    this.setState(() => ({audio: new Audio(this.props.currentStation.src[0].stream)}),
-      () => {
-        this.state.audio.play();
-        this.state.audio.addEventListener('loadeddata',() => {
-          console.log(5555);
-        });
-      }
-      );
-
-  };
-
   render() {
-    const {currentStation} = this.props;
-    const {alphabetReady} = this.state;
+    const {countries, stations} = this.props;
+    const {alphabetIsReady} = this.state;
 
     return (
-      <Collapse mountOnEnter unmountOnExit timeout={800} in={!!currentStation.uid}>
-        <button onClick={this.ggg}>srfese</button>
-        {currentStation.name && alphabetReady && (
+      <Collapse  timeout={800} in={!!stations.station.uid}>
+        {alphabetIsReady && stations.station.genreIndex && (
           <Wrap>
-            <Logo alt="Name Radio" src={"https://sakals.000webhostapp.com/share/nice.jpg"}/>
+
+            <Logo alt={stations.station.name}
+                  src={"https://sakals.000webhostapp.com/share/nice.jpg"}
+            />
 
             <Info>
               <Title>
-                <Typography variant="headline" component="h3">{currentStation.title}</Typography>
-                <Typography variant="caption">{currentStation.country.label}</Typography>
+                <Typography variant="headline" component="h3">
+                  {stations.station.name}
+                </Typography>
+                <Typography variant="caption">
+                  {countries.list[stations.station.countryIndex]}
+                </Typography>
               </Title>
               <div>
                 {
-                  [...currentStation.genre.label.toUpperCase()]
+                  [...stations.station.genre.toUpperCase()]
                     .map((chart, index) => (
                       <ChartIcon key={String(index)} viewBox="0 0 34 34">
                         <path d={alphabet[chart]}/>
@@ -146,20 +126,22 @@ class Player extends React.PureComponent {
 
               {this.renderNavigationBtn('Next')}
             </Controller>
-          </Wrap>
 
+          </Wrap>
         )}
       </Collapse>
     );
   }
 }
 
-const mapStateToProps = ({sunny: {currentStation}}) => ({
-  currentStation,
+const mapStateToProps = ({countries, genres, stations}) => ({
+  countries,
+  genres,
+  stations,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setStation,
+  setCurrentStation,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Player);

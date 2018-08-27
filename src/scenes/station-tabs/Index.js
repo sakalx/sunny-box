@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {setCurrentStation} from 'root/redux-core/actions/stations';
 
-import StationCard from 'root/scenes/card';
+import StationCard from 'root/scenes/station-card';
 
 import Fade from '@material-ui/core/Fade';
 import Tab from '@material-ui/core/Tab';
@@ -20,28 +20,25 @@ const StationTabs = ({
                        setCurrentStation,
                      }) => {
 
-  const genre = genres.list[genres.index]
-  const stationsByGenre = stations.list[genre];
+  const genre = genres.list[genres.index];
+  const stationsByGenre = stations.list[genre] || [];
   const currentStation = stations.station;
+
 
   const selectedStation = stationsByGenre
     .find(station => station.uid === currentStation.uid);
 
   const handleChangeStation = (event, uid) => {
-    const play = currentStation.uid !== uid;
-
     const selectedStation = stationsByGenre.find(station => station.uid === uid);
 
     const station = {
       ...selectedStation,
-      
+      uid: selectedStation.uid === currentStation.uid ? false : selectedStation.uid,
       countryIndex: countries.index,
-      genreIndex: index,
+      genreIndex: genres.index,
     };
 
-
-    setStation({...station, uid: false});
-    setTimeout(setStation, 0, station)
+    setCurrentStation(station);
   };
 
   return (

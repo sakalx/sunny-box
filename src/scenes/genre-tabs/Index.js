@@ -8,8 +8,6 @@ import {connect} from 'react-redux';
 import {setGenreIndex} from 'root/redux-core/actions/genres';
 import {setCurrentStation} from 'root/redux-core/actions/stations';
 
-import Pulse from 'root/components/pulse';
-
 import AppBar from '@material-ui/core/AppBar';
 import Fade from '@material-ui/core/Fade';
 import Slide from '@material-ui/core/Slide';
@@ -27,17 +25,21 @@ let alphabet = null;
 
 class GenreTabs extends React.PureComponent {
   state = {
+    alphabetIsReady: false,
     isSearch: false,
     searchRadio: {value: ''},
   };
 
   componentDidMount() {
     getCache(cacheConfig.alphabet)
-  .then(alphabetCache => alphabet = Base64Decode(alphabetCache));
+      .then(alphabetCache => {
+        alphabet = alphabetCache;
+        this.setState({alphabetIsReady: true})
+      });
   }
 
   getSuggestionList = () => {
-    const stationsList = Object.entries(this.props.stations);
+    const stationsList = Object.entries(this.props.stations.list);
 
     return stationsList.reduce((acc, next) => {
       const suggestion = next[1].map(({name}) =>
@@ -74,17 +76,22 @@ class GenreTabs extends React.PureComponent {
 
       setGenreIndex(index);
       setCurrentStation(station);
-      this.setState({isSearch: false});
+
+      this.setState({
+        isSearch: false,
+        searchRadio: {value: ''},
+      });
+    } else {
+      this.setState({searchRadio: {value: value[0]}});
     }
-    this.setState({searchRadio: {value: value[0]}});
   };
 
   render() {
     const {genres} = this.props;
-    const {isSearch, searchRadio} = this.state;
+    const {alphabetIsReady, isSearch, searchRadio} = this.state;
 
-    if (!alphabet) return <Pulse/>;
-    
+    if (!alphabetIsReady) return <span/>;
+
     return (
       <Wrap>
         <Slide in={!isSearch}>

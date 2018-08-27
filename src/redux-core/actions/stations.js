@@ -1,10 +1,11 @@
 import cacheConfig from 'root/config/cache';
 import {getStationsByCountry} from 'root/api';
-
 import {setCountryIndex} from './countries';
 import {setGenreIndex, setGenreList} from './genres';
 
-import {stationsTypes} from '../types';
+import {promise, stationsTypes} from '../types';
+
+const {FULFILLED} = promise;
 
 const {
   SET_CURRENT_STATION,
@@ -12,13 +13,40 @@ const {
   SET_STATIONS_BY_COUNTRY,
 } = stationsTypes;
 
-export const setCurrentStation = station => {
+
+export const setCurrentStation = station => (dispatch, getState) => {
+  const prevAudio = getState().stations.station.audio;
+  prevAudio.pause();
+
+  delete station.audio;
   localStorage.setItem(cacheConfig.station.key, JSON.stringify(station));
 
-  return ({
-    type: SET_CURRENT_STATION,
-    payload: station,
-  })
+  if (station.uid) {
+    const src = station.src.map(({stream}) => stream);
+    const audio = new Audio(src);
+
+    audio.play();
+
+    const payload = new Promise((resolve, reject) => {
+      audio.addEventListener('loadeddata', () => {
+        resolve({...station, audio});
+      });
+      audio.addEventListener('error', () => {
+        reject({...station, audio});
+      });
+    });
+
+    dispatch({
+      type: SET_CURRENT_STATION,
+      payload,
+    });
+
+  } else {
+    dispatch({
+      type: SET_CURRENT_STATION + FULFILLED,
+      payload: station,
+    })
+  }
 };
 
 export const setStationList = list => ({

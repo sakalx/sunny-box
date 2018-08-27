@@ -15,10 +15,10 @@ import {
 const StationCard = ({currentStation, playing}) => (
   <Wrap playing={String(playing)}>
     <City component="span" variant="caption">
-      {currentStation.city}
+      currentStation.city
     </City>
     <Cover image={"https://sakals.000webhostapp.com/share/logo.png"}
-           title={currentStation.title}
+           title='currentStation.title'
     />
     {playing
       ? <Pulse color={muiTheme.palette.secondary.dark}/>
@@ -28,9 +28,8 @@ const StationCard = ({currentStation, playing}) => (
   </Wrap>
 );
 
-const mapStateToProps = ({sunny: {currentCountry, currentStation}}) => ({
-  currentCountry,
-  currentStation,
+const mapStateToProps = () => ({
+
 });
 
 export default connect(mapStateToProps, null)(StationCard);

@@ -11,12 +11,6 @@ firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
 firestore.settings({timestampsInSnapshots: true});
 
-/*
-const TOKEN = '146861067c97180b6e3fc79f34';
-const SPARE_TOKEN = '2227bc9dbeeea2063129a72a3d';
-const api = `https://api.dirble.com/v2/countries/ru/stations/?token=${TOKEN}&per_page=30`;
-*/
-
 const checkStatus = response =>
   response.status === 200
     ? Promise.resolve(response)
@@ -55,7 +49,9 @@ export const getCountriesList = () => {
       .then(querySnapshot => {
         const list = [];
 
-        querySnapshot.forEach(doc => list.push(doc.id));
+        querySnapshot.forEach(doc => {
+          Object.keys(doc.data()).length && list.push(doc.id)
+        });
         localStorage.setItem(cacheConfig.countriesList.key, JSON.stringify(list));
 
         return list;
