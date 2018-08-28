@@ -3,18 +3,18 @@ import 'root/static/json/alphabet-paths';
 
 const cacheConfig = {
   "geographyMap": {
-    "key": "geography-map",
+    "key": "~geography-map",
     "src": "static/json/geography-map.json",
   },
   "alphabet": {
-    "key": "alphabet-svg",
+    "key": "~alphabet-svg",
     "src": "static/json/alphabet-paths.json",
   },
   "station": {
-    "key": "station",
+    "key": "~station",
   },
   "countriesList": {
-    "key": "countries-list",
+    "key": "~countries-list",
   },
 };
 

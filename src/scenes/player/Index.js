@@ -7,6 +7,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {setCurrentStation} from 'root/redux-core/actions/stations';
 
+import defaultImg from 'root/static/img/default-img.jpg';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Collapse from '@material-ui/core/Collapse';
@@ -18,6 +19,7 @@ import Typography from '@material-ui/core/Typography';
 
 import {
   ChartIcon,
+  Col,
   Controller,
   Info,
   Logo,
@@ -83,14 +85,19 @@ class Player extends React.PureComponent {
     const {alphabetIsReady} = this.state;
 
     return (
-      <Collapse  timeout={800} in={!!stations.station.uid}>
-        {alphabetIsReady && stations.station.genreIndex && (
+      <Collapse timeout={800} in={!!stations.station.uid && !stations.fetchingStation}>
+        {alphabetIsReady && (
           <Wrap>
-
-            <Logo alt={stations.station.name}
-                  src={"https://sakals.000webhostapp.com/share/nice.jpg"}
-            />
-
+            <Col>
+              <Logo alt={stations.station.name}
+                    src={stations.station.image || defaultImg}
+              />
+              {stations.station.website && (
+                <a href={stations.station.website} target="_blank">
+                  <Typography variant="caption">{stations.station.website}</Typography>
+                </a>
+              )}
+            </Col>
             <Info>
               <Title>
                 <Typography variant="headline" component="h3">
@@ -99,17 +106,18 @@ class Player extends React.PureComponent {
                 <Typography variant="caption">
                   {countries.list[stations.station.countryIndex]}
                 </Typography>
+
               </Title>
-              <div>
-                {
-                  [...stations.station.genre.toUpperCase()]
-                    .map((chart, index) => (
-                      <ChartIcon key={String(index)} viewBox="0 0 34 34">
-                        <path d={alphabet[chart]}/>
-                      </ChartIcon>
-                    ))
-                }
-              </div>
+              <Col>
+                {stations.station.genre && (
+                  <ChartIcon viewBox="0 0 34 34">
+                    <path d={alphabet[stations.station.genre[0].toUpperCase()]}/>
+                  </ChartIcon>
+                )}
+                <Typography variant="caption">
+                  {stations.station.genre}
+                </Typography>
+              </Col>
             </Info>
 
             <Controller>

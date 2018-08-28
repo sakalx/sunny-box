@@ -1,7 +1,9 @@
 import cacheConfig from 'root/config/cache';
 import {getStationsByCountry} from 'root/api';
+
 import {setCountryIndex} from './countries';
 import {setGenreIndex, setGenreList} from './genres';
+import {toggleSnackbar} from './notification';
 
 import {promise, stationsTypes} from '../types';
 
@@ -13,40 +15,41 @@ const {
   SET_STATIONS_BY_COUNTRY,
 } = stationsTypes;
 
+const audioListener = (prevAudio, station, dispatch) => {
+  const audio = new Audio(station.src);
+
+  return new Promise((resolve, reject) => {
+    audio.addEventListener('loadeddata', () => {
+      prevAudio.pause();
+      audio.play();
+      resolve({...station, audio});
+    });
+
+    audio.addEventListener('error', () => {
+      dispatch(toggleSnackbar('hmm... looks like this station not available now 🤤🍄'));
+      reject();
+    });
+  });
+};
+
 
 export const setCurrentStation = station => (dispatch, getState) => {
   const prevAudio = getState().stations.station.audio;
-  prevAudio.pause();
+
+  !station.uid && prevAudio.pause();
 
   delete station.audio;
   localStorage.setItem(cacheConfig.station.key, JSON.stringify(station));
 
-  if (station.uid) {
-    const src = station.src.map(({stream}) => stream);
-    const audio = new Audio(src);
-
-    audio.play();
-
-    const payload = new Promise((resolve, reject) => {
-      audio.addEventListener('loadeddata', () => {
-        resolve({...station, audio});
-      });
-      audio.addEventListener('error', () => {
-        reject({...station, audio});
-      });
-    });
-
-    dispatch({
+  station.uid
+    ? dispatch({
       type: SET_CURRENT_STATION,
-      payload,
-    });
-
-  } else {
-    dispatch({
+      payload: audioListener(prevAudio, station, dispatch),
+    })
+    : dispatch({
       type: SET_CURRENT_STATION + FULFILLED,
       payload: station,
     })
-  }
 };
 
 export const setStationList = list => ({

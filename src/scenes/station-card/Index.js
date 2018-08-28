@@ -1,35 +1,30 @@
 import React from 'react';
 import muiTheme from 'root/theme';
 
-import {connect} from 'react-redux';
+import defaultImg from 'root/static/img/default-img.jpg';
 
 import Pulse from 'root/components/pulse';
 
 import {
-  City,
+  Country,
   Cover,
   PlayIcon,
   Wrap,
 } from './style';
 
-const StationCard = ({currentStation, playing}) => (
+const StationCard = ({station, playing}) => (
   <Wrap playing={String(playing)}>
-    <City component="span" variant="caption">
-      currentStation.city
-    </City>
-    <Cover image={"https://sakals.000webhostapp.com/share/logo.png"}
-           title='currentStation.title'
+    <Country component="span" variant="caption">
+      {station.country}
+    </Country>
+    <Cover image={station.image || defaultImg}
+           title={station.name}
     />
     {playing
-      ? <Pulse color={muiTheme.palette.secondary.dark}/>
+      ? <Pulse color={muiTheme.palette.secondary.light}/>
       : <PlayIcon color="primary"/>
     }
-    <h3>New York</h3>
   </Wrap>
 );
 
-const mapStateToProps = () => ({
-
-});
-
-export default connect(mapStateToProps, null)(StationCard);
+export default StationCard;

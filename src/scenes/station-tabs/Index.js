@@ -57,7 +57,10 @@ const StationTabs = ({
           value={station.uid}
         >
           <Tab
-            icon={<StationCard playing={station.uid === currentStation.uid}/>}
+            icon={<StationCard
+              playing={station.uid === currentStation.uid}
+              station={station}
+            />}
             label={station.name}
           />
         </Fade>

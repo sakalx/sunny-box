@@ -4,6 +4,10 @@ export const promise = {
   FULFILLED: '_FULFILLED',
 };
 
+export const notification = {
+  TOGGLE_SNACKBAR: 'TOGGLE_SNACKBAR',
+};
+
 export const countiesTypes = {
   SET_CURRENT_COUNTRY: 'SET_CURRENT_COUNTRY',
   SET_LIST_OF_COUNTRIES: 'SET_LIST_OF_COUNTRIES',

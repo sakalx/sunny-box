@@ -53,10 +53,6 @@ export default function stations(state = initState, {type, payload}) {
         ...state,
         errorStation: true,
         fetchingStation: false,
-        station: {
-          ...state.station,
-          ...payload,
-        },
       });
 
     case SET_LIST_OF_STATIONS:

@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 const _playPauseIcon = styled('div')`
   height: 44px !important;
+  margin: auto;
   width: 44px !important;
 `;
 
@@ -15,12 +16,12 @@ export const Wrap = styled(Paper)`
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 255px;
+  height: 180px;
   justify-content: space-between;
   margin: 15px;
   position: relative;
   transition: all 0.3s linear;
-  width: 160px;
+  width: 150px;
   &:hover {
     ${props => `
       box-shadow: 5px 5px 20px ${props.playing === 'true' 
@@ -36,7 +37,7 @@ export const Cover = styled(CardMedia)`
   width: 100%;
 `;
 
-export const City = styled(Typography)`
+export const Country = styled(Typography)`
   background: ${muiTheme.palette.error.light};
   color: ${muiTheme.palette.common.white} !important;
   padding: 0 5px;
@@ -45,12 +46,4 @@ export const City = styled(Typography)`
   top: 10px;
 `;
 
-/*
-export const Title = styled(Typography)`
-  padding: 5px;
-  ${({active}) => active === 'true' && `
-    color: ${muiTheme.palette.primary.dark} !important;  
-  `};
-`;
-*/
 export const PlayIcon = _playPauseIcon.withComponent(PlayIc);

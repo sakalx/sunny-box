@@ -12,7 +12,7 @@ const {palette} = muiTheme;
 export const Wrap = styled('div')`
   align-items: center;
   border-bottom: 1px solid ${palette.action.disabledBackground};
-  box-shadow: inset 0 35px 35px -25px ${palette.action.disabledBackground};
+  box-shadow: inset 0 35px 35px -25px ${palette.action.hover};
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -22,6 +22,13 @@ export const Wrap = styled('div')`
 export const Logo = styled(Avatar)`
   width: 60px !important;
   height: 60px !important;
+`;
+
+export const Col = styled('div')`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
 
 export const Info = styled('div')`
