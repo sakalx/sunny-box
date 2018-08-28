@@ -19,12 +19,14 @@ const audioListener = (prevAudio, station, dispatch) => {
   const audio = new Audio(station.src);
 
   return new Promise((resolve, reject) => {
+
     audio.addEventListener('loadeddata', () => {
       prevAudio.pause();
       audio.play();
       resolve({...station, audio});
     });
 
+    // TODO remove listener
     audio.addEventListener('error', () => {
       dispatch(toggleSnackbar('hmm... looks like this station not available now 🤤🍄'));
       reject();

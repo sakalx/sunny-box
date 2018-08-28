@@ -185,10 +185,10 @@ const config = {
     cleanFolderProd,
     commonsChunk,
     definePlugin,
-    //favicon,
+    favicon,
     htmlIndex,
     uglifyJs,
-    //pwaManifest,
+    pwaManifest,
   ] : [
     commonsChunk,
     htmlIndex,

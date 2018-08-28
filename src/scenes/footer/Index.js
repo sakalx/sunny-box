@@ -4,29 +4,31 @@ import Typography from '@material-ui/core/Typography';
 
 import {
   Link,
+  LinkSrc,
+  Title,
   Wrap,
 } from 'root/scenes/footer/style';
 
 const Footer = () => (
   <Wrap>
-    <Link href='https://www.linkedin.com/in/serhii-sakal/'>
-      <Typography
+    <Link href='https://www.linkedin.com/in/serhii-sakal/' target="_blank">
+      <Title
         align="center"
         color='textSecondary'
         variant="title"
       >
         Developed by Sakal
-      </Typography>
+      </Title>
     </Link>
 
-    <Link href='https://www.linkedin.com/in/serhii-sakal/'>
+    <LinkSrc href='https://github.com/sakalx/sunny-box/' target="_blank">
       <Typography
         align="center"
-        variant="button"
+        variant="caption"
       >
-        Open Source
+        open source 😈
       </Typography>
-    </Link>
+    </LinkSrc>
   </Wrap>
 );
 
