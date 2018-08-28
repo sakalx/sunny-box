@@ -22,7 +22,7 @@ const
 const cleanFolderProd = new CleanWebpackPlugin(production);
 
 const commonsChunk = new webpack.optimize.CommonsChunkPlugin({
-  name: ['index', 'vendor'],
+  name: ['index'],
 });
 
 const favicon = new FaviconWebpackPlugin({
@@ -50,7 +50,7 @@ const htmlIndex = new HtmlWebpackPlugin({
   inject: 'body',
   hash: true,
   filename: 'index.html',
-  chunks: ['index', 'vendor'],
+  chunks: ['index'],
 });
 
 const uglifyJs = new webpack.optimize.UglifyJsPlugin({
@@ -122,7 +122,6 @@ const config = {
   devtool: sourceMap,
 
   entry: {
-    vendor: ['react', 'react-dom'],
     index: SRC_DIR + '/index',
   },
 

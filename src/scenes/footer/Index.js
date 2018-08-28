@@ -1,10 +1,12 @@
 import React from 'react';
 
-import Typography from '@material-ui/core/Typography';
+import {linkedinIco, githubIco} from 'root/static/custom-icons';
 
 import {
+  GithubIcon,
   Link,
-  LinkSrc,
+  LinkedinIcon,
+  SourceText,
   Title,
   Wrap,
 } from 'root/scenes/footer/style';
@@ -18,17 +20,20 @@ const Footer = () => (
         variant="title"
       >
         Developed by Sakal
+        <LinkedinIcon viewBox="0 0 434 434">
+          <path d={linkedinIco}/>
+        </LinkedinIcon>
       </Title>
     </Link>
 
-    <LinkSrc href='https://github.com/sakalx/sunny-box/' target="_blank">
-      <Typography
-        align="center"
-        variant="caption"
-      >
-        open source 😈
-      </Typography>
-    </LinkSrc>
+    <Link href='https://github.com/sakalx/sunny-box/' target="_blank">
+      <SourceText variant="caption">
+        open source
+        <GithubIcon viewBox="0 0 434 434">
+          <path d={githubIco}/>
+        </GithubIcon>
+      </SourceText>
+    </Link>
   </Wrap>
 );
 

@@ -4,7 +4,6 @@ import muiTheme from 'root/theme';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import PauseIc from '@material-ui/icons/PauseCircleFilled';
-import PlayIc from '@material-ui/icons/PlayCircleOutline';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
 const {palette} = muiTheme;
