@@ -26,6 +26,7 @@ class App extends React.PureComponent {
   };
 
   componentDidMount() {
+
     getCountriesList()
       .then(list => {
         this.props.setCountryList(list);

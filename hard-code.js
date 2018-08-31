@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const axios = require('axios');
 
 require('firebase/firestore');
@@ -92,9 +93,34 @@ function createOurData(stations) {
 
 
 function sendToFirestore(country, data) {
-  firestore.doc(`stations/${country}`).set(data)
+  firestore.doc(`stations/${country}`).set(data, {merge: true})
     .then(() => console.log('should be good 🎈 😈'))
     .catch(error => console.error('Firebase:', error));
 }
 
-data(160, 180); // max 177
+// data(160, 180); // max 177
+
+const addStation = () => {
+
+  const country = 'Ukraine';
+  const station = {
+    country: 'UA',
+    genre: 'rock',
+    image: 'https://www.radioroks.ua/static/img/content/articles/269/s.jpg',
+    name: 'ROKS',
+    src: ['http://online-radioroks.tavrmedia.ua/RadioROKS'],
+    uid: crypto.randomBytes(16).toString('hex'),
+    website: 'https://www.radioroks.ua',
+  };
+
+  firestore.doc(`stations/${country}`).get()
+    .then(doc => {
+      const prevStations = doc.data()[station.genre];
+      const stationsByGenre = {[station.genre]: [...prevStations, station]};
+
+      sendToFirestore(country, stationsByGenre)
+    })
+    .catch(error => console.error('add-station', error));
+};
+
+addStation();

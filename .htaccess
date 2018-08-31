@@ -1,7 +1,3 @@
-# HTID:328189: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
-php_value display_errors 1
-# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:328189:
-
 #Caching start from here )
 <IfModule mod_expires.c>
   <FilesMatch \.(svg|ico|gif|png|jpg|jpeg|ogg|mp4|mkv|flv|swf|wmv|asf|asx|wma|wax|wmx|wm)$>

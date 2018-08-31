@@ -20,17 +20,28 @@ const audioListener = (prevAudio, station, dispatch) => {
 
   return new Promise((resolve, reject) => {
 
-    audio.addEventListener('loadeddata', () => {
+    const timerId = setTimeout(() => {
+      handleError(reject);
+      audio.removeEventListener('error', handleError);
+      audio.removeEventListener('loadeddata', handleLoaded);
+    }, 8000);
+
+    const handleError = () => {
+      dispatch(toggleSnackbar('hmm... looks like this station not available now 🤤🍄'));
+      reject();
+      clearTimeout(timerId);
+    };
+
+    const handleLoaded = () => {
+      localStorage.setItem(cacheConfig.station.key, JSON.stringify(station));
       prevAudio.pause();
       audio.play();
       resolve({...station, audio});
-    });
+      clearTimeout(timerId);
+    };
 
-    // TODO remove listener
-    audio.addEventListener('error', () => {
-      dispatch(toggleSnackbar('hmm... looks like this station not available now 🤤🍄'));
-      reject();
-    });
+    audio.addEventListener('loadeddata', handleLoaded);
+    audio.addEventListener('error', handleError);
   });
 };
 
@@ -41,7 +52,6 @@ export const setCurrentStation = station => (dispatch, getState) => {
   !station.uid && prevAudio.pause();
 
   delete station.audio;
-  localStorage.setItem(cacheConfig.station.key, JSON.stringify(station));
 
   station.uid
     ? dispatch({
