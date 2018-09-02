@@ -1,4 +1,5 @@
 import React from 'react';
+import Loadable from 'react-loadable';
 import styled, {keyframes} from 'styled-components';
 import muiTheme from 'root/theme';
 
@@ -14,11 +15,26 @@ import {setCurrentStation, setStationsByCountry} from 'root/redux-core/actions/s
 import Pulse from './components/pulse';
 import SnackBarMessage from './components/snack-bar';
 
-import Footer from './scenes/footer';
-import GenreTabs from './scenes/genre-tabs';
-import Player from './scenes/player';
-import StationTabs from './scenes/station-tabs';
 import WorldMap from './scenes/world-map';
+import Footer from './scenes/footer';
+
+const GenreTabsLazy = Loadable({
+  loader: () => import('./scenes/genre-tabs'),
+  loading: () => <Pulse/>,
+  delay: 66,
+});
+
+const StationTabsLazy = Loadable({
+  loader: () => import('./scenes/station-tabs'),
+  loading: () => <Pulse/>,
+  delay: 66,
+});
+
+const PlayerLazy = Loadable({
+  loader: () => import('./scenes/player'),
+  loading: () => <Pulse/>,
+  delay: 66,
+});
 
 class App extends React.PureComponent {
   state = {
@@ -62,7 +78,7 @@ class App extends React.PureComponent {
 
     return (
       <Wrap>
-        <GenreTabs/>
+        <GenreTabsLazy/>
 
         {stations.fetchingStation &&
         <WrapLoader>
@@ -70,10 +86,10 @@ class App extends React.PureComponent {
         </WrapLoader>}
 
         <WrapStations>
-          <StationTabs/>
+          <StationTabsLazy/>
         </WrapStations>
 
-        <Player/>
+        <PlayerLazy/>
         <WorldMap/>
 
         <Footer/>

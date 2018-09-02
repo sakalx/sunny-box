@@ -12,7 +12,6 @@ import {setStationsByCountry} from 'root/redux-core/actions/stations';
 import {ZoomableGroup, Geographies, Geography} from 'react-simple-maps';
 import {Motion} from 'react-motion';
 
-/*import Pulse from 'root/components/pulse';*/
 import CountryTabs from '../country-tabs';
 import CountryInfo from '../country-info';
 
