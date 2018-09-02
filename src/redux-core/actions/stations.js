@@ -35,8 +35,9 @@ const audioListener = (prevAudio, station, dispatch) => {
     const handleLoaded = () => {
       localStorage.setItem(cacheConfig.station.key, JSON.stringify(station));
       prevAudio.pause();
-      audio.play();
-      resolve({...station, audio});
+      audio.play()
+        .then(() => resolve({...station, audio}))
+        .catch(() => reject());
       clearTimeout(timerId);
     };
 
@@ -49,7 +50,10 @@ const audioListener = (prevAudio, station, dispatch) => {
 export const setCurrentStation = station => (dispatch, getState) => {
   const prevAudio = getState().stations.station.audio;
 
-  !station.uid && prevAudio.pause();
+  !station.uid && (
+    prevAudio.pause(),
+      localStorage.setItem(cacheConfig.station.key, JSON.stringify(station))
+  );
 
   delete station.audio;
 
